@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "kipper"
+version = "0.1.0"
+description = ""
+authors = ["Thomas Cooper <code@tomcooper.dev>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "^2.27.1"
+beautifulsoup4 = "^4.10.0"
+
+[tool.poetry.dev-dependencies]
+ipython = "^8.0.1"
+pylint = "^2.12.2"
+black = "^22.1.0"
+mypy = "^0.931"
+types-requests = "^2.27.8"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
