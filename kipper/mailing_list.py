@@ -39,8 +39,9 @@ def get_monthly_mbox_file(
     if filepath.exists():
         if not overwrite:
             print(
-                "Mbox file {filepath} already exists. Skipping download (set overwrite to True to re-download)."
+                f"Mbox file {filepath} already exists. Skipping download (set overwrite to True to re-download)."
             )
+            return filepath
         else:
             print(f"Overwritting existing mbox file: {filepath}")
 
@@ -85,7 +86,7 @@ def get_multiple_mbox(
     days_back: int,
     output_directory: Optional[str] = None,
     overwrite: bool = False,
-):
+) -> List[Path]:
     """Gets all monthly mbox archives from the specified mailing list over the specified number of days into the past"""
 
     if not output_directory:
