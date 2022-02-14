@@ -2,12 +2,13 @@ import os
 import re
 import datetime as dt
 
-from typing import Dict, List, Tuple, Optional, Union, cast
+from typing import Dict, List, Tuple, Optional, Union
 from pathlib import Path
-from dataclasses import dataclass
+from enum import Enum
 
 from mailbox import mbox
 from email.message import Message
+from pandas import DataFrame, concat, to_datetime
 
 import requests
 
@@ -17,6 +18,34 @@ BASE_URL: str = "https://lists.apache.org/api/mbox.lua"
 DOMAIN: str = "kafka.apache.org"
 MAIL_DATE_FORMAT = "%a, %d %b %Y %H:%M:%S %z"
 MAIL_DATE_FORMAT_ZONE = "%a, %d %b %Y %H:%M:%S %z (%Z)"
+KIP_MENTION_COLUMNS = [
+    "kip",
+    "mention_type",
+    "message_id",
+    "mbox_year",
+    "mbox_month",
+    "timestamp",
+]
+
+
+class KIPMentionType(Enum):
+    """Enum class representing the possible types of KIP mention"""
+
+    SUBJECT = "subject"
+    VOTE = "vote"
+    DISCUSS = "discuss"
+    BODY = "body"
+
+
+def kmt_from_str(mention_type: str) -> KIPMentionType:
+    """Finds the KIPMentionType enum value which matches the supplied string.
+    Raises a ValueError if the supplied string doesn't match a mention type."""
+
+    for option in KIPMentionType:
+        if mention_type == option.value:
+            return option
+
+    raise ValueError(f"{mention_type} is not a valid KIPMentionType")
 
 
 def get_monthly_mbox_file(
@@ -117,97 +146,6 @@ def get_multiple_mbox(
     return filepaths
 
 
-@dataclass
-class KIPMention:
-    """Represents a single mention of a KIP"""
-
-    kip: int
-    message_id: int
-    mbox_year: int
-    mbox_month: int
-    timestamp: dt.datetime
-
-    def __lt__(self, other) -> bool:
-
-        if isinstance(other, KIPMention):
-            if self.timestamp < other.timestamp:
-                return True
-            else:
-                return False
-        else:
-            raise ValueError(f"Cannot compare KIPMention with {type(other)}")
-
-    def __gt__(self, other) -> bool:
-
-        if isinstance(other, KIPMention):
-            if self.timestamp > other.timestamp:
-                return True
-            else:
-                return False
-        else:
-            raise ValueError(f"Cannot compare KIPMention with {type(other)}")
-
-
-@dataclass
-class KIPData:
-    """Represents all mentions of a KIP"""
-
-    kip_id: int
-    vote_mention: Optional[KIPMention] = None
-    discuss_mention: Optional[KIPMention] = None
-    subject_mention: Optional[KIPMention] = None
-    body_mention: Optional[KIPMention] = None
-
-    def add_vote_mention(self, mention: KIPMention) -> None:
-        """Add a new vote mention but only if it was more recent
-        than the current one."""
-        if self.vote_mention:
-            if mention > self.vote_mention:
-                self.vote_mention = mention
-        else:
-            self.vote_mention = mention
-
-    def add_discuss_mention(self, mention: KIPMention) -> None:
-        """Add a new dicussion mention but only if it was more recent
-        than the current one."""
-        if self.discuss_mention:
-            if mention > self.discuss_mention:
-                self.discuss_mention = mention
-        else:
-            self.discuss_mention = mention
-
-    def add_subject_mention(self, mention: KIPMention) -> None:
-        """Add a new subject mention but only if it was more recent
-        than the current one."""
-        if self.subject_mention:
-            if mention > self.subject_mention:
-                self.subject_mention = mention
-        else:
-            self.subject_mention = mention
-
-    def add_body_mention(self, mention: KIPMention) -> None:
-        """Add a new body mention but only if it was more recent
-        than the current one."""
-        if self.body_mention:
-            if mention > self.body_mention:
-                self.body_mention = mention
-        else:
-            self.body_mention = mention
-
-
-def get_kip_data(kip_dict: Dict[int, KIPData], kip_id: int):
-    """Returns the KIPData instance for the requested KIP ID. If the KIP
-    doesn't have an entry an empty KIPData instances is created for the KIP,
-    added to the Dict and returned."""
-
-    if kip_id in kip_dict:
-        return kip_dict[kip_id]
-
-    kip_data: KIPData = KIPData(kip_id)
-    kip_dict[kip_id] = kip_data
-    return kip_data
-
-
 def parse_message_timestamp(date_str) -> Optional[dt.datetime]:
     """Parses the message timestamp string and converts to a python datetime object.
     If the string cannot be parsed then None is returned."""
@@ -238,15 +176,9 @@ def parse_message_timestamp(date_str) -> Optional[dt.datetime]:
     return timestamp
 
 
-def process_mbox_archive(
-    filepath: Path, output: Optional[Dict[int, KIPData]] = None
-) -> Dict[int, KIPData]:
+def process_mbox_archive(filepath: Path) -> DataFrame:
     """Process the supplied mbox archive, harvest the KIP data and
-    add it to the supplied dictionary (or create a new one if none is
-    supplied)."""
-
-    if not output:
-        output = {}
+    create a DataFrame containing each mention"""
 
     mail_box: mbox = mbox(filepath)
 
@@ -254,8 +186,8 @@ def process_mbox_archive(
     mbox_year: int = int(year_month[-2])
     mbox_month: int = int(year_month[-1])
 
-    key: int
-    msg: Message
+    data: List[List[Union[str, int, dt.datetime]]] = []
+
     for key, msg in mail_box.items():
 
         # TODO: Add debug logging
@@ -271,23 +203,39 @@ def process_mbox_archive(
 
         if subject_kip_match:
             subject_kip_id: int = int(subject_kip_match.groupdict()["kip"])
-            subject_kip_data: KIPData = get_kip_data(output, subject_kip_id)
-            subject_mention: KIPMention = KIPMention(
-                subject_kip_id, key, mbox_year, mbox_month, timestamp
+            data.append(
+                [
+                    subject_kip_id,
+                    KIPMentionType.SUBJECT.value,
+                    key,
+                    mbox_year,
+                    mbox_month,
+                    timestamp,
+                ]
             )
-            subject_kip_data.add_subject_mention(subject_mention)
 
             if "VOTE" in msg["subject"]:
-                vote_mention: KIPMention = KIPMention(
-                    subject_kip_id, key, mbox_year, mbox_month, timestamp
+                data.append(
+                    [
+                        subject_kip_id,
+                        KIPMentionType.VOTE.value,
+                        key,
+                        mbox_year,
+                        mbox_month,
+                        timestamp,
+                    ]
                 )
-                subject_kip_data.add_vote_mention(vote_mention)
-
-            if "DISCUSS" in msg["subject"]:
-                discuss_mention: KIPMention = KIPMention(
-                    subject_kip_id, key, mbox_year, mbox_month, timestamp
+            elif "DISCUSS" in msg["subject"]:
+                data.append(
+                    [
+                        subject_kip_id,
+                        KIPMentionType.DISCUSS.value,
+                        key,
+                        mbox_year,
+                        mbox_month,
+                        timestamp,
+                    ]
                 )
-                subject_kip_data.add_discuss_mention(discuss_mention)
 
         # For some reason the payload of the message can be a nested list of messages?
         temp_payload: Union[str, list] = msg.get_payload()
@@ -314,62 +262,68 @@ def process_mbox_archive(
         if body_matches:
             for body_kip_str in body_matches:
                 body_kip_id: int = int(body_kip_str)
-                body_kip_data: KIPData = get_kip_data(output, body_kip_id)
-                body_mention: KIPMention = KIPMention(
-                    body_kip_id, key, mbox_year, mbox_month, timestamp
+                data.append(
+                    [
+                        body_kip_id,
+                        KIPMentionType.BODY.value,
+                        key,
+                        mbox_year,
+                        mbox_month,
+                        timestamp,
+                    ]
                 )
-                body_kip_data.add_body_mention(body_mention)
 
-    return output
+    output = DataFrame(data, columns=KIP_MENTION_COLUMNS)
+    output["timestamp"] = to_datetime(output["timestamp"], utc=True)
 
-
-def merge_kip_data(one: KIPData, two: KIPData) -> None:
-    """Merges two KIP Data instances together returning a single
-    KIPData with the most recent KIPMentions from the two."""
-
-    if one.kip_id != two.kip_id:
-        raise ValueError(
-            "KIPData instances were not for the same KIP ID and cannot be merged"
-        )
-
-    one.add_subject_mention(cast(KIPMention, two.subject_mention))
-    one.add_vote_mention(cast(KIPMention, two.vote_mention))
-    one.add_discuss_mention(cast(KIPMention, two.discuss_mention))
-    one.add_body_mention(cast(KIPMention, two.body_mention))
+    return output.drop_duplicates()
 
 
-def merge_kip_data_dicts(
-    main_dict: Dict[int, KIPData], add_dict: Dict[int, KIPData]
-) -> None:
-    """Merges the supplied add_dict into the main_dict. Where main dict
-    already has an entry for a KIP in the add)_dict two dict, the most
-    recent KIPMentions from each are used to produce a new KIPData instance
-    in the main dict."""
-
-    for kip_id, kip_data in add_dict.items():
-        if kip_id in main_dict:
-            main_data = main_dict[kip_id]
-            merge_kip_data(main_data, kip_data)
-            main_dict[kip_id] = main_data
-        else:
-            main_dict[kip_id] = kip_data
-
-
-def process_all_mbox_in_directory(dir_path: Path) -> Dict[int, KIPData]:
-    """Process all the mbox files in the given directory and harvest KIP information"""
+def process_all_mbox_in_directory(dir_path: Path) -> DataFrame:
+    """Process all the mbox files in the given directory and harvest all KIP mentions."""
 
     if not dir_path.is_dir():
         raise ValueError(f"The supplied path ({dir_path}) is not a directory.")
 
-    output: Dict[int, KIPData] = {}
+    output: DataFrame = DataFrame(columns=KIP_MENTION_COLUMNS)
 
     for element in dir_path.iterdir():
         if element.is_file():
             if "mbox" in element.name:
                 print(f"Processing file: {element.name}")
-                file_data: Dict[int, KIPData] = process_mbox_archive(element, output)
-                merge_kip_data_dicts(output, file_data)
+                file_data: DataFrame = process_mbox_archive(element)
+                output = concat((output, file_data), ignore_index=True)
+
             else:
                 print(f"Skipping non-mbox file: {element.name}")
 
     return output
+
+
+def get_most_recent_mentions(kip_mentions: DataFrame) -> DataFrame:
+    """Gets the most recent mentions, for each metion type, for each kip from
+    the supplied mentions dataframe"""
+
+    output = []
+
+    for _, kip_mention_data in kip_mentions.groupby(["kip", "mention_type"]):
+        output.append(
+            kip_mention_data[
+                kip_mention_data["timestamp"] == kip_mention_data["timestamp"].max()
+            ]
+        )
+
+    return concat(output, ignore_index=True)
+
+
+def get_most_recent_mention_by_type(kip_mentions: DataFrame) -> DataFrame:
+    """Gets a dataframe indexed by KIP number with the most recent mention of each mention type."""
+
+    most_recent_kip_mentions: DataFrame = get_most_recent_mentions(kip_mentions)
+
+    most_recent: DataFrame = most_recent_kip_mentions.pivot_table(
+        index="kip", columns="mention_type", values="timestamp"
+    )
+    most_recent["overall"] = most_recent.max(axis=1, skipna=True, numeric_only=False)
+
+    return most_recent
