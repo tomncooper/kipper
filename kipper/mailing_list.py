@@ -25,6 +25,7 @@ KIP_MENTION_COLUMNS = [
     "mbox_year",
     "mbox_month",
     "timestamp",
+    "from",
 ]
 
 
@@ -176,6 +177,45 @@ def parse_message_timestamp(date_str) -> Optional[dt.datetime]:
     return timestamp
 
 
+def extract_message_payload(msg: Message) -> str:
+    """Extract email message string from the supplied message instance. If multiple messages
+    are extracted or none then a ValueError is raised."""
+
+    valid_payloads: List[str] = []
+
+    for message in msg.walk():
+
+        payload: str = message.get_payload()
+
+        if (
+            ("<html>" in payload)
+            or ("</html>" in payload)
+            or ("<div>" in payload)
+            or ("</div>" in payload)
+        ):
+            # Sometimes the message will contain an additional html copy of the
+            # main message
+            continue
+
+        if " " not in payload:
+            # If the message doesn't contain a single space the it is probably
+            # a public key.
+            continue
+
+        valid_payloads.append(payload)
+
+    if len(valid_payloads) == 1:
+        return valid_payloads[0]
+
+    if len(valid_payloads) > 1:
+        err_msg: str = f"Warning: more than 1 message ({len(valid_payloads)}) in the message payload: {valid_payloads}"
+        print(err_msg)
+        raise ValueError(err_msg)
+
+    msg_dump: List[str] = [item.get_payload() for item in msg.walk()]
+    raise ValueError(f"Message does not contain a valid payload: {msg_dump}")
+
+
 def process_mbox_archive(filepath: Path) -> DataFrame:
     """Process the supplied mbox archive, harvest the KIP data and
     create a DataFrame containing each mention"""
@@ -211,6 +251,7 @@ def process_mbox_archive(filepath: Path) -> DataFrame:
                     mbox_year,
                     mbox_month,
                     timestamp,
+                    msg["from"],
                 ]
             )
 
@@ -223,6 +264,7 @@ def process_mbox_archive(filepath: Path) -> DataFrame:
                         mbox_year,
                         mbox_month,
                         timestamp,
+                        msg["from"],
                     ]
                 )
             elif "DISCUSS" in msg["subject"]:
@@ -234,30 +276,20 @@ def process_mbox_archive(filepath: Path) -> DataFrame:
                         mbox_year,
                         mbox_month,
                         timestamp,
+                        msg["from"],
                     ]
                 )
 
-        # For some reason the payload of the message can be a nested list of messages?
-        temp_payload: Union[str, list] = msg.get_payload()
-        while not isinstance(temp_payload, str):
-            if isinstance(temp_payload, list):
-                if len(temp_payload) > 1:
-                    # TODO: Deal with these multiple messages
-                    print(
-                        f"Warning: more than 1 message ({len(temp_payload)}) in the message payload"
-                    )
-                temp_payload = temp_payload[0]
-            elif isinstance(temp_payload, Message):
-                temp_payload = temp_payload.get_payload()
-            else:
-                print(f"What even is this: {type(temp_payload)}")
-
-        payload: str = temp_payload
+        try:
+            payload: str = extract_message_payload(msg)
+        except ValueError:
+            continue
 
         try:
             body_matches: List[str] = re.findall(KIP_PATTERN, payload)
         except TypeError:
             print(f"Unable to parse payload of type {type(payload)}")
+            continue
 
         if body_matches:
             for body_kip_str in body_matches:
@@ -270,6 +302,7 @@ def process_mbox_archive(filepath: Path) -> DataFrame:
                         mbox_year,
                         mbox_month,
                         timestamp,
+                        msg["from"],
                     ]
                 )
 
