@@ -13,7 +13,7 @@ from pandas import DataFrame, concat, to_datetime
 import requests
 
 
-KIP_PATTERN: re.Pattern = re.compile("KIP-(?P<kip>\d+)", re.IGNORECASE)
+KIP_PATTERN: re.Pattern = re.compile(r"KIP-(?P<kip>\d+)", re.IGNORECASE)
 BASE_URL: str = "https://lists.apache.org/api/mbox.lua"
 DOMAIN: str = "kafka.apache.org"
 MAIL_DATE_FORMAT = "%a, %d %b %Y %H:%M:%S %z"
