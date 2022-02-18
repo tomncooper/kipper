@@ -8,7 +8,7 @@ from enum import Enum
 
 from mailbox import mbox
 from email.message import Message
-from pandas import DataFrame, concat, to_datetime
+from pandas import DataFrame, concat, to_datetime, read_csv
 
 import requests
 
@@ -27,6 +27,8 @@ KIP_MENTION_COLUMNS = [
     "timestamp",
     "from",
 ]
+CACHE_DIR = "cache"
+CACHE_SUFFIX = ".cache.csv"
 
 
 class KIPMentionType(Enum):
@@ -312,7 +314,9 @@ def process_mbox_archive(filepath: Path) -> DataFrame:
     return output.drop_duplicates()
 
 
-def process_all_mbox_in_directory(dir_path: Path) -> DataFrame:
+def process_all_mbox_in_directory(
+    dir_path: Path, overwrite_cache: bool = False
+) -> DataFrame:
     """Process all the mbox files in the given directory and harvest all KIP mentions."""
 
     if not dir_path.is_dir():
@@ -320,13 +324,33 @@ def process_all_mbox_in_directory(dir_path: Path) -> DataFrame:
 
     output: DataFrame = DataFrame(columns=KIP_MENTION_COLUMNS)
 
+    cache_dir: Path = dir_path.joinpath(CACHE_DIR)
+
+    if not cache_dir.exists():
+        os.mkdir(cache_dir)
+
     for element in dir_path.iterdir():
         if element.is_file():
             if "mbox" in element.name:
-                print(f"Processing file: {element.name}")
-                file_data: DataFrame = process_mbox_archive(element)
-                output = concat((output, file_data), ignore_index=True)
 
+                cache_file: Path = cache_dir.joinpath(element.name + CACHE_SUFFIX)
+                if cache_file.exists() and not overwrite_cache:
+                    print(f"Loading data from cache file: {cache_file}")
+                    file_data: DataFrame = read_csv(
+                        cache_file, parse_dates=["timestamp"]
+                    )
+                else:
+                    # Either the cache file doesn't exist or we want to overwrite it
+                    if overwrite_cache:
+                        print(
+                            f"Processing file: {element.name} and overwritting cache file: {cache_file}"
+                        )
+                    else:
+                        print(f"Processing file: {element.name}")
+                    file_data = process_mbox_archive(element)
+                    file_data.to_csv(cache_file, index=False)
+
+                output = concat((output, file_data), ignore_index=True)
             else:
                 print(f"Skipping non-mbox file: {element.name}")
 
