@@ -2,7 +2,7 @@ import os
 import re
 import datetime as dt
 
-from typing import Dict, List, Tuple, Optional, Union
+from typing import Dict, List, Tuple, Optional, Union, Set
 from pathlib import Path
 from enum import Enum
 
@@ -179,7 +179,7 @@ def parse_message_timestamp(date_str) -> Optional[dt.datetime]:
     return timestamp
 
 
-def extract_message_payload(msg: Message) -> str:
+def extract_message_payload(msg: Message) -> List[str]:
     """Extract email message string from the supplied message instance. If multiple messages
     are extracted or none then a ValueError is raised."""
 
@@ -187,7 +187,15 @@ def extract_message_payload(msg: Message) -> str:
 
     for message in msg.walk():
 
-        payload: str = message.get_payload()
+        temp_payload: Union[List[Message], str] = message.get_payload()
+        if isinstance(temp_payload, list):
+            payload: str = temp_payload[0].get_payload()
+        elif isinstance(temp_payload, str):
+            payload = message.get_payload()
+        else:
+            err_msg: str = f"Expected payload to be list or str no {type(temp_payload)}"
+            print(err_msg)
+            raise ValueError(err_msg)
 
         if (
             ("<html>" in payload)
@@ -199,23 +207,23 @@ def extract_message_payload(msg: Message) -> str:
             # main message
             continue
 
-        if " " not in payload:
+        if (" " not in payload) or ("PGP SIGNATURE" in payload):
             # If the message doesn't contain a single space the it is probably
-            # a public key.
+            # a public key and def is it has PGP SIGNATURE in it.
             continue
 
         valid_payloads.append(payload)
 
-    if len(valid_payloads) == 1:
-        return valid_payloads[0]
+    # Sometimes there are multiple copies of the exact same message in a payload so
+    # we use a set to remove those.
+    valid_payloads_set: Set[str] = set(valid_payloads)
 
-    if len(valid_payloads) > 1:
-        err_msg: str = f"Warning: more than 1 message ({len(valid_payloads)}) in the message payload: {valid_payloads}"
-        print(err_msg)
-        raise ValueError(err_msg)
+    if len(valid_payloads_set) > 1:
+        print(
+            f"Warning: more than 1 message ({len(valid_payloads)}) in the message payload"
+        )
 
-    msg_dump: List[str] = [item.get_payload() for item in msg.walk()]
-    raise ValueError(f"Message does not contain a valid payload: {msg_dump}")
+    return list(valid_payloads_set)
 
 
 def process_mbox_archive(filepath: Path) -> DataFrame:
@@ -283,30 +291,35 @@ def process_mbox_archive(filepath: Path) -> DataFrame:
                 )
 
         try:
-            payload: str = extract_message_payload(msg)
+            valid_payloads: Optional[str] = extract_message_payload(msg)
         except ValueError:
+            print(f"Error processing payload for message {key} in file {filepath}")
             continue
 
-        try:
-            body_matches: List[str] = re.findall(KIP_PATTERN, payload)
-        except TypeError:
-            print(f"Unable to parse payload of type {type(payload)}")
+        if not valid_payloads:
             continue
 
-        if body_matches:
-            for body_kip_str in body_matches:
-                body_kip_id: int = int(body_kip_str)
-                data.append(
-                    [
-                        body_kip_id,
-                        KIPMentionType.BODY.value,
-                        key,
-                        mbox_year,
-                        mbox_month,
-                        timestamp,
-                        msg["from"],
-                    ]
-                )
+        for payload in valid_payloads:
+            try:
+                body_matches: List[str] = re.findall(KIP_PATTERN, payload)
+            except TypeError:
+                print(f"Unable to parse payload of type {type(payload)}")
+                continue
+
+            if body_matches:
+                for body_kip_str in body_matches:
+                    body_kip_id: int = int(body_kip_str)
+                    data.append(
+                        [
+                            body_kip_id,
+                            KIPMentionType.BODY.value,
+                            key,
+                            mbox_year,
+                            mbox_month,
+                            timestamp,
+                            msg["from"],
+                        ]
+                    )
 
     output = DataFrame(data, columns=KIP_MENTION_COLUMNS)
     output["timestamp"] = to_datetime(output["timestamp"], utc=True)
@@ -342,9 +355,7 @@ def process_all_mbox_in_directory(
                 else:
                     # Either the cache file doesn't exist or we want to overwrite it
                     if overwrite_cache:
-                        print(
-                            f"Processing file: {element.name} and overwritting cache file: {cache_file}"
-                        )
+                        print(f"Processing file: {element.name}")
                     else:
                         print(f"Processing file: {element.name}")
                     file_data = process_mbox_archive(element)
