@@ -138,7 +138,9 @@ def create_status_dict(
     return output
 
 
-def render_status_page(kip_mentions: DataFrame, output_filename: str) -> None:
+def render_standalone_status_page(
+    kip_mentions: DataFrame, output_filename: str
+) -> None:
     """Renders the KIPs under discussion table with a status entry based on
     how recently the KIP was mentioned in an email subject line."""
 

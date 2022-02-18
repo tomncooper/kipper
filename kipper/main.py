@@ -1,6 +1,10 @@
 from argparse import ArgumentParser, Namespace
+from pathlib import Path
 
-from kipper.mailing_list import get_multiple_mbox
+from pandas import DataFrame, read_csv
+
+from kipper.mailing_list import get_multiple_mbox, process_all_mbox_in_directory
+from kipper.output import render_standalone_status_page
 
 
 def create_parser() -> ArgumentParser:
@@ -11,6 +15,7 @@ def create_parser() -> ArgumentParser:
     main_subparser = parser.add_subparsers(title="subcommands", dest="subcommand")
     setup_mail_command(main_subparser)
     setup_wiki_command(main_subparser)
+    setup_output_command(main_subparser)
 
     return parser
 
@@ -58,6 +63,22 @@ def setup_mail_command(main_subparser):
         help="Replace existing mail archives.",
     )
 
+    process_subparser = mail_subparser.add_parser(
+        "process", help="Command for processing mailing list archives."
+    )
+
+    process_subparser.add_argument(
+        "directory", help="The directory containing the mbox files to be processed."
+    )
+
+    process_subparser.add_argument(
+        "-owc",
+        "--overwrite_cache",
+        required=False,
+        action="store_true",
+        help="Reprocess the mbox files and overwrite their cache files.",
+    )
+
 
 def setup_wiki_command(main_subparser):
     """Setup the top level wiki command line option."""
@@ -68,7 +89,30 @@ def setup_wiki_command(main_subparser):
     wiki_subparser = wiki_parser.add_subparsers(dest="wiki_subcommand")
 
 
-if __name__ == "__main__":
+def setup_output_command(main_subparser):
+    """Setup the top level output command line option."""
+
+    output_parser = main_subparser.add_parser(
+        "output", help="Command for performing output related commands"
+    )
+    output_subparser = output_parser.add_subparsers(dest="output_subcommand")
+
+    standalone_subparser = output_subparser.add_parser(
+        "standalone",
+        help="Command for rendering a standalone html file of the kp table.",
+    )
+
+    standalone_subparser.add_argument(
+        "kip_mentions_file", help="The path to the processed kip mentions csv."
+    )
+
+    standalone_subparser.add_argument(
+        "output_file", help="The path to the output html file"
+    )
+
+
+def run():
+    """KIPper Main Method"""
 
     parser: ArgumentParser = create_parser()
     args: Namespace = parser.parse_args()
@@ -79,9 +123,26 @@ if __name__ == "__main__":
                 out_dir = None
             else:
                 out_dir = args.output_dir
-            mbox_paths = get_multiple_mbox(
+            get_multiple_mbox(
                 args.mailing_list,
                 args.days,
                 output_directory=out_dir,
                 overwrite=args.overwrite,
             )
+        elif args.mail_subcommand == "process":
+            out_dir: Path = Path(args.directory)
+            kip_mentions: DataFrame = process_all_mbox_in_directory(
+                out_dir, args.overwrite_cache
+            )
+            output_file: Path = out_dir.joinpath("kip_mentions.csv")
+            kip_mentions.to_csv(output_file, index=False)
+            print(f"Saved KIP mentions to {output_file}")
+    if args.subcommand == "output":
+        if args.output_subcommand == "standalone":
+            kip_mentions = read_csv(args.kip_mentions_file, parse_dates=["timestamp"])
+            render_standalone_status_page(kip_mentions, args.output_file)
+
+
+if __name__ == "__main__":
+
+    run()
