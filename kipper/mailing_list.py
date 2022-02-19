@@ -261,7 +261,7 @@ def process_mbox_archive(filepath: Path) -> DataFrame:
                     mbox_year,
                     mbox_month,
                     timestamp,
-                    msg["from"],
+                    str(msg["from"]),
                 ]
             )
 
@@ -274,7 +274,7 @@ def process_mbox_archive(filepath: Path) -> DataFrame:
                         mbox_year,
                         mbox_month,
                         timestamp,
-                        msg["from"],
+                        str(msg["from"]),
                     ]
                 )
             elif "DISCUSS" in msg["subject"]:
@@ -286,7 +286,7 @@ def process_mbox_archive(filepath: Path) -> DataFrame:
                         mbox_year,
                         mbox_month,
                         timestamp,
-                        msg["from"],
+                        str(msg["from"]),
                     ]
                 )
 
@@ -317,7 +317,7 @@ def process_mbox_archive(filepath: Path) -> DataFrame:
                             mbox_year,
                             mbox_month,
                             timestamp,
-                            msg["from"],
+                            str(msg["from"]),
                         ]
                     )
 
