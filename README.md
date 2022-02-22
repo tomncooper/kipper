@@ -28,7 +28,7 @@ $ poetry run kipper mail process
 To create the standalone site html run:
 
 ```bash
-$ poetry run kipper output standalone dev/kip_mentions.csv dev/standalone.html
+$ poetry run kipper output standalone dev/kip_mentions.csv index.html
 ```
 
 This will use the csv created in the processing step to create the output html.
