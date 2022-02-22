@@ -26,6 +26,7 @@ KIP_MENTION_COLUMNS = [
     "mbox_month",
     "timestamp",
     "from",
+    "vote",
 ]
 CACHE_DIR = "cache"
 CACHE_SUFFIX = ".cache.csv"
@@ -226,6 +227,25 @@ def extract_message_payload(msg: Message) -> List[str]:
     return list(valid_payloads_set)
 
 
+def parse_for_vote(payload: str) -> Optional[str]:
+    """Parses the supplied payload string line by line, ignoring any line starting
+    with ">", and checks if the line contains a +1, 0 or -1 returning the appropriate
+    vote string if it does. If no, non-reply, line contains a vote then None is returned."""
+
+    for line in payload.split("\n"):
+        if ">" not in line[:10]:
+            if " +1 " in line:
+                return "+1"
+
+            if " -1 " in line:
+                return "-1"
+
+            if " 0 " in line:
+                return "0"
+
+    return None
+
+
 def process_mbox_archive(filepath: Path) -> DataFrame:
     """Process the supplied mbox archive, harvest the KIP data and
     create a DataFrame containing each mention"""
@@ -236,7 +256,7 @@ def process_mbox_archive(filepath: Path) -> DataFrame:
     mbox_year: int = int(year_month[-2])
     mbox_month: int = int(year_month[-1])
 
-    data: List[List[Union[str, int, dt.datetime]]] = []
+    data: List[List[Union[str, int, dt.datetime, None]]] = []
 
     for key, msg in mail_box.items():
 
@@ -251,6 +271,8 @@ def process_mbox_archive(filepath: Path) -> DataFrame:
             print(f"Could not parse timestamp for message {key}")
             continue
 
+        is_vote: bool = False
+
         if subject_kip_match:
             subject_kip_id: int = int(subject_kip_match.groupdict()["kip"])
             data.append(
@@ -262,21 +284,13 @@ def process_mbox_archive(filepath: Path) -> DataFrame:
                     mbox_month,
                     timestamp,
                     str(msg["from"]),
+                    None,
                 ]
             )
 
             if "VOTE" in msg["subject"]:
-                data.append(
-                    [
-                        subject_kip_id,
-                        KIPMentionType.VOTE.value,
-                        key,
-                        mbox_year,
-                        mbox_month,
-                        timestamp,
-                        str(msg["from"]),
-                    ]
-                )
+                is_vote = True
+
             elif "DISCUSS" in msg["subject"]:
                 data.append(
                     [
@@ -287,11 +301,12 @@ def process_mbox_archive(filepath: Path) -> DataFrame:
                         mbox_month,
                         timestamp,
                         str(msg["from"]),
+                        None,
                     ]
                 )
 
         try:
-            valid_payloads: Optional[str] = extract_message_payload(msg)
+            valid_payloads: List[str] = extract_message_payload(msg)
         except ValueError:
             print(f"Error processing payload for message {key} in file {filepath}")
             continue
@@ -300,6 +315,22 @@ def process_mbox_archive(filepath: Path) -> DataFrame:
             continue
 
         for payload in valid_payloads:
+
+            if is_vote:
+                vote_str: Optional[str] = parse_for_vote(payload)
+                data.append(
+                    [
+                        subject_kip_id,
+                        KIPMentionType.VOTE.value,
+                        key,
+                        mbox_year,
+                        mbox_month,
+                        timestamp,
+                        str(msg["from"]),
+                        vote_str,
+                    ]
+                )
+
             try:
                 body_matches: List[str] = re.findall(KIP_PATTERN, payload)
             except TypeError:
@@ -318,6 +349,7 @@ def process_mbox_archive(filepath: Path) -> DataFrame:
                             mbox_month,
                             timestamp,
                             str(msg["from"]),
+                            None,
                         ]
                     )
 

@@ -18,12 +18,54 @@ STATUS_TABLE_TEMPLATE: str = """
         <th>KIP</th>
         <th>Description</th>
         <th>Status</th>
+        <th>+1</th>
+        <th>0</th>
+        <th>-1</th>
     </tr>
     {% for kip in kip_status %}
     <tr>
         <td><a href={{ kip['url'] }}>{{ kip['id'] }}</a></td>
         <td>{{ kip['text'] }}
         <td style="background-color:{{ kip['status'].text }};"></td>
+        <td>
+        {% if kip["+1"] %}
+            <div class="tooltip">{{ kip["+1"]|length }}
+                <span class="tooltiptext">
+                {% for name in kip["+1"] %}
+                {{ name }}<br>
+                {% endfor %}
+                </span>
+            </div> 
+        {% else %}
+            {{ kip["+1"]|length }}
+        {% endif %}
+        </td>
+        <td>
+        {% if kip["0"] %}
+            <div class="tooltip">{{ kip["0"]|length }}
+                <span class="tooltiptext">
+                {% for name in kip["0"] %}
+                {{ name }}<br>
+                {% endfor %}
+                </span>
+            </div> 
+        {% else %}
+            {{ kip["0"]|length }}
+        {% endif %}
+        </td>
+        <td>
+        {% if kip["-1"] %}
+            <div class="tooltip">{{ kip["-1"]|length }}
+                <span class="tooltiptext">
+                {% for name in kip["-1"] %}
+                {{ name }}<br>
+                {% endfor %}
+                </span>
+            </div> 
+        {% else %}
+            {{ kip["-1"]|length }}
+        {% endif %}
+        </td>
     </tr> 
     {% endfor %}
 </table>
@@ -52,6 +94,37 @@ STANDALONE_STATUS_TEMPLATE: str = f"""
             table, th, td {{
                 border: 1px solid black;
                 border-collapse: collapse;
+            }}
+
+            /* Tooltip container */
+            .tooltip {{
+                position: relative;
+                display: inline-block;
+                border-bottom: 1px dotted black;
+                /* If you want dots under the hoverable text */
+            }}
+
+            /* Tooltip text */
+            .tooltip .tooltiptext {{
+                visibility: hidden;
+                width: 200px;
+                background-color: black;
+                color: #fff;
+                text-align: center;
+                padding: 5px 0;
+                border-radius: 6px;
+
+
+                /* Position the tooltip text - see examples below! */
+                position: absolute;
+                z-index: 1;
+                top: -5px;
+                right: 105%;
+            }}
+
+            /* Show the tooltip text when you mouse over the tooltip container */
+            .tooltip:hover .tooltiptext {{
+                visibility: visible;
             }}
         </style>
     </head>
@@ -108,9 +181,34 @@ def clean_description(description: str):
     return description
 
 
+def create_vote_dict(kip_mentions: DataFrame) -> Dict[int, Dict[str, List[str]]]:
+    """Creates a dictionary mapping from KIP ID to a dict mapping
+    from vote type to list of those who voted that way"""
+
+    vote_dict: Dict[int, Dict[str, List[str]]] = {}
+    kip_id: int
+    kip_votes: DataFrame
+    for kip_id, kip_votes in kip_mentions[~kip_mentions["vote"].isna()][
+        ["kip", "from", "vote"]
+    ].groupby("kip"):
+        kip_dict = {}
+        for vote in ["+1", "0", "-1"]:
+            kip_dict[f"{vote}"] = list(
+                set(
+                    [
+                        name.replace('"', "")
+                        for name in kip_votes[kip_votes["vote"] == vote]["from"]
+                    ]
+                )
+            )
+        vote_dict[kip_id] = kip_dict
+
+    return vote_dict
+
+
 def create_status_dict(
     kip_mentions: DataFrame,
-) -> List[Dict[str, Union[int, str, KIPStatus]]]:
+) -> List[Dict[str, Union[int, str, KIPStatus, List[str]]]]:
     """Calculate a status for each KIP based on how recently it was mentioned in an
     email subject"""
 
@@ -122,9 +220,11 @@ def create_status_dict(
         get_kip_tables()["discussion"]
     )
 
-    output: List[Dict[str, Union[int, str, KIPStatus]]] = []
+    vote_dict: Dict[int, Dict[str, List[str]]] = create_vote_dict(kip_mentions)
+
+    output: List[Dict[str, Union[int, str, KIPStatus, List[str]]]] = []
     for kip_id, kip_data in discussion_table.items():
-        status_entry: Dict[str, Union[int, str, KIPStatus]] = {}
+        status_entry: Dict[str, Union[int, str, KIPStatus, List[str]]] = {}
         status_entry["id"] = kip_id
         status_entry["text"] = clean_description(kip_data["text"])
         status_entry["url"] = kip_data["url"]
@@ -132,6 +232,11 @@ def create_status_dict(
             status_entry["status"] = calculate_status(subject_mentions[kip_id])
         else:
             status_entry["status"] = KIPStatus.BLACK
+        for vote in ["+1", "0", "-1"]:
+            if kip_id in vote_dict:
+                status_entry[vote] = vote_dict[kip_id][vote]
+            else:
+                status_entry[vote] = []
 
         output.append(status_entry)
 

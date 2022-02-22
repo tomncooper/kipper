@@ -132,14 +132,18 @@ def run():
         elif args.mail_subcommand == "process":
             out_dir: Path = Path(args.directory)
             kip_mentions: DataFrame = process_all_mbox_in_directory(
-                out_dir, args.overwrite_cache
+                out_dir, overwrite_cache=args.overwrite_cache
             )
             output_file: Path = out_dir.joinpath("kip_mentions.csv")
             kip_mentions.to_csv(output_file, index=False)
             print(f"Saved KIP mentions to {output_file}")
     if args.subcommand == "output":
         if args.output_subcommand == "standalone":
-            kip_mentions = read_csv(args.kip_mentions_file, parse_dates=["timestamp"])
+            kip_mentions: DataFrame = read_csv(
+                args.kip_mentions_file,
+                converters={"vote": lambda x: str(x) if x else None},
+                parse_dates=["timestamp"],
+            )
             render_standalone_status_page(kip_mentions, args.output_file)
 
 
