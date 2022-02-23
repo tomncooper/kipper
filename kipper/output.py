@@ -5,7 +5,7 @@ from typing import List, Dict, Union, Optional
 from enum import Enum
 
 from pandas import DataFrame, Timestamp, Timedelta, to_datetime
-from jinja2 import Template, Environment, BaseLoader
+from jinja2 import Template, Environment, FileSystemLoader
 
 from kipper.mailing_list import get_most_recent_mention_by_type
 from kipper.wiki import (
@@ -16,131 +16,6 @@ from kipper.wiki import (
 )
 
 KIP_SPLITTER: re.Pattern = re.compile(r"KIP-\d+\W?[:-]?\W?", re.IGNORECASE)
-
-STATUS_TABLE_TEMPLATE: str = """
-<table>
-    <tr>
-        <th>KIP</th>
-        <th>Description</th>
-        <th>Status</th>
-        <th>+1</th>
-        <th>0</th>
-        <th>-1</th>
-    </tr>
-    {% for kip in kip_status %}
-    <tr>
-        <td><a href={{ kip['url'] }}>{{ kip['id'] }}</a></td>
-        <td>{{ kip['text'] }}
-        <td style="background-color:{{ kip['status'].text }};"></td>
-        <td>
-        {% if kip["+1"] %}
-            <div class="tooltip">{{ kip["+1"]|length }}
-                <span class="tooltiptext">
-                {% for name in kip["+1"] %}
-                {{ name }}<br>
-                {% endfor %}
-                </span>
-            </div> 
-        {% else %}
-            {{ kip["+1"]|length }}
-        {% endif %}
-        </td>
-        <td>
-        {% if kip["0"] %}
-            <div class="tooltip">{{ kip["0"]|length }}
-                <span class="tooltiptext">
-                {% for name in kip["0"] %}
-                {{ name }}<br>
-                {% endfor %}
-                </span>
-            </div> 
-        {% else %}
-            {{ kip["0"]|length }}
-        {% endif %}
-        </td>
-        <td>
-        {% if kip["-1"] %}
-            <div class="tooltip">{{ kip["-1"]|length }}
-                <span class="tooltiptext">
-                {% for name in kip["-1"] %}
-                {{ name }}<br>
-                {% endfor %}
-                </span>
-            </div> 
-        {% else %}
-            {{ kip["-1"]|length }}
-        {% endif %}
-        </td>
-    </tr> 
-    {% endfor %}
-</table>
-"""
-
-STATUS_KEY_TEMPLATE = """
-<table>
-    <tr>
-        <th>Status</th>
-        <th>Mentioned within the last N days</th>
-    </tr>
-    {% for status in kip_status_enum %}
-    <tr>
-        <td style="background-color:{{ status.text }};"></td>
-        <td>{{ status.duration.days }}</td>
-    </tr>
-    {% endfor %}
-</table>
-"""
-
-STANDALONE_STATUS_TEMPLATE: str = f"""
-<!DOCTYPE html>
-    <head>
-        <title>KIP Status</title>
-        <style type="text/css">
-            table, th, td {{
-                border: 1px solid black;
-                border-collapse: collapse;
-            }}
-
-            /* Tooltip container */
-            .tooltip {{
-                position: relative;
-                display: inline-block;
-                border-bottom: 1px dotted black;
-                /* If you want dots under the hoverable text */
-            }}
-
-            /* Tooltip text */
-            .tooltip .tooltiptext {{
-                visibility: hidden;
-                width: 200px;
-                background-color: black;
-                color: #fff;
-                text-align: center;
-                padding: 5px 0;
-                border-radius: 6px;
-
-
-                /* Position the tooltip text - see examples below! */
-                position: absolute;
-                z-index: 1;
-                top: -5px;
-                right: 105%;
-            }}
-
-            /* Show the tooltip text when you mouse over the tooltip container */
-            .tooltip:hover .tooltiptext {{
-                visibility: visible;
-            }}
-        </style>
-    </head>
-    <body>
-        <h1>KIPs Under Discussion</h1>
-        {STATUS_TABLE_TEMPLATE}
-        <h2>Status Key</h2>
-        {STATUS_KEY_TEMPLATE}
-    </body>
-</html>
-"""
 
 
 class KIPStatus(Enum):
@@ -262,11 +137,15 @@ def render_standalone_status_page(
         Dict[str, Union[int, str, KIPStatus, List[str]]]
     ] = create_status_dict(kip_mentions)
 
-    template: Template = Environment(loader=BaseLoader()).from_string(
-        STANDALONE_STATUS_TEMPLATE
+    template: Template = Environment(loader=FileSystemLoader("templates")).get_template(
+        "index.html.jinja"
     )
 
-    output: str = template.render(kip_status=kip_status, kip_status_enum=KIPStatus)
+    output: str = template.render(
+        kip_status=kip_status,
+        kip_status_enum=KIPStatus,
+        date=dt.datetime.now(dt.timezone.utc).strftime("%Y/%m/%d %H:%M:%S %Z"),
+    )
 
     with open(output_filename, "w", encoding="utf8") as out_file:
         out_file.write(output)
