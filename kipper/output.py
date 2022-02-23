@@ -223,7 +223,8 @@ def create_status_dict(
     vote_dict: Dict[int, Dict[str, List[str]]] = create_vote_dict(kip_mentions)
 
     output: List[Dict[str, Union[int, str, KIPStatus, List[str]]]] = []
-    for kip_id, kip_data in discussion_table.items():
+    for kip_id in sorted(discussion_table.keys(), reverse=True):
+        kip_data: Dict[str, str] = discussion_table[kip_id]
         status_entry: Dict[str, Union[int, str, KIPStatus, List[str]]] = {}
         status_entry["id"] = kip_id
         status_entry["text"] = clean_description(kip_data["text"])
@@ -249,9 +250,9 @@ def render_standalone_status_page(
     """Renders the KIPs under discussion table with a status entry based on
     how recently the KIP was mentioned in an email subject line."""
 
-    kip_status: List[Dict[str, Union[int, str, KIPStatus]]] = create_status_dict(
-        kip_mentions
-    )
+    kip_status: List[
+        Dict[str, Union[int, str, KIPStatus, List[str]]]
+    ] = create_status_dict(kip_mentions)
 
     template: Template = Environment(loader=BaseLoader()).from_string(
         STANDALONE_STATUS_TEMPLATE
