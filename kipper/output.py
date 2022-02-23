@@ -8,7 +8,12 @@ from pandas import DataFrame, Timestamp, Timedelta, to_datetime
 from jinja2 import Template, Environment, BaseLoader
 
 from kipper.mailing_list import get_most_recent_mention_by_type
-from kipper.wiki import get_kip_tables, process_discussion_table
+from kipper.wiki import (
+    get_kip_child_links,
+    get_kip_main_page_info,
+    get_kip_tables,
+    process_discussion_table,
+)
 
 KIP_SPLITTER: re.Pattern = re.compile(r"KIP-\d+\W?[:-]?\W?", re.IGNORECASE)
 
@@ -216,8 +221,11 @@ def create_status_dict(
 
     subject_mentions: DataFrame = recent_mentions["subject"].dropna()
 
+    kip_main_page_info = get_kip_main_page_info()
+
     discussion_table: Dict[int, Dict[str, str]] = process_discussion_table(
-        get_kip_tables()["discussion"]
+        get_kip_tables(kip_main_page_info)["discussion"],
+        get_kip_child_links(kip_main_page_info),
     )
 
     vote_dict: Dict[int, Dict[str, List[str]]] = create_vote_dict(kip_mentions)
