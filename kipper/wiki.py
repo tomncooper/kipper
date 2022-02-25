@@ -1,6 +1,6 @@
 import re
 import json
-from typing import Any, List, Dict, Optional
+from typing import Any, List, Dict, Optional, Union, cast
 from pathlib import Path
 
 import requests
@@ -51,24 +51,143 @@ def get_kip_main_page_body(kip_main_info: Dict[str, Any]) -> str:
     return kip_body_request.json()["body"]["view"]["value"]
 
 
-def get_kip_child_links(
+ACCEPTED_TERMS: List[str] = [
+    "accepted",
+    "approved",
+    "adopted",
+    "adopt",
+    "implemented",
+    "committed",
+    "completed",
+    "merged",
+    "released",
+    "accept",
+    "vote passed",
+]
+UNDER_DISCUSSION_TERMS: List[str] = [
+    "discussion",
+    "discuss",
+    "discusion",
+    "voting",
+    "under vote",
+    "draft",
+    "wip",
+    "under review",
+]
+NOT_ACCEPTED_TERMS: List[str] = [
+    "rejected",
+    "discarded",
+    "superseded",
+    "subsumed",
+    "withdrawn",
+    "cancelled",
+    "abandoned",
+    "replaced",
+    "moved to",
+]
+ACCEPTED: str = "accepted"
+UNDER_DISCUSSION: str = "under discussion"
+NOT_ACCEPTED: str = "not accepted"
+UNKNOWN: str = "unknown"
+
+
+def get_current_state(html: str) -> Optional[str]:
+    """Discerns the state of the kip from the supplied current state html paragraph"""
+
+    if any(option in html.lower() for option in ACCEPTED_TERMS):
+        return ACCEPTED
+
+    if any(option in html.lower() for option in UNDER_DISCUSSION_TERMS):
+        return UNDER_DISCUSSION
+
+    if any(option in html.lower() for option in NOT_ACCEPTED_TERMS):
+        return NOT_ACCEPTED
+
+    return None
+
+
+def enrich_kip_info(kip_dict: Dict[str, Union[str, int]]) -> None:
+    """Parses the body of the KIP wiki page pointed to by the 'content_url'
+    key in the supplied dictionary. It will add the derived data to the
+    supplied dict."""
+
+    kip_response: requests.Response = requests.get(
+        cast(str, kip_dict["content_url"]), params={"expand": "body.view"}
+    )
+    kip_response.raise_for_status()
+
+    body_html: str = kip_response.json()["body"]["view"]["value"]
+    parsed_body: BeautifulSoup = BeautifulSoup(body_html, "html.parser")
+
+    state_processed: bool = False
+    jira_processed: bool = False
+
+    for para in parsed_body.find_all("p"):
+
+        if not state_processed and "current state" in para.text.lower():
+            state: Optional[str] = get_current_state(para.text)
+            if state:
+                kip_dict["state"] = state
+            else:
+                print(f"Could not discern KIP state from {para}")
+                kip_dict["state"] = UNKNOWN
+
+            state_processed = True
+
+        elif not jira_processed and "jira" in para.text.lower():
+            link: Tag = para.find("a")
+            if link:
+                href: Optional[str] = link.get("href")
+            else:
+                href = None
+
+            if href:
+                kip_dict["jira"] = href
+            else:
+                print(f"Could not discern JIRA link from {para}")
+                kip_dict["jira"] = UNKNOWN
+
+            jira_processed = True
+
+    if not state_processed:
+        kip_dict["state"] = UNKNOWN
+
+    if not jira_processed:
+        kip_dict["jira"] = UNKNOWN
+
+
+def process_child_kip(kip_id: int, child: dict):
+    """Process and enrich the KIP child page dictionary"""
+
+    print(f"Processing KIP {kip_id} wiki page")
+    child_dict: Dict[str, Union[int, str]] = {}
+    child_dict["kip_id"] = kip_id
+    child_dict["title"] = child["title"]
+    child_dict["web_url"] = BASE_URL + child["_links"]["webui"]
+    child_dict["content_url"] = child["_links"]["self"]
+    enrich_kip_info(child_dict)
+
+    return child_dict
+
+
+def get_kip_information(
     kip_main_info: Dict[str, Any],
     chunk: int = 100,
     update: bool = True,
     overwrite_cache: bool = False,
-    cache_filepath: str = "kip_url_cache.json",
-) -> Dict[int, str]:
-    """Gets the URL of all child pages of the KIP main page that relate
+    cache_filepath: str = "kip_wiki_cache.json",
+) -> Dict[int, Dict[str, Union[int, str]]]:
+    """Gets the details of all child pages of the KIP main page that relate
     to a KIP. This takes a long time so will cache its results in a json file."""
 
     if update and overwrite_cache:
-        raise ValueError("Either update or overwrite_cache can be true but not both")
+        update = False
 
     cache_file_path: Path = Path(cache_filepath)
     if cache_file_path.exists() and not overwrite_cache:
         print(f"Loading KIP Wiki information from cache file: {cache_file_path}")
         with open(cache_file_path, "r", encoding="utf8") as cache_file:
-            output: Dict[int, str] = {
+            output: Dict[int, Dict[str, Union[int, str]]] = {
                 int(k): v for k, v in json.load(cache_file).items()
             }
         if not update:
@@ -104,13 +223,7 @@ def get_kip_child_links(
             if kip_match:
                 kip_id: int = int(kip_match.groupdict()["kip"])
                 if kip_id not in output:
-                    print(f"Processing KIP {kip_id}")
-                    child_url: str = child["_links"]["self"]
-                    child_url_response: requests.Response = requests.get(child_url)
-                    child_url_response.raise_for_status()
-                    output[kip_id] = (
-                        BASE_URL + child_url_response.json()["_links"]["webui"]
-                    )
+                    output[kip_id] = process_child_kip(kip_id, child)
 
         if "next" in response_json["_links"]:
             kip_child_response: requests.Response = requests.get(
@@ -137,10 +250,10 @@ def get_kip_tables(kip_main_info: Dict[str, Any]) -> Dict[str, Tag]:
         A dict mapping from the table name [adopted, discussion,
         discarded, recordings] to the Table element."""
 
-    body: str = get_kip_main_page_body(kip_main_info)
-    parsed_body: BeautifulSoup = BeautifulSoup(body, "html.parser")
+    body_html: str = get_kip_main_page_body(kip_main_info)
+    parsed_body: BeautifulSoup = BeautifulSoup(body_html, "html.parser")
 
-    tables: List[Tag] = [table for table in parsed_body.find_all("table")]
+    tables: List[Tag] = list(parsed_body.find_all("table"))
 
     kip_tables: Dict[str, Tag] = {
         "adopted": tables[0],
@@ -153,7 +266,7 @@ def get_kip_tables(kip_main_info: Dict[str, Any]) -> Dict[str, Tag]:
 
 
 def process_discussion_table(
-    discussion_table: Tag, kip_child_urls: Dict[int, str]
+    discussion_table: Tag, kip_child_urls: Dict[int, Dict[str, Union[str, int]]]
 ) -> Dict[int, Dict[str, str]]:
     """Process the KIPs under discussion table"""
 
@@ -174,7 +287,7 @@ def process_discussion_table(
             kip_dict["text"] = kip_text
             kip_dict["comment"] = columns[1].text
             try:
-                kip_dict["url"] = kip_child_urls[kip_id]
+                kip_dict["url"] = cast(str, kip_child_urls[kip_id]["web_url"])
             except KeyError:
                 kip_dict["url"] = columns[0].a.get("href")
             output[kip_id] = kip_dict

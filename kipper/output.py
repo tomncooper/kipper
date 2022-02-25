@@ -9,10 +9,9 @@ from jinja2 import Template, Environment, FileSystemLoader
 
 from kipper.mailing_list import get_most_recent_mention_by_type
 from kipper.wiki import (
-    get_kip_child_links,
+    UNDER_DISCUSSION,
+    get_kip_information,
     get_kip_main_page_info,
-    get_kip_tables,
-    process_discussion_table,
 )
 
 KIP_SPLITTER: re.Pattern = re.compile(r"KIP-\d+\W?[:-]?\W?", re.IGNORECASE)
@@ -87,7 +86,7 @@ def create_vote_dict(kip_mentions: DataFrame) -> Dict[int, Dict[str, List[str]]]
 
 
 def create_status_dict(
-    kip_mentions: DataFrame,
+    kip_mentions: DataFrame, kip_wiki_info: Dict[int, Dict[str, Union[int, str]]]
 ) -> List[Dict[str, Union[int, str, KIPStatus, List[str]]]]:
     """Calculate a status for each KIP based on how recently it was mentioned in an
     email subject"""
@@ -96,46 +95,44 @@ def create_status_dict(
 
     subject_mentions: DataFrame = recent_mentions["subject"].dropna()
 
-    kip_main_page_info = get_kip_main_page_info()
-
-    discussion_table: Dict[int, Dict[str, str]] = process_discussion_table(
-        get_kip_tables(kip_main_page_info)["discussion"],
-        get_kip_child_links(kip_main_page_info),
-    )
-
     vote_dict: Dict[int, Dict[str, List[str]]] = create_vote_dict(kip_mentions)
 
     output: List[Dict[str, Union[int, str, KIPStatus, List[str]]]] = []
-    for kip_id in sorted(discussion_table.keys(), reverse=True):
-        kip_data: Dict[str, str] = discussion_table[kip_id]
-        status_entry: Dict[str, Union[int, str, KIPStatus, List[str]]] = {}
-        status_entry["id"] = kip_id
-        status_entry["text"] = clean_description(kip_data["text"])
-        status_entry["url"] = kip_data["url"]
-        if kip_id in subject_mentions:
-            status_entry["status"] = calculate_status(subject_mentions[kip_id])
-        else:
-            status_entry["status"] = KIPStatus.BLACK
-        for vote in ["+1", "0", "-1"]:
-            if kip_id in vote_dict:
-                status_entry[vote] = vote_dict[kip_id][vote]
+    for kip_id in sorted(kip_wiki_info.keys(), reverse=True):
+        kip_data: Dict[str, Union[int, str]] = kip_wiki_info[kip_id]
+        if kip_data["state"] == UNDER_DISCUSSION:
+            status_entry: Dict[str, Union[int, str, KIPStatus, List[str]]] = {}
+            status_entry["id"] = kip_id
+            status_entry["text"] = clean_description(kip_data["title"])
+            status_entry["url"] = kip_data["web_url"]
+            if kip_id in subject_mentions:
+                status_entry["status"] = calculate_status(subject_mentions[kip_id])
             else:
-                status_entry[vote] = []
+                status_entry["status"] = KIPStatus.BLACK
+            for vote in ["+1", "0", "-1"]:
+                if kip_id in vote_dict:
+                    status_entry[vote] = vote_dict[kip_id][vote]
+                else:
+                    status_entry[vote] = []
 
-        output.append(status_entry)
+            output.append(status_entry)
 
     return output
 
 
 def render_standalone_status_page(
-    kip_mentions: DataFrame, output_filename: str
+    kip_mentions: DataFrame,
+    output_filename: str,
 ) -> None:
     """Renders the KIPs under discussion table with a status entry based on
     how recently the KIP was mentioned in an email subject line."""
 
+    kip_main_info = get_kip_main_page_info()
+    kip_wiki_info = get_kip_information(kip_main_info)
+
     kip_status: List[
         Dict[str, Union[int, str, KIPStatus, List[str]]]
-    ] = create_status_dict(kip_mentions)
+    ] = create_status_dict(kip_mentions, kip_wiki_info)
 
     template: Template = Environment(loader=FileSystemLoader("templates")).get_template(
         "index.html.jinja"

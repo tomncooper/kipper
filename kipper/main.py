@@ -5,6 +5,7 @@ from pandas import DataFrame, read_csv
 
 from kipper.mailing_list import get_multiple_mbox, process_all_mbox_in_directory
 from kipper.output import render_standalone_status_page
+from kipper.wiki import get_kip_information, get_kip_main_page_info
 
 
 def create_parser() -> ArgumentParser:
@@ -88,6 +89,18 @@ def setup_wiki_command(main_subparser):
     )
     wiki_subparser = wiki_parser.add_subparsers(dest="wiki_subcommand")
 
+    wiki_download_subparser = wiki_subparser.add_parser(
+        "download", help="Command for downloading and caching KIP wiki information."
+    )
+
+    wiki_download_subparser.add_argument(
+        "-ow",
+        "--overwrite",
+        required=False,
+        action="store_true",
+        help="Redownload all KIP wiki information.",
+    )
+
 
 def setup_output_command(main_subparser):
     """Setup the top level output command line option."""
@@ -137,6 +150,7 @@ def run():
             output_file: Path = out_dir.joinpath("kip_mentions.csv")
             kip_mentions.to_csv(output_file, index=False)
             print(f"Saved KIP mentions to {output_file}")
+
     if args.subcommand == "output":
         if args.output_subcommand == "standalone":
             kip_mentions: DataFrame = read_csv(
@@ -145,6 +159,11 @@ def run():
                 parse_dates=["timestamp"],
             )
             render_standalone_status_page(kip_mentions, args.output_file)
+
+    if args.subcommand == "wiki":
+        if args.wiki_subcommand == "download":
+            kip_main_info = get_kip_main_page_info()
+            get_kip_information(kip_main_info, overwrite_cache=args.overwrite)
 
 
 if __name__ == "__main__":
