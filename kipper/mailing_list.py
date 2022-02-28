@@ -75,8 +75,8 @@ def get_monthly_mbox_file(
                 f"Mbox file {filepath} already exists. Skipping download (set overwrite to True to re-download)."
             )
             return filepath
-        else:
-            print(f"Overwritting existing mbox file: {filepath}")
+
+        print(f"Overwritting existing mbox file: {filepath}")
 
     options: Dict[str, str] = {
         "list": mailing_list,
@@ -359,6 +359,33 @@ def process_mbox_archive(filepath: Path) -> DataFrame:
     return output.drop_duplicates()
 
 
+def process_mbox_files(
+    mbox_files: List[Path], cache_dir: Path, overwrite_cache: bool = False
+) -> DataFrame:
+    """Process a list of mbox files and cache the results under the provided cache directory"""
+
+    output: DataFrame = DataFrame(columns=KIP_MENTION_COLUMNS)
+
+    for element in mbox_files:
+
+        cache_file: Path = cache_dir.joinpath(element.name + CACHE_SUFFIX)
+        if cache_file.exists() and not overwrite_cache:
+            print(f"Loading data from cache file: {cache_file}")
+            file_data: DataFrame = read_csv(cache_file, parse_dates=["timestamp"])
+        else:
+            # Either the cache file doesn't exist or we want to overwrite it
+            if overwrite_cache:
+                print(f"Processing file: {element.name}")
+            else:
+                print(f"Processing file: {element.name}")
+            file_data = process_mbox_archive(element)
+            file_data.to_csv(cache_file, index=False)
+
+        output = concat((output, file_data), ignore_index=True)
+
+    return output
+
+
 def process_all_mbox_in_directory(
     dir_path: Path, overwrite_cache: bool = False
 ) -> DataFrame:
@@ -367,35 +394,21 @@ def process_all_mbox_in_directory(
     if not dir_path.is_dir():
         raise ValueError(f"The supplied path ({dir_path}) is not a directory.")
 
-    output: DataFrame = DataFrame(columns=KIP_MENTION_COLUMNS)
-
     cache_dir: Path = dir_path.joinpath(CACHE_DIR)
 
     if not cache_dir.exists():
         os.mkdir(cache_dir)
 
+    mbox_files: List[Path] = []
+
     for element in dir_path.iterdir():
         if element.is_file():
             if "mbox" in element.name:
-
-                cache_file: Path = cache_dir.joinpath(element.name + CACHE_SUFFIX)
-                if cache_file.exists() and not overwrite_cache:
-                    print(f"Loading data from cache file: {cache_file}")
-                    file_data: DataFrame = read_csv(
-                        cache_file, parse_dates=["timestamp"]
-                    )
-                else:
-                    # Either the cache file doesn't exist or we want to overwrite it
-                    if overwrite_cache:
-                        print(f"Processing file: {element.name}")
-                    else:
-                        print(f"Processing file: {element.name}")
-                    file_data = process_mbox_archive(element)
-                    file_data.to_csv(cache_file, index=False)
-
-                output = concat((output, file_data), ignore_index=True)
+                mbox_files.append(element)
             else:
                 print(f"Skipping non-mbox file: {element.name}")
+
+    output: DataFrame = process_mbox_files(mbox_files, cache_dir, overwrite_cache)
 
     return output
 

@@ -1,9 +1,15 @@
 from argparse import ArgumentParser, Namespace
 from pathlib import Path
+from typing import List
 
 from pandas import DataFrame, read_csv
 
-from kipper.mailing_list import get_multiple_mbox, process_all_mbox_in_directory
+from kipper.mailing_list import (
+    get_multiple_mbox,
+    process_all_mbox_in_directory,
+    CACHE_DIR,
+    process_mbox_files,
+)
 from kipper.output import render_standalone_status_page
 from kipper.wiki import get_kip_information, get_kip_main_page_info
 
@@ -132,6 +138,14 @@ def setup_wiki_command(main_subparser):
         help="Redownload all KIP wiki information.",
     )
 
+    wiki_download_subparser.add_argument(
+        "-u",
+        "--update",
+        required=False,
+        action="store_true",
+        help="Update KIP wiki information. This will add any newly added KIPs to the existing cache.",
+    )
+
 
 def setup_output_command(main_subparser):
     """Setup the top level output command line option."""
@@ -155,7 +169,7 @@ def setup_output_command(main_subparser):
     )
 
 
-def setup_mail_download(args: Namespace):
+def setup_mail_download(args: Namespace) -> List[Path]:
     """Run the mail archive download command"""
 
     if "output_dir" not in args:
@@ -163,12 +177,14 @@ def setup_mail_download(args: Namespace):
     else:
         out_dir = args.output_dir
 
-    get_multiple_mbox(
+    files: List[Path] = get_multiple_mbox(
         args.mailing_list,
         args.days,
         output_directory=out_dir,
         overwrite=args.overwrite,
     )
+
+    return files
 
 
 def process_mail_archives(args: Namespace) -> None:
@@ -187,7 +203,9 @@ def setup_wiki_download(args: Namespace) -> None:
     """Run the KIP wiki information download"""
 
     kip_main_info = get_kip_main_page_info()
-    get_kip_information(kip_main_info, overwrite_cache=args.overwrite)
+    get_kip_information(
+        kip_main_info, update=args.update, overwrite_cache=args.overwrite
+    )
 
 
 def run():
@@ -197,11 +215,11 @@ def run():
     args: Namespace = parser.parse_args()
 
     if args.subcommand == "init":
-        print("Initializing all data Caches")
+        print("Initializing all data caches")
         print("Downloading KIP Wiki Information")
         args.overwrite = True
         setup_wiki_download(args)
-        print("Dowloading Mailing List Archives")
+        print("Dowloading Developer Mailing List Archives")
         args.mailing_list = "dev"
         setup_mail_download(args)
         args.overwrite_cache = True
@@ -209,7 +227,25 @@ def run():
         process_mail_archives(args)
 
     if args.subcommand == "update":
-        print("Update all the things! - Not yet implemented")
+        print("Updating all data caches")
+        print("Updating KIP Wiki Information")
+        args.update = True
+        args.overwrite = False
+        setup_wiki_download(args)
+        print("Updating Developer Mailing List Archives")
+        # Re-download the most recent months archive
+        args.days = 1
+        args.overwrite = True
+        args.mailing_list = "dev"
+        updated_files: List[Path] = setup_mail_download(args)
+        # Reprocess just the newly downloaded mail file
+        cache_dir: Path = Path("dev").joinpath(CACHE_DIR)
+        process_mbox_files(updated_files, cache_dir, overwrite_cache=True)
+        # Overwrite the kip mentions cache by process all the old mbox cache files
+        # and the newly overwritten one(s)
+        args.directory = "dev"
+        args.overwrite_cache = False
+        process_mail_archives(args)
 
     if args.subcommand == "mail":
         if args.mail_subcommand == "download":
@@ -228,8 +264,9 @@ def run():
 
     if args.subcommand == "wiki":
         if args.wiki_subcommand == "download":
-            kip_main_info = get_kip_main_page_info()
-            get_kip_information(kip_main_info, overwrite_cache=args.overwrite)
+            setup_wiki_download(
+                args,
+            )
 
 
 if __name__ == "__main__":
