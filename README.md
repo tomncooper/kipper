@@ -13,22 +13,14 @@ $ poetry install
 
 ## Creating the site
 
-To download the Apache Kafka `dev` mailing list archive for the last year run:
+To download the Apache Kafka `dev` mailing list for the last year (longer periods can be set via the `--days` option), process the archives and download the KIP Wiki information from the confluence site; run the `init` command:
 
 ```bash
-$ poetry run kipper mail download dev --days 365
+$ poetry run kipper init --days 365
 ```
 
-To process the mail archives and create summary csv files run:
-
-```bash
-$ poetry run kipper mail process 
-```
-
-To create the standalone site html run:
+To create the standalone site html run the command below where the first argument is the kip mentions cache file produced by the step above and the second if the html output filepath:
 
 ```bash
 $ poetry run kipper output standalone dev/kip_mentions.csv index.html
 ```
-
-This will use the csv created in the processing step to create the output html.
