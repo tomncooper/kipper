@@ -60,8 +60,8 @@
             <td><a href={{ kip['url'] }}>{{ kip['id'] }}</a></td>
             <td>{{ kip['text'] }}
             <td style="background-color:{{ kip['status'].text }};"></td>
-            <td>
-                {% if kip["+1"] %}
+            {% if kip["+1"] %}
+            <td style="background-color:green;">
                 <div class="tooltip">{{ kip["+1"]|length }}
                     <span class="tooltiptext">
                         {% for name in kip["+1"] %}
@@ -69,12 +69,12 @@
                         {% endfor %}
                     </span>
                 </div>
-                {% else %}
-                {{ kip["+1"]|length }}
-                {% endif %}
             </td>
-            <td>
-                {% if kip["0"] %}
+            {% else %}
+            <td>{{ kip["+1"]|length }}</td>
+            {% endif %}
+            {% if kip["0"] %}
+            <td style="background-color:yellow;">
                 <div class="tooltip">{{ kip["0"]|length }}
                     <span class="tooltiptext">
                         {% for name in kip["0"] %}
@@ -82,12 +82,12 @@
                         {% endfor %}
                     </span>
                 </div>
-                {% else %}
-                {{ kip["0"]|length }}
-                {% endif %}
             </td>
-            <td>
-                {% if kip["-1"] %}
+            {% else %}
+            <td>{{ kip["0"]|length }}</td>
+            {% endif %}
+            {% if kip["-1"] %}
+            <td style="background-color:red;">
                 <div class="tooltip">{{ kip["-1"]|length }}
                     <span class="tooltiptext">
                         {% for name in kip["-1"] %}
@@ -95,10 +95,10 @@
                         {% endfor %}
                     </span>
                 </div>
-                {% else %}
-                {{ kip["-1"]|length }}
-                {% endif %}
             </td>
+            {% else %}
+            <td>{{ kip["-1"]|length }}</td>
+            {% endif %}
         </tr>
         {% endfor %}
     </table>

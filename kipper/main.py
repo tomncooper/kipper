@@ -6,6 +6,7 @@ from pandas import DataFrame, read_csv
 
 from kipper.mailing_list import (
     get_multiple_mbox,
+    load_mbox_cache_file,
     process_all_mbox_in_directory,
     CACHE_DIR,
     process_mbox_files,
@@ -255,11 +256,8 @@ def run():
 
     if args.subcommand == "output":
         if args.output_subcommand == "standalone":
-            kip_mentions: DataFrame = read_csv(
-                args.kip_mentions_file,
-                converters={"vote": lambda x: str(x) if x else None},
-                parse_dates=["timestamp"],
-            )
+            cache_file = Path(args.kip_mentions_file)
+            kip_mentions: DataFrame = load_mbox_cache_file(cache_file)
             render_standalone_status_page(kip_mentions, args.output_file)
 
     if args.subcommand == "wiki":

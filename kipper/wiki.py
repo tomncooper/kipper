@@ -173,7 +173,7 @@ def process_child_kip(kip_id: int, child: dict):
 def get_kip_information(
     kip_main_info: Dict[str, Any],
     chunk: int = 100,
-    update: bool = True,
+    update: bool = False,
     overwrite_cache: bool = False,
     cache_filepath: str = "kip_wiki_cache.json",
 ) -> Dict[int, Dict[str, Union[int, str]]]:

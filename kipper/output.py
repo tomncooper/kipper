@@ -1,7 +1,7 @@
 import re
 import datetime as dt
 
-from typing import List, Dict, Union, Optional
+from typing import List, Dict, Union, Optional, cast
 from enum import Enum
 
 from pandas import DataFrame, Timestamp, Timedelta, to_datetime
@@ -74,10 +74,8 @@ def create_vote_dict(kip_mentions: DataFrame) -> Dict[int, Dict[str, List[str]]]
         for vote in ["+1", "0", "-1"]:
             kip_dict[f"{vote}"] = list(
                 set(
-                    [
-                        name.replace('"', "")
-                        for name in kip_votes[kip_votes["vote"] == vote]["from"]
-                    ]
+                    name.replace('"', "")
+                    for name in kip_votes[kip_votes["vote"] == vote]["from"]
                 )
             )
         vote_dict[kip_id] = kip_dict
@@ -103,7 +101,7 @@ def create_status_dict(
         if kip_data["state"] == UNDER_DISCUSSION:
             status_entry: Dict[str, Union[int, str, KIPStatus, List[str]]] = {}
             status_entry["id"] = kip_id
-            status_entry["text"] = clean_description(kip_data["title"])
+            status_entry["text"] = clean_description(cast(str, kip_data["title"]))
             status_entry["url"] = kip_data["web_url"]
             if kip_id in subject_mentions:
                 status_entry["status"] = calculate_status(subject_mentions[kip_id])

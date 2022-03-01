@@ -2,7 +2,7 @@ import os
 import re
 import datetime as dt
 
-from typing import Dict, List, Tuple, Optional, Union, Set
+from typing import Dict, List, Tuple, Optional, Union, Set, Any
 from pathlib import Path
 from enum import Enum
 
@@ -359,6 +359,32 @@ def process_mbox_archive(filepath: Path) -> DataFrame:
     return output.drop_duplicates()
 
 
+def vote_converter(vote: Optional[str]) -> Optional[str]:
+    """Converter function for the vote column of the mbox cache dataframe"""
+
+    if vote != "":
+        vote_num: float = float(vote)
+        if vote_num >= 1.0:
+            return "+1"
+
+        if vote_num <= -1.0:
+            return "-1"
+
+        return "0"
+
+    return None
+
+
+def load_mbox_cache_file(cache_file: Path) -> DataFrame:
+    """Loads the pre-processed mbox cache file and applies the relevant type converters"""
+
+    file_data: DataFrame = read_csv(
+        cache_file, converters={"vote": vote_converter}, parse_dates=["timestamp"]
+    )
+
+    return file_data
+
+
 def process_mbox_files(
     mbox_files: List[Path], cache_dir: Path, overwrite_cache: bool = False
 ) -> DataFrame:
@@ -371,7 +397,7 @@ def process_mbox_files(
         cache_file: Path = cache_dir.joinpath(element.name + CACHE_SUFFIX)
         if cache_file.exists() and not overwrite_cache:
             print(f"Loading data from cache file: {cache_file}")
-            file_data: DataFrame = read_csv(cache_file, parse_dates=["timestamp"])
+            file_data: DataFrame = load_mbox_cache_file(cache_file)
         else:
             # Either the cache file doesn't exist or we want to overwrite it
             if overwrite_cache:
