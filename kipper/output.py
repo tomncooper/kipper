@@ -1,4 +1,5 @@
 import re
+import math
 import datetime as dt
 
 from typing import List, Dict, Union, Optional, cast
@@ -10,6 +11,7 @@ from jinja2 import Template, Environment, FileSystemLoader
 from kipper.mailing_list import get_most_recent_mention_by_type
 from kipper.wiki import (
     UNDER_DISCUSSION,
+    WIKI_DATE_FORMAT,
     get_kip_information,
     get_kip_main_page_info,
 )
@@ -20,6 +22,7 @@ KIP_SPLITTER: re.Pattern = re.compile(r"KIP-\d+\W?[:-]?\W?", re.IGNORECASE)
 class KIPStatus(Enum):
     """Enum representing the possible values of a KIP's status"""
 
+    BLUE = ("blue", Timedelta(weeks=0))
     GREEN = ("green", Timedelta(weeks=4))
     YELLOW = ("yellow", Timedelta(weeks=12))
     RED = ("red", Timedelta(days=365))
@@ -83,6 +86,27 @@ def create_vote_dict(kip_mentions: DataFrame) -> Dict[int, Dict[str, List[str]]]
     return vote_dict
 
 
+def calculate_age(date_str: str) -> str:
+    """Calculate the age string for the given date string"""
+
+    then: dt.datetime = dt.datetime.strptime(date_str, WIKI_DATE_FORMAT).replace(
+        tzinfo=dt.timezone.utc
+    )
+    now: dt.datetime = dt.datetime.now(dt.timezone.utc)
+    diff: dt.timedelta = now - then
+
+    if diff.days < 7:
+        return f"{diff.days} days"
+
+    if diff.days > 7 and diff.days < 365:
+        weeks: int = int(round(diff.days / 7, 0))
+        return f"{weeks} weeks"
+
+    years: int = math.floor(diff.days / 365)
+    weeks_remaining: int = int(round(diff.days / 7 % 52, 0))
+    return f"{years} years {weeks_remaining} weeks"
+
+
 def create_status_dict(
     kip_mentions: DataFrame, kip_wiki_info: Dict[int, Dict[str, Union[int, str]]]
 ) -> List[Dict[str, Union[int, str, KIPStatus, List[str]]]]:
@@ -103,10 +127,24 @@ def create_status_dict(
             status_entry["id"] = kip_id
             status_entry["text"] = clean_description(cast(str, kip_data["title"]))
             status_entry["url"] = kip_data["web_url"]
+            status_entry["created_by"] = kip_data["created_by"]
+            status_entry["age"] = calculate_age(kip_data["created_on"])
+
             if kip_id in subject_mentions:
                 status_entry["status"] = calculate_status(subject_mentions[kip_id])
             else:
-                status_entry["status"] = KIPStatus.BLACK
+                created_diff: dt.timedelta = dt.datetime.now(
+                    dt.timezone.utc
+                ) - dt.datetime.strptime(
+                    cast(str, kip_data["created_on"]), WIKI_DATE_FORMAT
+                ).replace(
+                    tzinfo=dt.timezone.utc
+                )
+                if created_diff <= dt.timedelta(days=28):
+                    status_entry["status"] = KIPStatus.BLUE
+                else:
+                    status_entry["status"] = KIPStatus.BLACK
+
             for vote in ["+1", "0", "-1"]:
                 if kip_id in vote_dict:
                     status_entry[vote] = vote_dict[kip_id][vote]

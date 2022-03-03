@@ -62,6 +62,8 @@
             <th>+1</th>
             <th>0</th>
             <th>-1</th>
+            <th>Created by</th>
+            <th>Age</th>
         </tr>
         {% for kip in kip_status %}
         <tr>
@@ -107,6 +109,8 @@
             {% else %}
             <td>{{ kip["-1"]|length }}</td>
             {% endif %}
+            <td>{{ kip["created_by"] }}</td>
+            <td>{{ kip["age"] }}</td>
         </tr>
         {% endfor %}
     </table>

@@ -10,6 +10,7 @@ from bs4.element import Tag
 
 BASE_URL: str = "https://wiki.apache.org/confluence"
 CONTENT_URL: str = BASE_URL + "/rest/api/content"
+WIKI_DATE_FORMAT: str = "%Y-%m-%dT%H:%M:%S.000Z"
 
 KIP_PATTERN: re.Pattern = re.compile("KIP-(?P<kip>\d+)", re.IGNORECASE)
 
@@ -106,17 +107,11 @@ def get_current_state(html: str) -> Optional[str]:
     return None
 
 
-def enrich_kip_info(kip_dict: Dict[str, Union[str, int]]) -> None:
+def enrich_kip_info(body_html: str, kip_dict: Dict[str, Union[str, int]]) -> None:
     """Parses the body of the KIP wiki page pointed to by the 'content_url'
     key in the supplied dictionary. It will add the derived data to the
     supplied dict."""
 
-    kip_response: requests.Response = requests.get(
-        cast(str, kip_dict["content_url"]), params={"expand": "body.view"}
-    )
-    kip_response.raise_for_status()
-
-    body_html: str = kip_response.json()["body"]["view"]["value"]
     parsed_body: BeautifulSoup = BeautifulSoup(body_html, "html.parser")
 
     state_processed: bool = False
@@ -165,7 +160,13 @@ def process_child_kip(kip_id: int, child: dict):
     child_dict["title"] = child["title"]
     child_dict["web_url"] = BASE_URL + child["_links"]["webui"]
     child_dict["content_url"] = child["_links"]["self"]
-    enrich_kip_info(child_dict)
+    child_dict["created_on"] = child["history"]["createdDate"]
+    child_dict["created_by"] = child["history"]["createdBy"]["displayName"]
+    child_dict["last_modified_on"] = child["history"]["lastUpdated"]["when"]
+    child_dict["last_modified_by"] = child["history"]["lastUpdated"]["by"][
+        "displayName"
+    ]
+    enrich_kip_info(child["body"]["view"]["value"], child_dict)
 
     return child_dict
 
@@ -208,7 +209,7 @@ def get_kip_information(
 
     first_kip_child_request: requests.Response = requests.get(
         BASE_URL + kip_child_info_request.json()["_expandable"]["page"],
-        params={"limit": chunk},
+        params={"limit": chunk, "expand": "history.lastUpdated,body.view"},
     )
 
     first_kip_child_request.raise_for_status()
