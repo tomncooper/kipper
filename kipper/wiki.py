@@ -225,6 +225,7 @@ def get_kip_information(
                 kip_id: int = int(kip_match.groupdict()["kip"])
                 if kip_id not in output:
                     output[kip_id] = process_child_kip(kip_id, child)
+                # TODO: Add check of last modified versus the stored one to indicate an update is needed.
 
         if "next" in response_json["_links"]:
             kip_child_response: requests.Response = requests.get(
