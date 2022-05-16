@@ -404,8 +404,12 @@ def process_mbox_files(
                 print(f"Processing file: {element.name}")
             else:
                 print(f"Processing file: {element.name}")
-            file_data = process_mbox_archive(element)
-            file_data.to_csv(cache_file, index=False)
+            try:
+                file_data = process_mbox_archive(element)
+            except Exception as ex:
+                print(f"ERROR processing file {element.name}: {ex}")
+            else:
+                file_data.to_csv(cache_file, index=False)
 
         output = concat((output, file_data), ignore_index=True)
 
