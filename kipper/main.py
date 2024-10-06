@@ -218,6 +218,7 @@ def run():
     if args.subcommand == "init":
         print("Initializing all data caches")
         print("Downloading KIP Wiki Information")
+        args.update = False
         args.overwrite = True
         setup_wiki_download(args)
         print("Dowloading Developer Mailing List Archives")

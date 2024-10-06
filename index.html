@@ -53,7 +53,7 @@
 
 <body>
     <h1>KIPs Under Discussion</h1>
-    <p>Last Updated: 2022/08/24 08:08:33 UTC</p>
+    <p>Last Updated: 2024/10/06 08:08:17 UTC</p>
     <table>
         <tr>
             <th>KIP</th>
@@ -67,25 +67,8 @@
         </tr>
         
         <tr>
-            <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=225152035>863</a></td>
-            <td>Reduce Fetcher#parseRecord() memory copy
-            <td style="background-color:green;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>LinShunKang</td>
-            <td>2 days</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=217393101>861</a></td>
-            <td>Add BytesIn/BytesOut per listener metrics
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1095%3A+Kafka+Canary+Isolation>1095</a></td>
+            <td>Kafka Canary Isolation
             <td style="background-color:blue;"></td>
             
             <td>0</td>
@@ -96,13 +79,13 @@
             
             <td>0</td>
             
-            <td>Luke Chen</td>
-            <td>3 weeks</td>
+            <td>Zhifeng Chen</td>
+            <td>2 weeks</td>
         </tr>
         
         <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-860%3A+Add+client-provided+option+to+guard+against+replication+factor+change+during+partition+reassignments>860</a></td>
-            <td>Add client-provided option to guard against replication factor change during partition reassignments
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1094%3A+Add+a+new+constructor+method+with+nextOffsets+to+ConsumerRecords>1094</a></td>
+            <td>Add a new constructor method with nextOffsets to ConsumerRecords
             <td style="background-color:green;"></td>
             
             <td>0</td>
@@ -113,22 +96,191 @@
             
             <td>0</td>
             
-            <td>Stanislav Kozlovski</td>
+            <td>Alieh Saeedi</td>
+            <td>2 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1093%3A+Add+more+observability+for+MirrorMaker2>1093</a></td>
+            <td>Add more observability for MirrorMaker2
+            <td style="background-color:green;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>PoAn Yang</td>
+            <td>3 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=321719077>1092</a></td>
+            <td>Extend Consumer#close with an option to leave the group or not
+            <td style="background-color:green;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>TengYao Chi</td>
+            <td>3 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1091%3A+Improved+Kafka+Streams+operator+metrics>1091</a></td>
+            <td>Improved Kafka Streams operator metrics
+            <td style="background-color:blue;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Bill Bejeck</td>
+            <td>3 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1089%3A+Allow+disabling+heartbeats+replication+in+MirrorSourceConnector>1089</a></td>
+            <td>Allow disabling heartbeats replication in MirrorSourceConnector
+            <td style="background-color:green;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Daniel Urban</td>
+            <td>3 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1088%3A+Replace+KafkaClientSupplier+with+KafkaClientInterceptor>1088</a></td>
+            <td>Replace KafkaClientSupplier with KafkaClientInterceptor
+            <td style="background-color:green;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Matthias J. Sax</td>
             <td>4 weeks</td>
         </tr>
         
         <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-859%3A+Add+Metadata+Log+Processing+Error+Related+Metrics>859</a></td>
-            <td>Add Metadata Log Processing Error Related Metrics
+            <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=318606528>1086</a></td>
+            <td>Add ability to specify a custom produce request parser.
+            <td style="background-color:green;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td style="background-color:red;">
+                <div class="tooltip">1
+                    <span class="tooltiptext">
+                        
+                        Colin McCabe <cmccabe@apache.org><br>
+                        
+                    </span>
+                </div>
+            </td>
+            
+            <td>Max</td>
+            <td>5 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1083%3A+Increase+default+value+of+task.shutdown.graceful.timeout.ms+in+Connect>1083</a></td>
+            <td>Increase default value of task.shutdown.graceful.timeout.ms in Connect
+            <td style="background-color:yellow;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Sagar Rao</td>
+            <td>8 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1081%3A+Graduation+Steps+for+KIPs>1081</a></td>
+            <td>Graduation Steps for KIPs
+            <td style="background-color:green;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Josep Prat</td>
+            <td>8 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1080%3A+Fix+the+typo%3A+%60maxlifeTimeMs%60+in+CreateDelegationTokenOptions>1080</a></td>
+            <td>Fix the typo: `maxlifeTimeMs` in CreateDelegationTokenOptions
+            <td style="background-color:green;"></td>
+            
+            <td style="background-color:green;">
+                <div class="tooltip">1
+                    <span class="tooltiptext">
+                        
+                        Chia-Ping Tsai <chia7712@gmail.com><br>
+                        
+                    </span>
+                </div>
+            </td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Jiunn Yang Huang</td>
+            <td>8 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1074%3A+Allow+the+replication+of+user+internal+topics>1074</a></td>
+            <td>Allow the replication of user internal topics
             <td style="background-color:green;"></td>
             
             <td style="background-color:green;">
                 <div class="tooltip">2
                     <span class="tooltiptext">
                         
-                        Colin McCabe <cmccabe@apache.org><br>
+                        Viktor Somogyi-Vass <viktor.somogyi@cloudera.com.INVALID><br>
                         
-                        =?UTF-8?Q?Jos=C3=A9_Armando_Garc=C3=ADa_Sancio?= <jsancio@confluent.io.INVALID><br>
+                        Chris Egerton <fearthecellos@gmail.com><br>
                         
                     </span>
                 </div>
@@ -140,13 +292,13 @@
             
             <td>0</td>
             
-            <td>Niket Goel</td>
-            <td>4 weeks</td>
+            <td>Patrik Márton</td>
+            <td>10 weeks</td>
         </tr>
         
         <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-858%3A+Handle+JBOD+broker+disk+failure+in+KRaft>858</a></td>
-            <td>Handle JBOD broker disk failure in KRaft
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1073%3A+Return+fenced+brokers+in+DescribeCluster+response>1073</a></td>
+            <td>Return fenced brokers in DescribeCluster response
             <td style="background-color:green;"></td>
             
             <td>0</td>
@@ -157,13 +309,30 @@
             
             <td>0</td>
             
-            <td>Igor Soarez</td>
-            <td>4 weeks</td>
+            <td>Gantigmaa Selenge</td>
+            <td>11 weeks</td>
         </tr>
         
         <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-857%3A+Streaming+recursion+in+Kafka+Streams>857</a></td>
-            <td>Streaming recursion in Kafka Streams
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1072%3A+Add+@FunctionalInterface+annotation+to+Kafka+Streams+SAM+methods>1072</a></td>
+            <td>Add @FunctionalInterface annotation to Kafka Streams SAM methods
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Bill Bejeck</td>
+            <td>11 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1071%3A+Streams+Rebalance+Protocol>1071</a></td>
+            <td>Streams Rebalance Protocol
             <td style="background-color:green;"></td>
             
             <td>0</td>
@@ -174,31 +343,39 @@
             
             <td>0</td>
             
-            <td>Nicholas Telford</td>
-            <td>4 weeks</td>
+            <td>Lucas Brutschy</td>
+            <td>12 weeks</td>
         </tr>
         
         <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-856%3A+KRaft+Disk+Failure+Recovery>856</a></td>
-            <td>KRaft Disk Failure Recovery
-            <td style="background-color:green;"></td>
+            <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=311627623>1067</a></td>
+            <td>Remove ReplicaVerificationTool in 5.0 (deprecate in 3.9)
+            <td style="background-color:yellow;"></td>
+            
+            <td style="background-color:green;">
+                <div class="tooltip">1
+                    <span class="tooltiptext">
+                        
+                        Dongjin Lee <dongjin@apache.org><br>
+                        
+                    </span>
+                </div>
+            </td>
+            
             
             <td>0</td>
             
             
             <td>0</td>
             
-            
-            <td>0</td>
-            
-            <td>José Armando García Sancio</td>
-            <td>4 weeks</td>
+            <td>Dongjin Lee</td>
+            <td>13 weeks</td>
         </tr>
         
         <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-855%3A+Add+schema.namespace+parameter+to+SetSchemaMetadata+SMT+in+Kafka+Connect>855</a></td>
-            <td>Add schema.namespace parameter to SetSchemaMetadata SMT in Kafka Connect
-            <td style="background-color:green;"></td>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1066%3A+Mechanism+to+cordon+brokers+and+log+directories>1066</a></td>
+            <td>Mechanism to cordon brokers and log directories
+            <td style="background-color:yellow;"></td>
             
             <td>0</td>
             
@@ -208,24 +385,20 @@
             
             <td>0</td>
             
-            <td>Michael Negodaev</td>
-            <td>5 weeks</td>
+            <td>Mickael Maison</td>
+            <td>13 weeks</td>
         </tr>
         
         <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-854+Separate+configuration+for+producer+ID+expiry>854</a></td>
-            <td>Separate configuration for producer ID expiry
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1064%3A+Upgrade+slf4j+to+2.x>1064</a></td>
+            <td>Upgrade slf4j to 2.x
             <td style="background-color:green;"></td>
             
             <td style="background-color:green;">
-                <div class="tooltip">3
+                <div class="tooltip">1
                     <span class="tooltiptext">
                         
-                        Jason Gustafson <jason@confluent.io.INVALID><br>
-                        
-                        Tom Bentley <tbentley@redhat.com><br>
-                        
-                        David Jacot <djacot@confluent.io.INVALID><br>
+                        Chia-Ping Tsai <chia7712@gmail.com><br>
                         
                     </span>
                 </div>
@@ -237,13 +410,30 @@
             
             <td>0</td>
             
-            <td>Justine Olshan</td>
-            <td>5 weeks</td>
+            <td>Muralidhar Basani</td>
+            <td>14 weeks</td>
         </tr>
         
         <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-853%3A+KRaft+Voter+Changes>853</a></td>
-            <td>KRaft Voter Changes
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1063%3A+Drop+inconsistent+casing+in+Selector+metrics+tags>1063</a></td>
+            <td>Drop inconsistent casing in Selector metrics tags
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>PoAn Yang</td>
+            <td>14 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1062%3A+Introduce+Pagination+for+some+requests+used+by+Admin+API>1062</a></td>
+            <td>Introduce Pagination for some requests used by Admin API
             <td style="background-color:yellow;"></td>
             
             <td>0</td>
@@ -254,14 +444,293 @@
             
             <td>0</td>
             
-            <td>José Armando García Sancio</td>
-            <td>5 weeks</td>
+            <td>Omnia Ibrahim</td>
+            <td>14 weeks</td>
         </tr>
         
         <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-852%3A+Optimize+calculation+of+size+for+log+in+remote+tier>852</a></td>
-            <td>Optimize calculation of size for log in remote tier
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1061%3A+Allow+exporting+SCRAM+credentials>1061</a></td>
+            <td>Allow exporting SCRAM credentials
             <td style="background-color:yellow;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Gaurav Narula</td>
+            <td>15 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1059%3A+Enable+Producer+to+resolve+send%28%29+method+errors>1059</a></td>
+            <td>Enable Producer to resolve send() method errors
+            <td style="background-color:yellow;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td style="background-color:red;">
+                <div class="tooltip">1
+                    <span class="tooltiptext">
+                        
+                        Chris Egerton <chrise@aiven.io.INVALID><br>
+                        
+                    </span>
+                </div>
+            </td>
+            
+            <td>Alieh Saeedi</td>
+            <td>16 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1058%3A+Txn+consumer+exerts+pressure+on+remote+storage+when+collecting+aborted+transactions>1058</a></td>
+            <td>Txn consumer exerts pressure on remote storage when collecting aborted transactions
+            <td style="background-color:green;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Kamal Chandraprakash</td>
+            <td>16 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1055%3A+Introducing+Round-Robin+Assignment+Strategy+to+ConnectorUtils>1055</a></td>
+            <td>Introducing Round-Robin Assignment Strategy to ConnectorUtils
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Fan Yang</td>
+            <td>17 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1054%3A+Support+external+schemas+in+JSONConverter>1054</a></td>
+            <td>Support external schemas in JSONConverter
+            <td style="background-color:yellow;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Priyanka K U</td>
+            <td>17 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1051%3A+Statically+configured+log+replication+throttling>1051</a></td>
+            <td>Statically configured log replication throttling
+            <td style="background-color:yellow;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Harry Fallows</td>
+            <td>17 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1050%3A+Consistent+error+handling+for+Transactions>1050</a></td>
+            <td>Consistent error handling for Transactions
+            <td style="background-color:green;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Kaushik Raina</td>
+            <td>17 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1048%3A+Improve+kafka-consumer-perf-test+to+benchmark+single+partition>1048</a></td>
+            <td>Improve kafka-consumer-perf-test to benchmark single partition
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Harsh Panchal</td>
+            <td>20 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1046%3A+Expose+producer.id.expiration.check.interval.ms+as+dynamic+broker+configuration>1046</a></td>
+            <td>Expose producer.id.expiration.check.interval.ms as dynamic broker configuration
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Jorge Esteban Quilcate Otoya</td>
+            <td>20 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1045%3A+Move+MockAdminClient+to+public+api>1045</a></td>
+            <td>Move MockAdminClient to public api
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Muralidhar Basani</td>
+            <td>20 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1044%3A+A+proposal+to+change+idempotent+producer+--+server+implementation>1044</a></td>
+            <td>A proposal to change idempotent producer -- server implementation
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Claude Warren</td>
+            <td>20 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1043%3A+Administration+of+groups>1043</a></td>
+            <td>Administration of groups
+            <td style="background-color:green;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Andrew Schofield</td>
+            <td>21 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=303794855>1042</a></td>
+            <td>Implementation of a GLOB Pattern type for ACL pattern matching.
+            <td style="background-color:yellow;"></td>
+            
+            <td style="background-color:green;">
+                <div class="tooltip">1
+                    <span class="tooltiptext">
+                        
+                        Claude Warren, Jr <claude.warren@aiven.io.INVALID><br>
+                        
+                    </span>
+                </div>
+            </td>
+            
+            
+            <td>0</td>
+            
+            
+            <td style="background-color:red;">
+                <div class="tooltip">1
+                    <span class="tooltiptext">
+                        
+                        Colin McCabe <cmccabe@apache.org><br>
+                        
+                    </span>
+                </div>
+            </td>
+            
+            <td>Muralidhar Basani</td>
+            <td>22 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1039%3A+Disable+automatic+topic+creation+for+MirrorMaker2+consumers>1039</a></td>
+            <td>Disable automatic topic creation for MirrorMaker2 consumers
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Yangkun Ai</td>
+            <td>24 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1038%3A+Add+Custom+Error+Handler+to+Producer>1038</a></td>
+            <td>Add Custom Error Handler to Producer
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Alieh Saeedi</td>
+            <td>24 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1030%3A+Change+constraints+and+default+values+for+various+configurations>1030</a></td>
+            <td>Change constraints and default values for various configurations
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -272,7 +741,1234 @@
             <td>0</td>
             
             <td>Divij Vaidya</td>
-            <td>8 weeks</td>
+            <td>29 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1027%3A+Add+MockFixedKeyProcessorContext+and+TestFixedKeyRecordFactory>1027</a></td>
+            <td>Add MockFixedKeyProcessorContext and TestFixedKeyRecordFactory
+            <td style="background-color:yellow;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Matthias J. Sax</td>
+            <td>30 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1026%3A+Handling+producer+snapshot+when+upgrading+from+%3C+v2.8.0+for+Tiered+Storage>1026</a></td>
+            <td>Handling producer snapshot when upgrading from < v2.8.0 for Tiered Storage
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Divij Vaidya</td>
+            <td>30 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1024%3A+Make+the+restore+behavior+of+GlobalKTables+with+custom+processors+configureable>1024</a></td>
+            <td>Make the restore behavior of GlobalKTables with custom processors configureable
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Walker Carlson</td>
+            <td>32 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1022%3A+Formatting+and+Updating+Features>1022</a></td>
+            <td>Formatting and Updating Features
+            <td style="background-color:green;"></td>
+            
+            <td style="background-color:green;">
+                <div class="tooltip">1
+                    <span class="tooltiptext">
+                        
+                        Justine Olshan <jolshan@confluent.io.INVALID><br>
+                        
+                    </span>
+                </div>
+            </td>
+            
+            
+            <td style="background-color:yellow;">
+                <div class="tooltip">4
+                    <span class="tooltiptext">
+                        
+                        Jun Rao <jun@confluent.io.INVALID><br>
+                        
+                        David Jacot <djacot@confluent.io.INVALID><br>
+                        
+                        Colin McCabe <cmccabe@apache.org><br>
+                        
+                        Justine Olshan <jolshan@confluent.io.INVALID><br>
+                        
+                    </span>
+                </div>
+            </td>
+            
+            
+            <td>0</td>
+            
+            <td>Justine Olshan</td>
+            <td>32 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1021%3A+Allow+to+get+last+stable+offset+%28LSO%29+in+kafka-get-offsets.sh>1021</a></td>
+            <td>Allow to get last stable offset (LSO) in kafka-get-offsets.sh
+            <td style="background-color:green;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Ahmed Sobeh</td>
+            <td>32 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1016+Make+MM2+heartbeats+topic+name+configurable>1016</a></td>
+            <td>Make MM2 heartbeats topic name configurable
+            <td style="background-color:yellow;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Bertlan Kondrat</td>
+            <td>38 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1015%3A+Limit+number+of+ssl+connections+in+brokers>1015</a></td>
+            <td>Limit number of ssl connections in brokers
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Jimmy Wang</td>
+            <td>39 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1014%3A+Managing+Unstable+Features+in+Apache+Kafka>1014</a></td>
+            <td>Managing Unstable Features in Apache Kafka
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Proven Provenzano</td>
+            <td>39 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1010%3A+Topic+Partition+Quota>1010</a></td>
+            <td>Topic Partition Quota
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Afshin Moazami</td>
+            <td>43 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1009%3A+Add+Broker-level+Throttle+Configurations>1009</a></td>
+            <td>Add Broker-level Throttle Configurations
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Ria Pradeep</td>
+            <td>46 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1008%3A+ParKa+-+the+Marriage+of+Parquet+and+Kafka>1008</a></td>
+            <td>ParKa - the Marriage of Parquet and Kafka
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Xinli Shang</td>
+            <td>46 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1006%3A+Remove+SecurityManager+Support>1006</a></td>
+            <td>Remove SecurityManager Support
+            <td style="background-color:yellow;"></td>
+            
+            <td style="background-color:green;">
+                <div class="tooltip">1
+                    <span class="tooltiptext">
+                        
+                        Luke Chen <showuon@gmail.com><br>
+                        
+                    </span>
+                </div>
+            </td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Greg Harris</td>
+            <td>46 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1003%3A+Signal+next+segment+when+remote+fetching>1003</a></td>
+            <td>Signal next segment when remote fetching
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Jorge Esteban Quilcate Otoya</td>
+            <td>47 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-1002%3A+Fetch+remote+segment+indexes+at+once>1002</a></td>
+            <td>Fetch remote segment indexes at once
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Jorge Esteban Quilcate Otoya</td>
+            <td>47 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-998%3A+Give+ProducerConfig%28props%2C+doLog%29+constructor+protected+access>998</a></td>
+            <td>Give ProducerConfig(props, doLog) constructor protected access
+            <td style="background-color:red;"></td>
+            
+            <td style="background-color:green;">
+                <div class="tooltip">1
+                    <span class="tooltiptext">
+                        
+                        Chris Egerton <fearthecellos@gmail.com><br>
+                        
+                    </span>
+                </div>
+            </td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>A. Sophie Blee-Goldman</td>
+            <td>48 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-997%3A++update+WindowRangeQuery+and+unify+WindowKeyQuery+and+WindowRangeQuery>997</a></td>
+            <td>update WindowRangeQuery and unify WindowKeyQuery and WindowRangeQuery
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Hanyu Zheng</td>
+            <td>48 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=272927649>991</a></td>
+            <td>Allow DropHeaders SMT to drop headers by wildcard/regexp
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Roman Schmitz</td>
+            <td>51 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-990%3A+Capability+to+PAUSE+Tasks+on+DeserializationException>990</a></td>
+            <td>Capability to PAUSE Tasks on DeserializationException
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Nicholas Telford</td>
+            <td>51 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-987%3A+Connect+Static+Assignments>987</a></td>
+            <td>Connect Static Assignments
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Greg Harris</td>
+            <td>1 years 1 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-986%3A+Cross-Cluster+Replication>986</a></td>
+            <td>Cross-Cluster Replication
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Greg Harris</td>
+            <td>1 years 1 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-984%3A+Add+pluggable+compression+interface+to+Kafka>984</a></td>
+            <td>Add pluggable compression interface to Kafka
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Assane Diop</td>
+            <td>1 years 1 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-983%3A+Full+speed+async+processing+during+rebalance>983</a></td>
+            <td>Full speed async processing during rebalance
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Erik van Oosten</td>
+            <td>1 years 2 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-982%3A+Access+SslPrincipalMapper+and+kerberosShortNamer+in+Custom+KafkaPrincipalBuilder>982</a></td>
+            <td>Access SslPrincipalMapper and kerberosShortNamer in Custom KafkaPrincipalBuilder
+            <td style="background-color:red;"></td>
+            
+            <td style="background-color:green;">
+                <div class="tooltip">1
+                    <span class="tooltiptext">
+                        
+                        Raghu B <raghu98499@gmail.com><br>
+                        
+                    </span>
+                </div>
+            </td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Raghu Baddam</td>
+            <td>1 years 3 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-981%3A+Manage+Connect+topics+with+custom+implementation+of+Admin>981</a></td>
+            <td>Manage Connect topics with custom implementation of Admin
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td style="background-color:red;">
+                <div class="tooltip">1
+                    <span class="tooltiptext">
+                        
+                        Greg Harris <greg.harris@aiven.io.INVALID><br>
+                        
+                    </span>
+                </div>
+            </td>
+            
+            <td>Omnia Ibrahim</td>
+            <td>1 years 3 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-973%3A+Expose+per+topic+replication+rate+metrics>973</a></td>
+            <td>Expose per topic replication rate metrics
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Nelson B.</td>
+            <td>1 years 5 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-972%3A+Add+the+metric+of+the+current+running+version+of+kafka>972</a></td>
+            <td>Add the metric of the current running version of kafka
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>hudeqi</td>
+            <td>1 years 6 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-969%3A+Support+range+interactive+queries+%28IQv2%29+for+versioned+state+stores>969</a></td>
+            <td>Support range interactive queries (IQv2) for versioned state stores
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Alieh Saeedi</td>
+            <td>1 years 8 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-967%3A+Support+custom+SSL+configuration+for+Kafka+Connect+RestServer>967</a></td>
+            <td>Support custom SSL configuration for Kafka Connect RestServer
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Taras Ledkov</td>
+            <td>1 years 8 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-965%3A+Support+disaster+recovery+between+clusters+by+MirrorMaker>965</a></td>
+            <td>Support disaster recovery between clusters by MirrorMaker
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>hudeqi</td>
+            <td>1 years 9 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=263426647>964</a></td>
+            <td>Have visibility when produce requests become "async"
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Sergio Troiano</td>
+            <td>1 years 9 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-958%3A+Tiered+Storage+Metrics>958</a></td>
+            <td>Tiered Storage Metrics
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Abhijeet Kumar</td>
+            <td>1 years 11 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-955%3A+Add+stream-table+join+on+foreign+key>955</a></td>
+            <td>Add stream-table join on foreign key
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>IGOR FOMENKO</td>
+            <td>1 years 11 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=263424937>953</a></td>
+            <td>partition method to be overloaded to accept headers as well.
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Jacob Tomy</td>
+            <td>1 years 12 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-952%3A+Regenerate+segment-aligned+producer+snapshots+when+upgrading+to+a+Kafka+version+supporting+Tiered+Storage>952</a></td>
+            <td>Regenerate segment-aligned producer snapshots when upgrading to a Kafka version supporting Tiered Storage
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Christo Lolov</td>
+            <td>1 years 12 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-948%3A+Allow+custom+prefix+for+internal+topic+names+in+Kafka+Streams>948</a></td>
+            <td>Allow custom prefix for internal topic names in Kafka Streams
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Igor Buzatović</td>
+            <td>1 years 14 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-945%3A+Update+threading+model+for+Consumer>945</a></td>
+            <td>Update threading model for Consumer
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Kirk True</td>
+            <td>1 years 14 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=255073470>943</a></td>
+            <td>Add independent “offset.storage.segment.bytes” for connect-distributed.properties
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>hudeqi</td>
+            <td>1 years 15 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-940%3A+Broker+extension+point+for+validating+record+contents+at+produce+time>940</a></td>
+            <td>Broker extension point for validating record contents at produce time
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Edoardo Comar</td>
+            <td>1 years 17 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-936%3A+Throttle+number+of+active+PIDs>936</a></td>
+            <td>Throttle number of active PIDs
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Omnia Ibrahim</td>
+            <td>1 years 20 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-935%3A+Extend+AlterConfigPolicy+with+existing+configurations>935</a></td>
+            <td>Extend AlterConfigPolicy with existing configurations
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Jorge Esteban Quilcate Otoya</td>
+            <td>1 years 20 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-934%3A+Add+DeleteTopicPolicy>934</a></td>
+            <td>Add DeleteTopicPolicy
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Jorge Esteban Quilcate Otoya</td>
+            <td>1 years 20 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-933%3A+Publish+metrics+when+source+connector+fails+to+poll+data>933</a></td>
+            <td>Publish metrics when source connector fails to poll data
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Ravindranath</td>
+            <td>1 years 20 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-928%3A+Making+Kafka+resilient+to+log+directories+becoming+full>928</a></td>
+            <td>Making Kafka resilient to log directories becoming full
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Christo Lolov</td>
+            <td>1 years 21 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-922%3A+Add+the+traffic+metric+of+the+partition+dimension>922</a></td>
+            <td>Add the traffic metric of the partition dimension
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>hudeqi</td>
+            <td>1 years 24 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-921%3A+OpenJDK+CRaC+support>921</a></td>
+            <td>OpenJDK CRaC support
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Radim Vansa</td>
+            <td>1 years 24 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-920%3A+Support+upgrading+KRaft+MetadataVersion+based+on+a+static+config>920</a></td>
+            <td>Support upgrading KRaft MetadataVersion based on a static config
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Colin McCabe</td>
+            <td>1 years 24 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-918%3A+MM2+Topic+And+Group+Listener>918</a></td>
+            <td>MM2 Topic And Group Listener
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Daniel Urban</td>
+            <td>1 years 25 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-916%3A+MM2+distributed+mode+flow+log+context>916</a></td>
+            <td>MM2 distributed mode flow log context
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Daniel Urban</td>
+            <td>1 years 27 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-913%3A+add+new+method+to+provide+possibility+for+accelerate+first+record%27s+sending>913</a></td>
+            <td>add new method to provide possibility for accelerate first record's sending
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>fu.jian</td>
+            <td>1 years 31 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-912%3A+Support+decreasing+send%27s+max+block+time+without+worrying+about+metadata%27s+fetch>912</a></td>
+            <td>Support decreasing send's max block time without worrying about metadata's fetch
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>fu.jian</td>
+            <td>1 years 31 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-910%3A+Update+Source+offsets+for+Source+Connectors+without+producing+records>910</a></td>
+            <td>Update Source offsets for Source Connectors without producing records
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Sagar Rao</td>
+            <td>1 years 32 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-905%3A+Broker+interceptors>905</a></td>
+            <td>Broker interceptors
+            <td style="background-color:red;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>David Mariassy</td>
+            <td>1 years 34 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-901%3A+Add+connectorDeleted+flag+when+stopping+tasks>901</a></td>
+            <td>Add connectorDeleted flag when stopping tasks
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Hector Geraldino</td>
+            <td>1 years 37 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-895%3A+Dynamically+refresh+partition+count+of+__consumer_offsets>895</a></td>
+            <td>Dynamically refresh partition count of __consumer_offsets
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Christo Lolov</td>
+            <td>1 years 40 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-891%3A+Running+multiple+versions+of+Connector+plugins>891</a></td>
+            <td>Running multiple versions of Connector plugins
+            <td style="background-color:green;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Snehashis Pal</td>
+            <td>1 years 46 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-888%3A+Batch+describe+ACLs+and+describe+client+quotas>888</a></td>
+            <td>Batch describe ACLs and describe client quotas
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Mickael Maison</td>
+            <td>1 years 47 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-886%3A+Add+Client+Producer+and+Consumer+Builders>886</a></td>
+            <td>Add Client Producer and Consumer Builders
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Daniel Scanteianu</td>
+            <td>1 years 47 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-885%3A+Expose+Broker%27s+Name+and+Version+to+Clients>885</a></td>
+            <td>Expose Broker's Name and Version to Clients
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Travis Bischel</td>
+            <td>1 years 47 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-883%3A+Add+isDeleted+flag+when+stopping+a+connector>883</a></td>
+            <td>Add isDeleted flag when stopping a connector
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Hector Geraldino</td>
+            <td>1 years 48 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-882%3A+Kafka+Connect+REST+API+configuration+validation+timeout+improvements>882</a></td>
+            <td>Kafka Connect REST API configuration validation timeout improvements
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Yash Mayya</td>
+            <td>1 years 49 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-880%3A+X509+SAN+based+SPIFFE+URI+ACL+within+mTLS+Client+Certificates>880</a></td>
+            <td>X509 SAN based SPIFFE URI ACL within mTLS Client Certificates
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Bart Van Bos</td>
+            <td>1 years 49 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-879%3A+Multi-level+Rack+Awareness>879</a></td>
+            <td>Multi-level Rack Awareness
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Viktor Somogyi</td>
+            <td>2 years 0 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-874%3A+TopicRoundRobinAssignor>874</a></td>
+            <td>TopicRoundRobinAssignor
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Mathieu Amblard</td>
+            <td>2 years 1 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-873%3A+ExceptionHandlingDeserializer%2C+RetryDeserializer%2C+PipeSerializer%2C+PipeDeserializer>873</a></td>
+            <td>ExceptionHandlingDeserializer, RetryDeserializer, PipeSerializer, PipeDeserializer
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Alex Collins</td>
+            <td>2 years 1 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-870%3A+Retention+policy+based+on+record+event+time>870</a></td>
+            <td>Retention policy based on record event time
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Nikolay Izhikov</td>
+            <td>2 years 3 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-864%3A+Add+End-To-End+Latency+Metrics+to+Connectors>864</a></td>
+            <td>Add End-To-End Latency Metrics to Connectors
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Jorge Esteban Quilcate Otoya</td>
+            <td>2 years 6 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=217393101>861</a></td>
+            <td>Add BytesIn/BytesOut per listener metrics
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Luke Chen</td>
+            <td>2 years 10 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-857%3A+Streaming+recursion+in+Kafka+Streams>857</a></td>
+            <td>Streaming recursion in Kafka Streams
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Nicholas Telford</td>
+            <td>2 years 11 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-855%3A+Add+schema.namespace+parameter+to+SetSchemaMetadata+SMT+in+Kafka+Connect>855</a></td>
+            <td>Add schema.namespace parameter to SetSchemaMetadata SMT in Kafka Connect
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>Michael Negodaev</td>
+            <td>2 years 11 weeks</td>
         </tr>
         
         <tr>
@@ -288,140 +1984,14 @@
             
             <td>0</td>
             
-            <td>dengziming</td>
-            <td>9 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-848%3A+The+Next+Generation+of+the+Consumer+Rebalance+Protocol>848</a></td>
-            <td>The Next Generation of the Consumer Rebalance Protocol
-            <td style="background-color:green;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>David Jacot</td>
-            <td>10 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-847%3A+Add+ProducerCount+metrics>847</a></td>
-            <td>Add ProducerCount metrics
-            <td style="background-color:yellow;"></td>
-            
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        Ismael Juma <ismael@juma.me.uk><br>
-                        
-                    </span>
-                </div>
-            </td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Artem Livshits</td>
-            <td>10 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=211886093>846</a></td>
-            <td>Processor-level Streams metrics for records/bytes Produced
-            <td style="background-color:yellow;"></td>
-            
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        Sophie Blee-Goldman <sophie@confluent.io.INVALID><br>
-                        
-                    </span>
-                </div>
-            </td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>A. Sophie Blee-Goldman</td>
-            <td>12 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-845%3A+%27HasField%27+predicate+for+kafka+connect>845</a></td>
-            <td>'HasField' predicate for kafka connect
-            <td style="background-color:yellow;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Kumud Kumar Srivatsava Tirupati</td>
-            <td>13 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-844%3A+Transactional+State+Stores>844</a></td>
-            <td>Transactional State Stores
-            <td style="background-color:green;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Alex Sorokoumov</td>
-            <td>13 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-843%3A+Adding+getMetricOrElseCreate+method+to+Metrics>843</a></td>
-            <td>Adding getMetricOrElseCreate method to Metrics
-            <td style="background-color:yellow;"></td>
-            
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        John Roesler <vvcephei@apache.org><br>
-                        
-                    </span>
-                </div>
-            </td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Sagar Rao</td>
-            <td>13 weeks</td>
+            <td>Deng Ziming</td>
+            <td>2 years 16 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-842%3A+Add+richer+group+offset+reset+mechanisms>842</a></td>
             <td>Add richer group offset reset mechanisms
-            <td style="background-color:yellow;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -432,67 +2002,13 @@
             <td>0</td>
             
             <td>hudeqi</td>
-            <td>13 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-841%3A+Fenced+replicas+should+not+be+allowed+to+join+the+ISR+in+KRaft>841</a></td>
-            <td>Fenced replicas should not be allowed to join the ISR in KRaft
-            <td style="background-color:yellow;"></td>
-            
-            <td style="background-color:green;">
-                <div class="tooltip">3
-                    <span class="tooltiptext">
-                        
-                        David Arthur <mumrah@gmail.com><br>
-                        
-                        Colin McCabe <cmccabe@apache.org><br>
-                        
-                        David Jacot <djacot@confluent.io.INVALID><br>
-                        
-                    </span>
-                </div>
-            </td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>David Jacot</td>
-            <td>14 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=211884652>840</a></td>
-            <td>Config file option for MessageReader/MessageFormatter in ConsoleProducer/ConsoleConsumer
-            <td style="background-color:green;"></td>
-            
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        John Roesler <vvcephei@apache.org><br>
-                        
-                    </span>
-                </div>
-            </td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Alexandre Garnier</td>
-            <td>14 weeks</td>
+            <td>2 years 20 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=211884640>839</a></td>
             <td>Provide builders for KafkaProducer/KafkaConsumer and KafkaStreams
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -503,121 +2019,13 @@
             <td>0</td>
             
             <td>Francois Rosiere</td>
-            <td>14 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-836%3A+Addition+of+Information+in+DescribeQuorumResponse+about+Voter+Lag>836</a></td>
-            <td>Addition of Information in DescribeQuorumResponse about Voter Lag
-            <td style="background-color:green;"></td>
-            
-            <td style="background-color:green;">
-                <div class="tooltip">2
-                    <span class="tooltiptext">
-                        
-                        Guozhang Wang <wangguoz@gmail.com><br>
-                        
-                        David Arthur <mumrah@gmail.com><br>
-                        
-                    </span>
-                </div>
-            </td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Niket Goel</td>
-            <td>16 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-835%3A+Monitor+KRaft+Controller+Quorum+Health>835</a></td>
-            <td>Monitor KRaft Controller Quorum Health
-            <td style="background-color:yellow;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Jose Armando Garcia Sancio</td>
-            <td>16 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=211882832>834</a></td>
-            <td>Pause / Resume KafkaStreams Topologies
-            <td style="background-color:yellow;"></td>
-            
-            <td style="background-color:green;">
-                <div class="tooltip">4
-                    <span class="tooltiptext">
-                        
-                        Guozhang Wang <wangguoz@gmail.com><br>
-                        
-                        Leah Thomas <lthomas@confluent.io.INVALID><br>
-                        
-                        Sophie Blee-Goldman <sophie@confluent.io.INVALID><br>
-                        
-                        John Roesler <vvcephei@apache.org><br>
-                        
-                    </span>
-                </div>
-            </td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Jim Hughes</td>
-            <td>16 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-833%3A+Mark+KRaft+as+Production+Ready>833</a></td>
-            <td>Mark KRaft as Production Ready
-            <td style="background-color:yellow;"></td>
-            
-            <td style="background-color:green;">
-                <div class="tooltip">5
-                    <span class="tooltiptext">
-                        
-                        Bill Bejeck <bbejeck@gmail.com><br>
-                        
-                        Jason Gustafson <jason@confluent.io.INVALID><br>
-                        
-                        =?UTF-8?Q?Jos=C3=A9_Armando_Garc=C3=ADa_Sancio?= <jsancio@confluent.io.INVALID><br>
-                        
-                        Colin McCabe <cmccabe@apache.org><br>
-                        
-                        Ismael Juma <ismael@juma.me.uk><br>
-                        
-                    </span>
-                </div>
-            </td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Colin McCabe</td>
-            <td>16 weeks</td>
+            <td>2 years 21 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=211882578>832</a></td>
             <td>Allow creating a producer/consumer using a producer/consumer config
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -628,71 +2036,13 @@
             <td>0</td>
             
             <td>Francois Rosiere</td>
-            <td>16 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-831%3A+Add+metric+for+log+recovery+progress>831</a></td>
-            <td>Add metric for log recovery progress
-            <td style="background-color:yellow;"></td>
-            
-            <td style="background-color:green;">
-                <div class="tooltip">3
-                    <span class="tooltiptext">
-                        
-                        Jun Rao <jun@confluent.io.INVALID><br>
-                        
-                        Tom Bentley <tbentley@redhat.com><br>
-                        
-                        Luke Chen <showuon@gmail.com><br>
-                        
-                    </span>
-                </div>
-            </td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Luke Chen</td>
-            <td>18 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-830%3A+Allow+disabling+JMX+Reporter>830</a></td>
-            <td>Allow disabling JMX Reporter
-            <td style="background-color:green;"></td>
-            
-            <td style="background-color:green;">
-                <div class="tooltip">3
-                    <span class="tooltiptext">
-                        
-                        Tom Bentley <tbentley@redhat.com><br>
-                        
-                        Mickael Maison <mickael.maison@gmail.com><br>
-                        
-                        Ismael Juma <ismael@juma.me.uk><br>
-                        
-                    </span>
-                </div>
-            </td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Mickael Maison</td>
-            <td>19 weeks</td>
+            <td>2 years 23 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-829%3A+%28console-consumer%29+add+print.topic+property>829</a></td>
             <td>(console-consumer) add print.topic property
-            <td style="background-color:green;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -703,13 +2053,13 @@
             <td>0</td>
             
             <td>Evans Jahja</td>
-            <td>19 weeks</td>
+            <td>2 years 26 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-828%3A+Add+the+corresponding+validator+to+the+configuration+where+the+validator+is+missing>828</a></td>
             <td>Add the corresponding validator to the configuration where the validator is missing
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -720,42 +2070,13 @@
             <td>0</td>
             
             <td>RivenSun</td>
-            <td>20 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-827%3A+Expose+logdirs+total+and+usable+space+via+Kafka+API>827</a></td>
-            <td>Expose logdirs total and usable space via Kafka API
-            <td style="background-color:yellow;"></td>
-            
-            <td style="background-color:green;">
-                <div class="tooltip">3
-                    <span class="tooltiptext">
-                        
-                        Tom Bentley <tbentley@redhat.com><br>
-                        
-                        Mickael Maison <mickael.maison@gmail.com><br>
-                        
-                        John Roesler <vvcephei@apache.org><br>
-                        
-                    </span>
-                </div>
-            </td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Mickael Maison</td>
-            <td>20 weeks</td>
+            <td>2 years 26 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-826%3A+Define+platforms+supported>826</a></td>
             <td>Define platforms supported
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -766,7 +2087,7 @@
             <td>0</td>
             
             <td>Mickael Maison</td>
-            <td>21 weeks</td>
+            <td>2 years 28 weeks</td>
         </tr>
         
         <tr>
@@ -783,13 +2104,13 @@
             <td>0</td>
             
             <td>Vikas Singh</td>
-            <td>26 weeks</td>
+            <td>2 years 33 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=199534763>822</a></td>
             <td>Optimize the semantics of KafkaConsumer#pause to be consistent between the two RebalanceProtocols
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -800,25 +2121,15 @@
             <td>0</td>
             
             <td>RivenSun</td>
-            <td>27 weeks</td>
+            <td>2 years 34 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-821%3A+Connect+Transforms+support+for+nested+structures>821</a></td>
             <td>Connect Transforms support for nested structures
-            <td style="background-color:green;"></td>
+            <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">2
-                    <span class="tooltiptext">
-                        
-                        Chris Egerton <fearthecellos@gmail.com><br>
-                        
-                        John Roesler <vvcephei@apache.org><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -827,13 +2138,13 @@
             <td>0</td>
             
             <td>Jorge Esteban Quilcate Otoya</td>
-            <td>28 weeks</td>
+            <td>2 years 35 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-819%3A+Merge+multiple+KStreams+in+one+operation>819</a></td>
             <td>Merge multiple KStreams in one operation
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -844,13 +2155,13 @@
             <td>0</td>
             
             <td>Nicholas Telford</td>
-            <td>29 weeks</td>
+            <td>2 years 36 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-818%3A+Introduce+cache-size-bytes-total+Task+Level+Metric>818</a></td>
             <td>Introduce cache-size-bytes-total Task Level Metric
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -861,13 +2172,13 @@
             <td>0</td>
             
             <td>Sagar Rao</td>
-            <td>29 weeks</td>
+            <td>2 years 36 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-817%3A+Fix+inconsistency+in+dynamic+application+log+levels>817</a></td>
             <td>Fix inconsistency in dynamic application log levels
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -878,7 +2189,7 @@
             <td>0</td>
             
             <td>Dongjin Lee</td>
-            <td>30 weeks</td>
+            <td>2 years 36 weeks</td>
         </tr>
         
         <tr>
@@ -895,7 +2206,7 @@
             <td>0</td>
             
             <td>Nicholas Telford</td>
-            <td>30 weeks</td>
+            <td>2 years 37 weeks</td>
         </tr>
         
         <tr>
@@ -912,13 +2223,13 @@
             <td>0</td>
             
             <td>A. Sophie Blee-Goldman</td>
-            <td>36 weeks</td>
+            <td>2 years 43 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-807%3A+Refactor+KafkaStreams+exposed+metadata+hierarchy>807</a></td>
             <td>Refactor KafkaStreams exposed metadata hierarchy
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -929,13 +2240,13 @@
             <td>0</td>
             
             <td>Josep Prat</td>
-            <td>38 weeks</td>
+            <td>2 years 44 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-804%3A+OfflinePartitionsCount+Tagged+by+Topic>804</a></td>
             <td>OfflinePartitionsCount Tagged by Topic
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -946,13 +2257,13 @@
             <td>0</td>
             
             <td>Mason Joseph Legere</td>
-            <td>39 weeks</td>
+            <td>2 years 45 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-803%3A+Add+Task+ID+and+Connector+Name+to+Connect+Task+Context>803</a></td>
             <td>Add Task ID and Connector Name to Connect Task Context
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -963,13 +2274,13 @@
             <td>0</td>
             
             <td>Sarah Story</td>
-            <td>39 weeks</td>
+            <td>2 years 45 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-802%3A+Validation+Support+for+Kafka+Connect+SMT+and+Converter+Options>802</a></td>
             <td>Validation Support for Kafka Connect SMT and Converter Options
-            <td style="background-color:red;"></td>
+            <td style="background-color:yellow;"></td>
             
             <td>0</td>
             
@@ -980,23 +2291,15 @@
             <td>0</td>
             
             <td>Gunnar Morling</td>
-            <td>39 weeks</td>
+            <td>2 years 45 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-799%3A+Align+behaviour+for+producer+callbacks+with+documented+behaviour>799</a></td>
             <td>Align behaviour for producer callbacks with documented behaviour
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        John Roesler <vvcephei@apache.org><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -1005,120 +2308,13 @@
             <td>0</td>
             
             <td>Seamus O Ceanainn</td>
-            <td>41 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-798%3A+Add+possibility+to+write+kafka+headers+in+Kafka+Console+Producer>798</a></td>
-            <td>Add possibility to write kafka headers in Kafka Console Producer
-            <td style="background-color:red;"></td>
-            
-            <td style="background-color:green;">
-                <div class="tooltip">2
-                    <span class="tooltiptext">
-                        
-                        David Jacot <djacot@confluent.io.INVALID><br>
-                        
-                        John Roesler <vvcephei@apache.org><br>
-                        
-                    </span>
-                </div>
-            </td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Florin Akermann</td>
-            <td>41 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=195726330>797</a></td>
-            <td>Accept duplicate listener on port for IPv4/IPv6
-            <td style="background-color:yellow;"></td>
-            
-            <td style="background-color:green;">
-                <div class="tooltip">3
-                    <span class="tooltiptext">
-                        
-                        Matthew Benedict de Detrich <matthew.dedetrich@aiven.io.INVALID><br>
-                        
-                        Tom Bentley <tbentley@redhat.com><br>
-                        
-                        Luke Chen <showuon@gmail.com><br>
-                        
-                    </span>
-                </div>
-            </td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Matthew de Detrich</td>
-            <td>41 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-795%3A+Add+public+APIs+for+AbstractCoordinator>795</a></td>
-            <td>Add public APIs for AbstractCoordinator
-            <td style="background-color:red;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Hector Geraldino</td>
-            <td>42 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=191336830>793</a></td>
-            <td>Sink Connectors: Support topic-mutating SMTs for async connectors (preCommit users)
-            <td style="background-color:green;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Diego Erdody</td>
-            <td>42 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-787%3A+MM2+Interface+to+manage+Kafka+resources>787</a></td>
-            <td>MM2 Interface to manage Kafka resources
-            <td style="background-color:yellow;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Omnia Ibrahim</td>
-            <td>43 weeks</td>
+            <td>2 years 47 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-786%3A+Emit+Metric+Client+Quota+Values>786</a></td>
             <td>Emit Metric Client Quota Values
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -1129,13 +2325,13 @@
             <td>0</td>
             
             <td>Mason Joseph Legere</td>
-            <td>44 weeks</td>
+            <td>2 years 51 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-785%3A+Automatic+storage+formatting>785</a></td>
             <td>Automatic storage formatting
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -1146,13 +2342,13 @@
             <td>0</td>
             
             <td>Igor Soarez</td>
-            <td>44 weeks</td>
+            <td>2 years 51 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-782%3A+Expandable+batch+size+in+producer>782</a></td>
             <td>Expandable batch size in producer
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -1163,13 +2359,13 @@
             <td>0</td>
             
             <td>Luke Chen</td>
-            <td>44 weeks</td>
+            <td>2 years 51 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-781%3A+Improve+MirrorMaker2%27s+client+configuration>781</a></td>
             <td>Improve MirrorMaker2's client configuration
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -1180,13 +2376,13 @@
             <td>0</td>
             
             <td>Dongjin Lee</td>
-            <td>45 weeks</td>
+            <td>2 years 52 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-780%3A+Support+fine-grained+compression+options>780</a></td>
             <td>Support fine-grained compression options
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -1197,13 +2393,13 @@
             <td>0</td>
             
             <td>Dongjin Lee</td>
-            <td>45 weeks</td>
+            <td>2 years 52 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-777%3A+Improved+testability+for+Admin+client>777</a></td>
             <td>Improved testability for Admin client
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -1214,13 +2410,13 @@
             <td>0</td>
             
             <td>Tom Bentley</td>
-            <td>48 weeks</td>
+            <td>3 years 2 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=188746244>776</a></td>
             <td>Add Consumer#peek for debugging/tuning
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -1231,23 +2427,15 @@
             <td>0</td>
             
             <td>Luke Chen</td>
-            <td>48 weeks</td>
+            <td>3 years 3 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-774%3A+Deprecate+public+access+to+Admin+client%27s+*Result+constructors>774</a></td>
             <td>Deprecate public access to Admin client's *Result constructors
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        Josep Prat <josep.prat@aiven.io.INVALID><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -1256,7 +2444,7 @@
             <td>0</td>
             
             <td>Tom Bentley</td>
-            <td>50 weeks</td>
+            <td>3 years 4 weeks</td>
         </tr>
         
         <tr>
@@ -1273,13 +2461,13 @@
             <td>0</td>
             
             <td>Colin McCabe</td>
-            <td>51 weeks</td>
+            <td>3 years 5 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-767%3A+Connect+Latency+Metrics>767</a></td>
             <td>Connect Latency Metrics
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -1290,7 +2478,7 @@
             <td>0</td>
             
             <td>Jordan Bull</td>
-            <td>1 years 2 weeks</td>
+            <td>3 years 9 weeks</td>
         </tr>
         
         <tr>
@@ -1307,7 +2495,7 @@
             <td>0</td>
             
             <td>Luke Chen</td>
-            <td>1 years 5 weeks</td>
+            <td>3 years 11 weeks</td>
         </tr>
         
         <tr>
@@ -1324,13 +2512,13 @@
             <td>0</td>
             
             <td>Ryanne Dolan</td>
-            <td>1 years 6 weeks</td>
+            <td>3 years 12 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-760%3A+Minimum+value+for+segment.ms+and+segment.bytes>760</a></td>
             <td>Minimum value for segment.ms and segment.bytes
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -1341,24 +2529,7 @@
             <td>0</td>
             
             <td>Badai Aqrandista</td>
-            <td>1 years 7 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-759%3A+Unneeded+repartition+canceling>759</a></td>
-            <td>Unneeded repartition canceling
-            <td style="background-color:red;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Ivan Ponomarev</td>
-            <td>1 years 9 weeks</td>
+            <td>3 years 14 weeks</td>
         </tr>
         
         <tr>
@@ -1375,24 +2546,7 @@
             <td>0</td>
             
             <td>Yi Ding</td>
-            <td>1 years 9 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-756%3A+Move+StreamsResetter+tool+outside+of+core>756</a></td>
-            <td>Move StreamsResetter tool outside of core
-            <td style="background-color:black;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Jorge Esteban Quilcate Otoya</td>
-            <td>1 years 11 weeks</td>
+            <td>3 years 15 weeks</td>
         </tr>
         
         <tr>
@@ -1409,7 +2563,7 @@
             <td>0</td>
             
             <td>Christopher L. Shannon</td>
-            <td>1 years 11 weeks</td>
+            <td>3 years 18 weeks</td>
         </tr>
         
         <tr>
@@ -1426,13 +2580,13 @@
             <td>0</td>
             
             <td>Matthew de Detrich</td>
-            <td>1 years 11 weeks</td>
+            <td>3 years 18 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-753%3A++ACL+authentication%2C+Host+field+support+IP+network+segment>753</a></td>
             <td>ACL authentication, Host field support IP network segment
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -1443,32 +2597,7 @@
             <td>0</td>
             
             <td>loboxu</td>
-            <td>1 years 11 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-752%3A+Support+--bootstrap-server+in+ReplicaVerificationTool>752</a></td>
-            <td>Support --bootstrap-server in ReplicaVerificationTool
-            <td style="background-color:red;"></td>
-            
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        Dongjin Lee <dongjin@apache.org><br>
-                        
-                    </span>
-                </div>
-            </td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Dongjin Lee</td>
-            <td>1 years 11 weeks</td>
+            <td>3 years 18 weeks</td>
         </tr>
         
         <tr>
@@ -1476,17 +2605,7 @@
             <td>Add --files and --file-separator options to the ConsoleProducer
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">2
-                    <span class="tooltiptext">
-                        
-                        Boyang Chen <reluctanthero104@gmail.com><br>
-                        
-                        wenbing shen <oliver.shen999@gmail.com><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -1495,7 +2614,7 @@
             <td>0</td>
             
             <td>Wenbing Shen</td>
-            <td>1 years 12 weeks</td>
+            <td>3 years 18 weeks</td>
         </tr>
         
         <tr>
@@ -1503,15 +2622,7 @@
             <td>Remove config value 0.10.0-2.4 of Streams built-in metrics version config
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        Bruno Cadonna <cadonna@apache.org><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -1520,7 +2631,7 @@
             <td>0</td>
             
             <td>Bruno Cadonna</td>
-            <td>1 years 14 weeks</td>
+            <td>3 years 20 weeks</td>
         </tr>
         
         <tr>
@@ -1537,7 +2648,7 @@
             <td>0</td>
             
             <td>Moses Nakamura</td>
-            <td>1 years 15 weeks</td>
+            <td>3 years 21 weeks</td>
         </tr>
         
         <tr>
@@ -1554,13 +2665,13 @@
             <td>0</td>
             
             <td>Matthew de Detrich</td>
-            <td>1 years 15 weeks</td>
+            <td>3 years 22 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-736%3A+Report+the+true+end+to+end+fetch+latency>736</a></td>
             <td>Report the true end to end fetch latency
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -1571,13 +2682,13 @@
             <td>0</td>
             
             <td>Ming Liu</td>
-            <td>1 years 17 weeks</td>
+            <td>3 years 24 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-731%3A+Record+Rate+Limiting+for+Kafka+Connect>731</a></td>
             <td>Record Rate Limiting for Kafka Connect
-            <td style="background-color:green;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -1588,13 +2699,13 @@
             <td>0</td>
             
             <td>Ryanne Dolan</td>
-            <td>1 years 20 weeks</td>
+            <td>3 years 26 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-729%3A+Custom+validation+of+records+on+the+broker+prior+to+log+append>729</a></td>
             <td>Custom validation of records on the broker prior to log append
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -1605,7 +2716,7 @@
             <td>0</td>
             
             <td>Soumyajit Sahu</td>
-            <td>1 years 21 weeks</td>
+            <td>3 years 27 weeks</td>
         </tr>
         
         <tr>
@@ -1622,7 +2733,7 @@
             <td>0</td>
             
             <td>A. Sophie Blee-Goldman</td>
-            <td>1 years 21 weeks</td>
+            <td>3 years 28 weeks</td>
         </tr>
         
         <tr>
@@ -1630,15 +2741,7 @@
             <td>Add --under-preferred-replica-partitions option to describe topics command
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        Tom Bentley <tbentley@redhat.com><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -1647,7 +2750,7 @@
             <td>0</td>
             
             <td>Wenbing Shen</td>
-            <td>1 years 22 weeks</td>
+            <td>3 years 28 weeks</td>
         </tr>
         
         <tr>
@@ -1664,7 +2767,7 @@
             <td>0</td>
             
             <td>Andrei Iatsuk</td>
-            <td>1 years 23 weeks</td>
+            <td>3 years 29 weeks</td>
         </tr>
         
         <tr>
@@ -1672,17 +2775,7 @@
             <td>Make KTable Join on Foreign key unopinionated
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">2
-                    <span class="tooltiptext">
-                        
-                        Guozhang Wang <wangguoz@gmail.com><br>
-                        
-                        John Roesler <vvcephei@apache.org><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -1691,32 +2784,7 @@
             <td>0</td>
             
             <td>Marco Lotz</td>
-            <td>1 years 25 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-714%3A+Client+metrics+and+observability>714</a></td>
-            <td>Client metrics and observability
-            <td style="background-color:yellow;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td style="background-color:red;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        Magnus Edenhill <magnus@edenhill.se><br>
-                        
-                    </span>
-                </div>
-            </td>
-            
-            <td>Magnus Edenhill</td>
-            <td>1 years 28 weeks</td>
+            <td>3 years 32 weeks</td>
         </tr>
         
         <tr>
@@ -1733,7 +2801,7 @@
             <td>0</td>
             
             <td>Jeremy Custenborder</td>
-            <td>1 years 29 weeks</td>
+            <td>3 years 35 weeks</td>
         </tr>
         
         <tr>
@@ -1750,24 +2818,7 @@
             <td>0</td>
             
             <td>Henry Cai</td>
-            <td>1 years 29 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-710%3A+Full+support+for+distributed+mode+in+dedicated+MirrorMaker+2.0+clusters>710</a></td>
-            <td>Full support for distributed mode in dedicated MirrorMaker 2.0 clusters
-            <td style="background-color:black;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Daniel Urban</td>
-            <td>1 years 30 weeks</td>
+            <td>3 years 35 weeks</td>
         </tr>
         
         <tr>
@@ -1784,7 +2835,7 @@
             <td>0</td>
             
             <td>Ismael Juma</td>
-            <td>3 years 31 weeks</td>
+            <td>5 years 38 weeks</td>
         </tr>
         
         <tr>
@@ -1801,7 +2852,7 @@
             <td>0</td>
             
             <td>Almog Gavra</td>
-            <td>1 years 32 weeks</td>
+            <td>3 years 39 weeks</td>
         </tr>
         
         <tr>
@@ -1818,7 +2869,7 @@
             <td>0</td>
             
             <td>Pere Urbon</td>
-            <td>1 years 33 weeks</td>
+            <td>3 years 39 weeks</td>
         </tr>
         
         <tr>
@@ -1835,7 +2886,7 @@
             <td>0</td>
             
             <td>Wenbing Shen</td>
-            <td>1 years 33 weeks</td>
+            <td>3 years 40 weeks</td>
         </tr>
         
         <tr>
@@ -1852,7 +2903,7 @@
             <td>0</td>
             
             <td>Akitoshi Yoshida</td>
-            <td>1 years 35 weeks</td>
+            <td>3 years 42 weeks</td>
         </tr>
         
         <tr>
@@ -1869,7 +2920,7 @@
             <td>0</td>
             
             <td>Tom Bentley</td>
-            <td>1 years 37 weeks</td>
+            <td>3 years 43 weeks</td>
         </tr>
         
         <tr>
@@ -1886,7 +2937,7 @@
             <td>0</td>
             
             <td>George Shu</td>
-            <td>1 years 38 weeks</td>
+            <td>3 years 44 weeks</td>
         </tr>
         
         <tr>
@@ -1903,7 +2954,7 @@
             <td>0</td>
             
             <td>George Shu</td>
-            <td>1 years 38 weeks</td>
+            <td>3 years 44 weeks</td>
         </tr>
         
         <tr>
@@ -1920,7 +2971,7 @@
             <td>0</td>
             
             <td>Noa Resare</td>
-            <td>1 years 38 weeks</td>
+            <td>3 years 44 weeks</td>
         </tr>
         
         <tr>
@@ -1937,7 +2988,7 @@
             <td>0</td>
             
             <td>Prateek Agarwal</td>
-            <td>1 years 39 weeks</td>
+            <td>3 years 45 weeks</td>
         </tr>
         
         <tr>
@@ -1954,7 +3005,7 @@
             <td>0</td>
             
             <td>Nikolay Izhikov</td>
-            <td>1 years 40 weeks</td>
+            <td>3 years 47 weeks</td>
         </tr>
         
         <tr>
@@ -1971,7 +3022,7 @@
             <td>0</td>
             
             <td>David Jacot</td>
-            <td>1 years 41 weeks</td>
+            <td>3 years 48 weeks</td>
         </tr>
         
         <tr>
@@ -1988,13 +3039,13 @@
             <td>0</td>
             
             <td>Joshua Grisham</td>
-            <td>1 years 41 weeks</td>
+            <td>3 years 48 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-682%3A+Connect+TimestampConverter+support+for+multiple+fields+and+multiple+input+formats>682</a></td>
             <td>Connect TimestampConverter support for multiple fields and multiple input formats
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -2005,7 +3056,7 @@
             <td>0</td>
             
             <td>Joshua Grisham</td>
-            <td>1 years 42 weeks</td>
+            <td>3 years 48 weeks</td>
         </tr>
         
         <tr>
@@ -2022,7 +3073,24 @@
             <td>0</td>
             
             <td>Tom Bentley</td>
-            <td>1 years 42 weeks</td>
+            <td>3 years 48 weeks</td>
+        </tr>
+        
+        <tr>
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-678%3A+New+Kafka+Connect+SMT+for+plainText+%3D%3E+Struct%28or+Map%29+with+Regex>678</a></td>
+            <td>New Kafka Connect SMT for plainText => Struct(or Map) with Regex
+            <td style="background-color:black;"></td>
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            
+            <td>0</td>
+            
+            <td>whsoul82</td>
+            <td>3 years 50 weeks</td>
         </tr>
         
         <tr>
@@ -2039,7 +3107,7 @@
             <td>0</td>
             
             <td>Javier Freire Riobó</td>
-            <td>1 years 46 weeks</td>
+            <td>4 years 1 weeks</td>
         </tr>
         
         <tr>
@@ -2056,7 +3124,7 @@
             <td>0</td>
             
             <td>Bruno Cadonna</td>
-            <td>1 years 47 weeks</td>
+            <td>4 years 2 weeks</td>
         </tr>
         
         <tr>
@@ -2073,7 +3141,7 @@
             <td>0</td>
             
             <td>Walker Carlson</td>
-            <td>1 years 49 weeks</td>
+            <td>4 years 3 weeks</td>
         </tr>
         
         <tr>
@@ -2090,7 +3158,7 @@
             <td>0</td>
             
             <td>Sandeep Kumar</td>
-            <td>1 years 51 weeks</td>
+            <td>4 years 5 weeks</td>
         </tr>
         
         <tr>
@@ -2107,7 +3175,7 @@
             <td>0</td>
             
             <td>satya k</td>
-            <td>1 years 51 weeks</td>
+            <td>4 years 5 weeks</td>
         </tr>
         
         <tr>
@@ -2124,7 +3192,7 @@
             <td>0</td>
             
             <td>Rupesh Kumar Patel</td>
-            <td>1 years 51 weeks</td>
+            <td>4 years 5 weeks</td>
         </tr>
         
         <tr>
@@ -2141,24 +3209,7 @@
             <td>0</td>
             
             <td>Brandon Brown</td>
-            <td>1 years 52 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-660%3A+Pluggable+ReplicaPlacer>660</a></td>
-            <td>Pluggable ReplicaPlacer
-            <td style="background-color:red;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Mickael Maison</td>
-            <td>2 years 1 weeks</td>
+            <td>4 years 6 weeks</td>
         </tr>
         
         <tr>
@@ -2175,7 +3226,7 @@
             <td>0</td>
             
             <td>Chia-Ping Tsai</td>
-            <td>2 years 1 weeks</td>
+            <td>4 years 8 weeks</td>
         </tr>
         
         <tr>
@@ -2183,15 +3234,7 @@
             <td>Add Customized Kafka Streams Logo
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        Bruno Cadonna <bruno@confluent.io><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -2200,7 +3243,7 @@
             <td>0</td>
             
             <td>Boyang Chen</td>
-            <td>2 years 2 weeks</td>
+            <td>4 years 8 weeks</td>
         </tr>
         
         <tr>
@@ -2217,13 +3260,13 @@
             <td>0</td>
             
             <td>Ning Zhang</td>
-            <td>2 years 3 weeks</td>
+            <td>4 years 10 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-655%3A+Windowed+Distinct+Operation+for+Kafka+Streams+API>655</a></td>
             <td>Windowed Distinct Operation for Kafka Streams API
-            <td style="background-color:black;"></td>
+            <td style="background-color:green;"></td>
             
             <td>0</td>
             
@@ -2234,7 +3277,7 @@
             <td>0</td>
             
             <td>Ivan Ponomarev</td>
-            <td>2 years 3 weeks</td>
+            <td>4 years 9 weeks</td>
         </tr>
         
         <tr>
@@ -2251,7 +3294,7 @@
             <td>0</td>
             
             <td>Boyang Chen</td>
-            <td>2 years 4 weeks</td>
+            <td>4 years 10 weeks</td>
         </tr>
         
         <tr>
@@ -2268,7 +3311,7 @@
             <td>0</td>
             
             <td>Ryan Dielhenn</td>
-            <td>2 years 4 weeks</td>
+            <td>4 years 10 weeks</td>
         </tr>
         
         <tr>
@@ -2285,7 +3328,7 @@
             <td>0</td>
             
             <td>Igor Piddubnyi</td>
-            <td>2 years 5 weeks</td>
+            <td>4 years 11 weeks</td>
         </tr>
         
         <tr>
@@ -2302,7 +3345,7 @@
             <td>0</td>
             
             <td>Nikhil Kumar</td>
-            <td>2 years 6 weeks</td>
+            <td>4 years 12 weeks</td>
         </tr>
         
         <tr>
@@ -2319,24 +3362,7 @@
             <td>0</td>
             
             <td>Jason Gustafson</td>
-            <td>2 years 7 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/pages/viewpage.action?pageId=158866569>641</a></td>
-            <td>An new java interface to replace 'kafka.common.MessageReader'
-            <td style="background-color:black;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Chia-Ping Tsai</td>
-            <td>2 years 7 weeks</td>
+            <td>4 years 13 weeks</td>
         </tr>
         
         <tr>
@@ -2353,7 +3379,7 @@
             <td>0</td>
             
             <td>Christopher Beard</td>
-            <td>2 years 9 weeks</td>
+            <td>4 years 15 weeks</td>
         </tr>
         
         <tr>
@@ -2370,7 +3396,7 @@
             <td>0</td>
             
             <td>mohamed chebbi</td>
-            <td>2 years 7 weeks</td>
+            <td>4 years 14 weeks</td>
         </tr>
         
         <tr>
@@ -2387,7 +3413,7 @@
             <td>0</td>
             
             <td>Arvin Zheng</td>
-            <td>2 years 8 weeks</td>
+            <td>4 years 14 weeks</td>
         </tr>
         
         <tr>
@@ -2404,29 +3430,15 @@
             <td>0</td>
             
             <td>Tom Bentley</td>
-            <td>2 years 8 weeks</td>
+            <td>4 years 14 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-631%3A+The+Quorum-based+Kafka+Controller>631</a></td>
             <td>The Quorum-based Kafka Controller
-            <td style="background-color:red;"></td>
+            <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">4
-                    <span class="tooltiptext">
-                        
-                        Boyang Chen <reluctanthero104@gmail.com><br>
-                        
-                        Colin McCabe <cmccabe@apache.org><br>
-                        
-                        Ron Dagostino <rndgstn@gmail.com><br>
-                        
-                        Ismael Juma <ismael@juma.me.uk><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -2435,7 +3447,7 @@
             <td>0</td>
             
             <td>Colin McCabe</td>
-            <td>2 years 9 weeks</td>
+            <td>4 years 15 weeks</td>
         </tr>
         
         <tr>
@@ -2452,7 +3464,7 @@
             <td>0</td>
             
             <td>Jiamei.xie</td>
-            <td>2 years 10 weeks</td>
+            <td>4 years 16 weeks</td>
         </tr>
         
         <tr>
@@ -2469,7 +3481,7 @@
             <td>0</td>
             
             <td>Tom Bentley</td>
-            <td>2 years 10 weeks</td>
+            <td>4 years 17 weeks</td>
         </tr>
         
         <tr>
@@ -2486,7 +3498,7 @@
             <td>0</td>
             
             <td>Boyang Chen</td>
-            <td>2 years 10 weeks</td>
+            <td>4 years 17 weeks</td>
         </tr>
         
         <tr>
@@ -2503,24 +3515,7 @@
             <td>0</td>
             
             <td>Cheng Tan</td>
-            <td>2 years 13 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-611%3A+Improved+Handling+of+Abandoned+Connectors+and+Tasks>611</a></td>
-            <td>Improved Handling of Abandoned Connectors and Tasks
-            <td style="background-color:black;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Chris Egerton</td>
-            <td>2 years 16 weeks</td>
+            <td>4 years 19 weeks</td>
         </tr>
         
         <tr>
@@ -2537,7 +3532,7 @@
             <td>0</td>
             
             <td>Boyang Chen</td>
-            <td>2 years 16 weeks</td>
+            <td>4 years 23 weeks</td>
         </tr>
         
         <tr>
@@ -2554,7 +3549,7 @@
             <td>0</td>
             
             <td>Wang Ge</td>
-            <td>2 years 17 weeks</td>
+            <td>4 years 24 weeks</td>
         </tr>
         
         <tr>
@@ -2571,7 +3566,7 @@
             <td>0</td>
             
             <td>Guozhang Wang</td>
-            <td>2 years 18 weeks</td>
+            <td>4 years 25 weeks</td>
         </tr>
         
         <tr>
@@ -2579,17 +3574,7 @@
             <td>Safely abort Producer transactions during application shutdown
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">2
-                    <span class="tooltiptext">
-                        
-                        Boyang Chen <reluctanthero104@gmail.com><br>
-                        
-                        John Roesler <vvcephei@apache.org><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -2598,7 +3583,7 @@
             <td>0</td>
             
             <td>Xiang Zhang</td>
-            <td>2 years 19 weeks</td>
+            <td>4 years 26 weeks</td>
         </tr>
         
         <tr>
@@ -2615,7 +3600,7 @@
             <td>0</td>
             
             <td>Jeff Widman</td>
-            <td>2 years 20 weeks</td>
+            <td>4 years 26 weeks</td>
         </tr>
         
         <tr>
@@ -2632,7 +3617,7 @@
             <td>0</td>
             
             <td>Connor Penhale</td>
-            <td>2 years 21 weeks</td>
+            <td>4 years 27 weeks</td>
         </tr>
         
         <tr>
@@ -2649,7 +3634,7 @@
             <td>0</td>
             
             <td>Chia-Ping Tsai</td>
-            <td>2 years 23 weeks</td>
+            <td>4 years 29 weeks</td>
         </tr>
         
         <tr>
@@ -2666,24 +3651,7 @@
             <td>0</td>
             
             <td>Zihan Li</td>
-            <td>2 years 23 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-581%3A+Value+of+optional+null+field+which+has+default+value>581</a></td>
-            <td>Value of optional null field which has default value
-            <td style="background-color:green;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Cheng Pan</td>
-            <td>2 years 23 weeks</td>
+            <td>4 years 29 weeks</td>
         </tr>
         
         <tr>
@@ -2700,7 +3668,7 @@
             <td>0</td>
             
             <td>Paolo Moriello</td>
-            <td>2 years 24 weeks</td>
+            <td>4 years 30 weeks</td>
         </tr>
         
         <tr>
@@ -2708,15 +3676,7 @@
             <td>Add configuration to limit number of partitions
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        Harsha Ch <harsha.ch@gmail.com><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -2725,7 +3685,7 @@
             <td>0</td>
             
             <td>Gokul Ramanan Subramanian</td>
-            <td>2 years 24 weeks</td>
+            <td>4 years 30 weeks</td>
         </tr>
         
         <tr>
@@ -2742,7 +3702,7 @@
             <td>0</td>
             
             <td>Cheng Tan</td>
-            <td>2 years 24 weeks</td>
+            <td>4 years 31 weeks</td>
         </tr>
         
         <tr>
@@ -2759,7 +3719,7 @@
             <td>0</td>
             
             <td>francis lee</td>
-            <td>2 years 25 weeks</td>
+            <td>4 years 31 weeks</td>
         </tr>
         
         <tr>
@@ -2767,21 +3727,7 @@
             <td>Support RPC message type 'double'
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">4
-                    <span class="tooltiptext">
-                        
-                        Bill Bejeck <bbejeck@gmail.com><br>
-                        
-                        Navinder Brar <navinder_brar@yahoo.com.INVALID><br>
-                        
-                        Konstantine Karantasis <konstantine@confluent.io><br>
-                        
-                        John Roesler <vvcephei@apache.org><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -2790,7 +3736,7 @@
             <td>0</td>
             
             <td>Brian Byrne</td>
-            <td>2 years 31 weeks</td>
+            <td>4 years 37 weeks</td>
         </tr>
         
         <tr>
@@ -2798,15 +3744,7 @@
             <td>Kafka Cluster Audit
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        Viktor Somogyi-Vass <viktorsomogyi@gmail.com><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -2815,7 +3753,7 @@
             <td>0</td>
             
             <td>Igor Martemyanov</td>
-            <td>2 years 31 weeks</td>
+            <td>4 years 37 weeks</td>
         </tr>
         
         <tr>
@@ -2832,7 +3770,7 @@
             <td>0</td>
             
             <td>Tommy Becker</td>
-            <td>2 years 31 weeks</td>
+            <td>4 years 37 weeks</td>
         </tr>
         
         <tr>
@@ -2849,7 +3787,7 @@
             <td>0</td>
             
             <td>huxihx</td>
-            <td>2 years 31 weeks</td>
+            <td>4 years 38 weeks</td>
         </tr>
         
         <tr>
@@ -2866,7 +3804,7 @@
             <td>0</td>
             
             <td>Alex Dunayevsky</td>
-            <td>2 years 35 weeks</td>
+            <td>4 years 42 weeks</td>
         </tr>
         
         <tr>
@@ -2883,7 +3821,7 @@
             <td>0</td>
             
             <td>high.lee</td>
-            <td>2 years 32 weeks</td>
+            <td>4 years 38 weeks</td>
         </tr>
         
         <tr>
@@ -2900,7 +3838,7 @@
             <td>0</td>
             
             <td>Dhruvil Shah</td>
-            <td>2 years 37 weeks</td>
+            <td>4 years 44 weeks</td>
         </tr>
         
         <tr>
@@ -2917,7 +3855,7 @@
             <td>0</td>
             
             <td>David Jacot</td>
-            <td>2 years 39 weeks</td>
+            <td>4 years 46 weeks</td>
         </tr>
         
         <tr>
@@ -2934,7 +3872,7 @@
             <td>0</td>
             
             <td>Satish Bellapu</td>
-            <td>2 years 40 weeks</td>
+            <td>4 years 46 weeks</td>
         </tr>
         
         <tr>
@@ -2951,7 +3889,7 @@
             <td>0</td>
             
             <td>Eric Azama</td>
-            <td>2 years 40 weeks</td>
+            <td>4 years 47 weeks</td>
         </tr>
         
         <tr>
@@ -2968,7 +3906,7 @@
             <td>0</td>
             
             <td>Viktor Somogyi</td>
-            <td>2 years 44 weeks</td>
+            <td>4 years 51 weeks</td>
         </tr>
         
         <tr>
@@ -2985,7 +3923,7 @@
             <td>0</td>
             
             <td>Richard Yu</td>
-            <td>2 years 44 weeks</td>
+            <td>4 years 51 weeks</td>
         </tr>
         
         <tr>
@@ -3002,7 +3940,7 @@
             <td>0</td>
             
             <td>Richard Yu</td>
-            <td>2 years 45 weeks</td>
+            <td>4 years 51 weeks</td>
         </tr>
         
         <tr>
@@ -3019,7 +3957,7 @@
             <td>0</td>
             
             <td>Noa Resare</td>
-            <td>2 years 45 weeks</td>
+            <td>4 years 52 weeks</td>
         </tr>
         
         <tr>
@@ -3036,7 +3974,7 @@
             <td>0</td>
             
             <td>NIKHIL BHATIA</td>
-            <td>2 years 0 weeks</td>
+            <td>5 years 7 weeks</td>
         </tr>
         
         <tr>
@@ -3044,17 +3982,7 @@
             <td>Reduce Producer Metadata Lookups for Large Number of Topics
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">2
-                    <span class="tooltiptext">
-                        
-                        Guozhang Wang <wangguoz@gmail.com><br>
-                        
-                        Jason Gustafson <jason@confluent.io><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -3063,7 +3991,7 @@
             <td>0</td>
             
             <td>Brian Byrne</td>
-            <td>2 years 49 weeks</td>
+            <td>5 years 4 weeks</td>
         </tr>
         
         <tr>
@@ -3080,7 +4008,7 @@
             <td>0</td>
             
             <td>kun du</td>
-            <td>2 years 0 weeks</td>
+            <td>5 years 7 weeks</td>
         </tr>
         
         <tr>
@@ -3097,12 +4025,12 @@
             <td>0</td>
             
             <td>Mykhailo Yeromenko</td>
-            <td>3 years 1 weeks</td>
+            <td>5 years 7 weeks</td>
         </tr>
         
         <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-512%3AAdding+headers+to+RecordMetaData>512</a></td>
-            <td>Adding headers to RecordMetaData
+            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-510%3A+Metrics+library+upgrade>510</a></td>
+            <td>Metrics library upgrade
             <td style="background-color:black;"></td>
             
             <td>0</td>
@@ -3113,25 +4041,8 @@
             
             <td>0</td>
             
-            <td>Renuka Metukuru</td>
-            <td>3 years 1 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-510%3A+Metrics+library+upgrade>510</a></td>
-            <td>Metrics library upgrade
-            <td style="background-color:red;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
             <td>Mario Molina</td>
-            <td>3 years 1 weeks</td>
+            <td>5 years 8 weeks</td>
         </tr>
         
         <tr>
@@ -3148,7 +4059,7 @@
             <td>0</td>
             
             <td>Werner Dähn</td>
-            <td>3 years 1 weeks</td>
+            <td>5 years 8 weeks</td>
         </tr>
         
         <tr>
@@ -3165,7 +4076,7 @@
             <td>0</td>
             
             <td>Dongjin Lee</td>
-            <td>3 years 2 weeks</td>
+            <td>5 years 8 weeks</td>
         </tr>
         
         <tr>
@@ -3182,7 +4093,7 @@
             <td>0</td>
             
             <td>Tom Bentley</td>
-            <td>3 years 3 weeks</td>
+            <td>5 years 9 weeks</td>
         </tr>
         
         <tr>
@@ -3199,7 +4110,7 @@
             <td>0</td>
             
             <td>Jungtaek Lim</td>
-            <td>3 years 3 weeks</td>
+            <td>5 years 9 weeks</td>
         </tr>
         
         <tr>
@@ -3207,15 +4118,7 @@
             <td>Add metric for number of topics marked for deletion
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        David Arthur <mumrah@gmail.com><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -3224,7 +4127,7 @@
             <td>0</td>
             
             <td>David Arthur</td>
-            <td>3 years 3 weeks</td>
+            <td>5 years 10 weeks</td>
         </tr>
         
         <tr>
@@ -3241,7 +4144,7 @@
             <td>0</td>
             
             <td>Cyrus Vafadari</td>
-            <td>3 years 3 weeks</td>
+            <td>5 years 10 weeks</td>
         </tr>
         
         <tr>
@@ -3258,7 +4161,7 @@
             <td>0</td>
             
             <td>Satish Duggana</td>
-            <td>3 years 4 weeks</td>
+            <td>5 years 11 weeks</td>
         </tr>
         
         <tr>
@@ -3275,34 +4178,7 @@
             <td>0</td>
             
             <td>Alexandre Dupriez</td>
-            <td>3 years 4 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-495%3A+Dynamically+Adjust+Log+Levels+in+Connect>495</a></td>
-            <td>Dynamically Adjust Log Levels in Connect
-            <td style="background-color:black;"></td>
-            
-            <td style="background-color:green;">
-                <div class="tooltip">2
-                    <span class="tooltiptext">
-                        
-                        Cyrus Vafadari <cvafadari@gmail.com><br>
-                        
-                        Chris Egerton <chrise@confluent.io><br>
-                        
-                    </span>
-                </div>
-            </td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Arjun Satish</td>
-            <td>3 years 5 weeks</td>
+            <td>5 years 11 weeks</td>
         </tr>
         
         <tr>
@@ -3319,7 +4195,7 @@
             <td>0</td>
             
             <td>Cyrus Vafadari</td>
-            <td>3 years 5 weeks</td>
+            <td>5 years 12 weeks</td>
         </tr>
         
         <tr>
@@ -3336,7 +4212,7 @@
             <td>0</td>
             
             <td>George Li</td>
-            <td>3 years 6 weeks</td>
+            <td>5 years 13 weeks</td>
         </tr>
         
         <tr>
@@ -3353,7 +4229,7 @@
             <td>0</td>
             
             <td>Jose Morales Aragon</td>
-            <td>3 years 7 weeks</td>
+            <td>5 years 13 weeks</td>
         </tr>
         
         <tr>
@@ -3370,7 +4246,7 @@
             <td>0</td>
             
             <td>Justine Olshan</td>
-            <td>3 years 7 weeks</td>
+            <td>5 years 13 weeks</td>
         </tr>
         
         <tr>
@@ -3387,24 +4263,7 @@
             <td>0</td>
             
             <td>Boyang Chen</td>
-            <td>3 years 9 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-477%3A+Add+PATCH+method+for+connector+config+in+Connect+REST+API>477</a></td>
-            <td>Add PATCH method for connector config in Connect REST API
-            <td style="background-color:black;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Ivan Yurchenko</td>
-            <td>3 years 11 weeks</td>
+            <td>5 years 16 weeks</td>
         </tr>
         
         <tr>
@@ -3421,7 +4280,7 @@
             <td>0</td>
             
             <td>Ryan Pridgeon</td>
-            <td>3 years 14 weeks</td>
+            <td>5 years 20 weeks</td>
         </tr>
         
         <tr>
@@ -3438,7 +4297,7 @@
             <td>0</td>
             
             <td>Boyang Chen</td>
-            <td>3 years 15 weeks</td>
+            <td>5 years 22 weeks</td>
         </tr>
         
         <tr>
@@ -3455,7 +4314,7 @@
             <td>0</td>
             
             <td>Flowermin</td>
-            <td>3 years 15 weeks</td>
+            <td>5 years 22 weeks</td>
         </tr>
         
         <tr>
@@ -3472,7 +4331,7 @@
             <td>0</td>
             
             <td>Richard Yu</td>
-            <td>3 years 18 weeks</td>
+            <td>5 years 24 weeks</td>
         </tr>
         
         <tr>
@@ -3489,7 +4348,7 @@
             <td>0</td>
             
             <td>Dongjin Lee</td>
-            <td>3 years 18 weeks</td>
+            <td>5 years 25 weeks</td>
         </tr>
         
         <tr>
@@ -3506,7 +4365,7 @@
             <td>0</td>
             
             <td>Richard Yu</td>
-            <td>3 years 19 weeks</td>
+            <td>5 years 26 weeks</td>
         </tr>
         
         <tr>
@@ -3523,7 +4382,7 @@
             <td>0</td>
             
             <td>Łukasz Antoniak</td>
-            <td>3 years 20 weeks</td>
+            <td>5 years 26 weeks</td>
         </tr>
         
         <tr>
@@ -3540,7 +4399,7 @@
             <td>0</td>
             
             <td>Yishun Guan</td>
-            <td>3 years 21 weeks</td>
+            <td>5 years 28 weeks</td>
         </tr>
         
         <tr>
@@ -3557,7 +4416,7 @@
             <td>0</td>
             
             <td>Matthias J. Sax</td>
-            <td>3 years 24 weeks</td>
+            <td>5 years 31 weeks</td>
         </tr>
         
         <tr>
@@ -3574,7 +4433,7 @@
             <td>0</td>
             
             <td>Ryanne Dolan</td>
-            <td>3 years 25 weeks</td>
+            <td>5 years 32 weeks</td>
         </tr>
         
         <tr>
@@ -3591,7 +4450,7 @@
             <td>0</td>
             
             <td>Viktor Somogyi</td>
-            <td>3 years 27 weeks</td>
+            <td>5 years 33 weeks</td>
         </tr>
         
         <tr>
@@ -3608,7 +4467,7 @@
             <td>0</td>
             
             <td>Ying Zheng</td>
-            <td>3 years 27 weeks</td>
+            <td>5 years 33 weeks</td>
         </tr>
         
         <tr>
@@ -3625,7 +4484,7 @@
             <td>0</td>
             
             <td>Kan Li</td>
-            <td>3 years 29 weeks</td>
+            <td>5 years 36 weeks</td>
         </tr>
         
         <tr>
@@ -3642,7 +4501,7 @@
             <td>0</td>
             
             <td>Jonathan Gordon</td>
-            <td>3 years 31 weeks</td>
+            <td>5 years 37 weeks</td>
         </tr>
         
         <tr>
@@ -3659,7 +4518,7 @@
             <td>0</td>
             
             <td>Boyang Chen</td>
-            <td>3 years 30 weeks</td>
+            <td>5 years 37 weeks</td>
         </tr>
         
         <tr>
@@ -3676,7 +4535,7 @@
             <td>0</td>
             
             <td>Andrew Schofield</td>
-            <td>3 years 32 weeks</td>
+            <td>5 years 38 weeks</td>
         </tr>
         
         <tr>
@@ -3693,7 +4552,7 @@
             <td>0</td>
             
             <td>Mayuresh Gharat</td>
-            <td>3 years 36 weeks</td>
+            <td>5 years 42 weeks</td>
         </tr>
         
         <tr>
@@ -3701,32 +4560,16 @@
             <td>Allow creating under-replicated topics and partitions
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        M. Manna <manmedia@gmail.com><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
-            <td style="background-color:yellow;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        M. Manna <manmedia@gmail.com><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
             
             <td>Mickael Maison</td>
-            <td>3 years 36 weeks</td>
+            <td>5 years 43 weeks</td>
         </tr>
         
         <tr>
@@ -3743,7 +4586,7 @@
             <td>0</td>
             
             <td>Richard Yu</td>
-            <td>3 years 36 weeks</td>
+            <td>5 years 43 weeks</td>
         </tr>
         
         <tr>
@@ -3760,7 +4603,7 @@
             <td>0</td>
             
             <td>Richard Yu</td>
-            <td>3 years 36 weeks</td>
+            <td>5 years 43 weeks</td>
         </tr>
         
         <tr>
@@ -3777,7 +4620,7 @@
             <td>0</td>
             
             <td>Kevin Lu</td>
-            <td>3 years 37 weeks</td>
+            <td>5 years 44 weeks</td>
         </tr>
         
         <tr>
@@ -3794,34 +4637,7 @@
             <td>0</td>
             
             <td>Kamal Kang</td>
-            <td>3 years 41 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-399%3A+Extend+ProductionExceptionHandler+to+cover+serialization+exceptions>399</a></td>
-            <td>Extend ProductionExceptionHandler to cover serialization exceptions
-            <td style="background-color:black;"></td>
-            
-            <td style="background-color:green;">
-                <div class="tooltip">2
-                    <span class="tooltiptext">
-                        
-                        Guozhang Wang <wangguoz@gmail.com><br>
-                        
-                        Anna McDonald <jbfletch@happypants.org><br>
-                        
-                    </span>
-                </div>
-            </td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Kamal Chandraprakash</td>
-            <td>3 years 38 weeks</td>
+            <td>5 years 48 weeks</td>
         </tr>
         
         <tr>
@@ -3838,7 +4654,7 @@
             <td>0</td>
             
             <td>Noa Resare</td>
-            <td>3 years 39 weeks</td>
+            <td>5 years 45 weeks</td>
         </tr>
         
         <tr>
@@ -3855,7 +4671,7 @@
             <td>0</td>
             
             <td>Brandon Kirchner</td>
-            <td>3 years 39 weeks</td>
+            <td>5 years 45 weeks</td>
         </tr>
         
         <tr>
@@ -3872,24 +4688,7 @@
             <td>0</td>
             
             <td>Attila Sasvári</td>
-            <td>3 years 39 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-391%3A+Allow+Producing+with+Offsets+for+Cluster+Replication>391</a></td>
-            <td>Allow Producing with Offsets for Cluster Replication
-            <td style="background-color:black;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Edoardo Comar</td>
-            <td>3 years 40 weeks</td>
+            <td>5 years 45 weeks</td>
         </tr>
         
         <tr>
@@ -3906,7 +4705,7 @@
             <td>0</td>
             
             <td>Lincong Li</td>
-            <td>3 years 42 weeks</td>
+            <td>5 years 49 weeks</td>
         </tr>
         
         <tr>
@@ -3923,7 +4722,7 @@
             <td>0</td>
             
             <td>CHIENHSING WU</td>
-            <td>3 years 42 weeks</td>
+            <td>5 years 49 weeks</td>
         </tr>
         
         <tr>
@@ -3940,7 +4739,7 @@
             <td>0</td>
             
             <td>Zahari Dichev</td>
-            <td>3 years 44 weeks</td>
+            <td>5 years 51 weeks</td>
         </tr>
         
         <tr>
@@ -3957,7 +4756,7 @@
             <td>0</td>
             
             <td>Jason Gustafson</td>
-            <td>3 years 45 weeks</td>
+            <td>5 years 51 weeks</td>
         </tr>
         
         <tr>
@@ -3974,7 +4773,7 @@
             <td>0</td>
             
             <td>Per Steffensen</td>
-            <td>3 years 46 weeks</td>
+            <td>5 years 0 weeks</td>
         </tr>
         
         <tr>
@@ -3991,7 +4790,7 @@
             <td>0</td>
             
             <td>Pavel Moukhataev</td>
-            <td>3 years 48 weeks</td>
+            <td>6 years 3 weeks</td>
         </tr>
         
         <tr>
@@ -4008,7 +4807,7 @@
             <td>0</td>
             
             <td>xiongqi wu</td>
-            <td>3 years 51 weeks</td>
+            <td>6 years 6 weeks</td>
         </tr>
         
         <tr>
@@ -4016,15 +4815,7 @@
             <td>Allow performance tools to print final results to output file
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        =?UTF-8?Q?Attila_Sasv=C3=A1ri?= <asasvari@apache.org><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -4033,7 +4824,7 @@
             <td>0</td>
             
             <td>Attila Sasvári</td>
-            <td>4 years 2 weeks</td>
+            <td>6 years 8 weeks</td>
         </tr>
         
         <tr>
@@ -4050,7 +4841,7 @@
             <td>0</td>
             
             <td>Lei Chen</td>
-            <td>4 years 1 weeks</td>
+            <td>6 years 8 weeks</td>
         </tr>
         
         <tr>
@@ -4067,7 +4858,7 @@
             <td>0</td>
             
             <td>Ratish Ravindran</td>
-            <td>4 years 4 weeks</td>
+            <td>6 years 10 weeks</td>
         </tr>
         
         <tr>
@@ -4075,32 +4866,16 @@
             <td>Priorities for Source Topics
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        Dongjin Lee <dongjin@apache.org><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
             
             
-            <td style="background-color:red;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        Colin McCabe <cmccabe@apache.org><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             <td>Nick Afshartous</td>
-            <td>4 years 4 weeks</td>
+            <td>6 years 11 weeks</td>
         </tr>
         
         <tr>
@@ -4117,24 +4892,7 @@
             <td>0</td>
             
             <td>Chia-Ping Tsai</td>
-            <td>4 years 4 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-347%3A++Enable+batching+in+FindCoordinatorRequest>347</a></td>
-            <td>Enable batching in FindCoordinatorRequest
-            <td style="background-color:black;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Yishun Guan</td>
-            <td>4 years 5 weeks</td>
+            <td>6 years 11 weeks</td>
         </tr>
         
         <tr>
@@ -4151,7 +4909,7 @@
             <td>0</td>
             
             <td>Colin McCabe</td>
-            <td>4 years 6 weeks</td>
+            <td>6 years 12 weeks</td>
         </tr>
         
         <tr>
@@ -4159,15 +4917,7 @@
             <td>Allow kafka-reassign-partitions.sh and kafka-log-dirs.sh to take admin client property file
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        Dong Lin <lindong28@gmail.com><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -4176,7 +4926,7 @@
             <td>0</td>
             
             <td>Dong Lin</td>
-            <td>4 years 7 weeks</td>
+            <td>6 years 13 weeks</td>
         </tr>
         
         <tr>
@@ -4193,7 +4943,7 @@
             <td>0</td>
             
             <td>Richard Yu</td>
-            <td>4 years 7 weeks</td>
+            <td>6 years 14 weeks</td>
         </tr>
         
         <tr>
@@ -4210,7 +4960,7 @@
             <td>0</td>
             
             <td>Richard Yu</td>
-            <td>4 years 8 weeks</td>
+            <td>6 years 14 weeks</td>
         </tr>
         
         <tr>
@@ -4227,7 +4977,7 @@
             <td>0</td>
             
             <td>Flavio Stutz</td>
-            <td>4 years 9 weeks</td>
+            <td>6 years 16 weeks</td>
         </tr>
         
         <tr>
@@ -4244,7 +4994,7 @@
             <td>0</td>
             
             <td>Vahid Hashemian</td>
-            <td>4 years 9 weeks</td>
+            <td>6 years 16 weeks</td>
         </tr>
         
         <tr>
@@ -4252,15 +5002,7 @@
             <td>Return new error code for DeleteTopics API when topic deletion disabled.
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        Jason Gustafson <jason@confluent.io><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -4269,7 +5011,7 @@
             <td>0</td>
             
             <td>Manikumar Reddy O.</td>
-            <td>4 years 10 weeks</td>
+            <td>6 years 16 weeks</td>
         </tr>
         
         <tr>
@@ -4277,15 +5019,7 @@
             <td>Allow fetchers to detect and handle log truncation
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        Jun Rao <jun@confluent.io><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -4294,7 +5028,7 @@
             <td>0</td>
             
             <td>Jason Gustafson</td>
-            <td>4 years 10 weeks</td>
+            <td>6 years 16 weeks</td>
         </tr>
         
         <tr>
@@ -4311,7 +5045,7 @@
             <td>0</td>
             
             <td>Sönke Liebau</td>
-            <td>4 years 10 weeks</td>
+            <td>6 years 17 weeks</td>
         </tr>
         
         <tr>
@@ -4328,7 +5062,7 @@
             <td>0</td>
             
             <td>Kevin Lafferty</td>
-            <td>4 years 11 weeks</td>
+            <td>6 years 17 weeks</td>
         </tr>
         
         <tr>
@@ -4345,7 +5079,7 @@
             <td>0</td>
             
             <td>Mike Freyberger</td>
-            <td>4 years 11 weeks</td>
+            <td>6 years 17 weeks</td>
         </tr>
         
         <tr>
@@ -4362,7 +5096,7 @@
             <td>0</td>
             
             <td>Adam Bellemare</td>
-            <td>4 years 12 weeks</td>
+            <td>6 years 18 weeks</td>
         </tr>
         
         <tr>
@@ -4379,7 +5113,7 @@
             <td>0</td>
             
             <td>Saulius Valatka</td>
-            <td>4 years 15 weeks</td>
+            <td>6 years 21 weeks</td>
         </tr>
         
         <tr>
@@ -4396,7 +5130,7 @@
             <td>0</td>
             
             <td>Allen Tang</td>
-            <td>4 years 16 weeks</td>
+            <td>6 years 22 weeks</td>
         </tr>
         
         <tr>
@@ -4413,7 +5147,7 @@
             <td>0</td>
             
             <td>Allen Tang</td>
-            <td>4 years 16 weeks</td>
+            <td>6 years 23 weeks</td>
         </tr>
         
         <tr>
@@ -4430,7 +5164,7 @@
             <td>0</td>
             
             <td>Adam Kotwasinski</td>
-            <td>4 years 17 weeks</td>
+            <td>6 years 23 weeks</td>
         </tr>
         
         <tr>
@@ -4447,7 +5181,7 @@
             <td>0</td>
             
             <td>Dong Lin</td>
-            <td>4 years 19 weeks</td>
+            <td>6 years 26 weeks</td>
         </tr>
         
         <tr>
@@ -4464,7 +5198,7 @@
             <td>0</td>
             
             <td>Dong Lin</td>
-            <td>4 years 20 weeks</td>
+            <td>6 years 26 weeks</td>
         </tr>
         
         <tr>
@@ -4481,7 +5215,7 @@
             <td>0</td>
             
             <td>Balint Molnar</td>
-            <td>4 years 22 weeks</td>
+            <td>6 years 28 weeks</td>
         </tr>
         
         <tr>
@@ -4498,7 +5232,7 @@
             <td>0</td>
             
             <td>Sergey Korytnikov</td>
-            <td>4 years 24 weeks</td>
+            <td>6 years 30 weeks</td>
         </tr>
         
         <tr>
@@ -4506,19 +5240,7 @@
             <td>A Scala Wrapper Library for Kafka Streams
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">3
-                    <span class="tooltiptext">
-                        
-                        John Roesler <john@confluent.io><br>
-                        
-                        Damian Guy <damian.guy@gmail.com><br>
-                        
-                        Ismael Juma <ismael@juma.me.uk><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -4527,7 +5249,7 @@
             <td>0</td>
             
             <td>Debasish Ghosh</td>
-            <td>4 years 24 weeks</td>
+            <td>6 years 30 weeks</td>
         </tr>
         
         <tr>
@@ -4544,24 +5266,7 @@
             <td>0</td>
             
             <td>Vahid Hashemian</td>
-            <td>4 years 26 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-263%3A+Allow+broker+to+skip+sanity+check+of+inactive+segments+on+broker+startup>263</a></td>
-            <td>Allow broker to skip sanity check of inactive segments on broker startup
-            <td style="background-color:black;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Dong Lin</td>
-            <td>4 years 26 weeks</td>
+            <td>6 years 33 weeks</td>
         </tr>
         
         <tr>
@@ -4578,7 +5283,7 @@
             <td>0</td>
             
             <td>Boyang Chen</td>
-            <td>4 years 35 weeks</td>
+            <td>6 years 42 weeks</td>
         </tr>
         
         <tr>
@@ -4595,7 +5300,7 @@
             <td>0</td>
             
             <td>Matthias J. Sax</td>
-            <td>4 years 27 weeks</td>
+            <td>6 years 33 weeks</td>
         </tr>
         
         <tr>
@@ -4612,7 +5317,7 @@
             <td>0</td>
             
             <td>jameschien</td>
-            <td>4 years 27 weeks</td>
+            <td>6 years 33 weeks</td>
         </tr>
         
         <tr>
@@ -4629,7 +5334,7 @@
             <td>0</td>
             
             <td>Prasanna Subburaj</td>
-            <td>4 years 28 weeks</td>
+            <td>6 years 35 weeks</td>
         </tr>
         
         <tr>
@@ -4646,7 +5351,7 @@
             <td>0</td>
             
             <td>Dong Lin</td>
-            <td>4 years 29 weeks</td>
+            <td>6 years 35 weeks</td>
         </tr>
         
         <tr>
@@ -4663,7 +5368,7 @@
             <td>0</td>
             
             <td>Sönke Liebau</td>
-            <td>4 years 30 weeks</td>
+            <td>6 years 36 weeks</td>
         </tr>
         
         <tr>
@@ -4680,7 +5385,7 @@
             <td>0</td>
             
             <td>Litao Deng</td>
-            <td>4 years 31 weeks</td>
+            <td>6 years 38 weeks</td>
         </tr>
         
         <tr>
@@ -4697,7 +5402,7 @@
             <td>0</td>
             
             <td>Manikumar Reddy O.</td>
-            <td>4 years 32 weeks</td>
+            <td>6 years 39 weeks</td>
         </tr>
         
         <tr>
@@ -4714,7 +5419,7 @@
             <td>0</td>
             
             <td>Vincent Meng</td>
-            <td>4 years 36 weeks</td>
+            <td>6 years 43 weeks</td>
         </tr>
         
         <tr>
@@ -4731,7 +5436,7 @@
             <td>0</td>
             
             <td>Jan Filipiak</td>
-            <td>4 years 36 weeks</td>
+            <td>6 years 43 weeks</td>
         </tr>
         
         <tr>
@@ -4748,7 +5453,7 @@
             <td>0</td>
             
             <td>Tom Bentley</td>
-            <td>4 years 37 weeks</td>
+            <td>6 years 43 weeks</td>
         </tr>
         
         <tr>
@@ -4765,7 +5470,7 @@
             <td>0</td>
             
             <td>Tom Bentley</td>
-            <td>4 years 38 weeks</td>
+            <td>6 years 44 weeks</td>
         </tr>
         
         <tr>
@@ -4782,7 +5487,7 @@
             <td>0</td>
             
             <td>dan norwood</td>
-            <td>4 years 38 weeks</td>
+            <td>6 years 45 weeks</td>
         </tr>
         
         <tr>
@@ -4790,32 +5495,16 @@
             <td>Detect outdated metadata using leaderEpoch and partitionEpoch
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        Guozhang Wang <wangguoz@gmail.com><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
-            <td style="background-color:yellow;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        Dong Lin <lindong28@gmail.com><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
             
             <td>Dong Lin</td>
-            <td>4 years 39 weeks</td>
+            <td>6 years 45 weeks</td>
         </tr>
         
         <tr>
@@ -4829,20 +5518,10 @@
             <td>0</td>
             
             
-            <td style="background-color:red;">
-                <div class="tooltip">2
-                    <span class="tooltiptext">
-                        
-                        Guozhang Wang <wangguoz@gmail.com><br>
-                        
-                        Gwen Shapira <gwen@confluent.io><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             <td>Konstantin Chukhlomin</td>
-            <td>4 years 39 weeks</td>
+            <td>6 years 46 weeks</td>
         </tr>
         
         <tr>
@@ -4859,7 +5538,7 @@
             <td>0</td>
             
             <td>Clebert Suconic</td>
-            <td>4 years 45 weeks</td>
+            <td>6 years 52 weeks</td>
         </tr>
         
         <tr>
@@ -4867,15 +5546,7 @@
             <td>Rationalising Policy interfaces
             <td style="background-color:black;"></td>
             
-            <td style="background-color:green;">
-                <div class="tooltip">1
-                    <span class="tooltiptext">
-                        
-                        Stephane Maarek <stephane@simplemachines.com.au><br>
-                        
-                    </span>
-                </div>
-            </td>
+            <td>0</td>
             
             
             <td>0</td>
@@ -4884,24 +5555,7 @@
             <td>0</td>
             
             <td>Tom Bentley</td>
-            <td>4 years 50 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-199%3A+Add+Kafka+Connect+offset+tool>199</a></td>
-            <td>Add Kafka Connect offset tool
-            <td style="background-color:black;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Randall Hauch</td>
-            <td>4 years 50 weeks</td>
+            <td>7 years 5 weeks</td>
         </tr>
         
         <tr>
@@ -4918,13 +5572,13 @@
             <td>0</td>
             
             <td>Ewen Cheslack-Postava</td>
-            <td>4 years 52 weeks</td>
+            <td>7 years 6 weeks</td>
         </tr>
         
         <tr>
             <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-185%3A+Make+exactly+once+in+order+delivery+per+partition+the+default+producer+setting>185</a></td>
             <td>Make exactly once in order delivery per partition the default producer setting
-            <td style="background-color:yellow;"></td>
+            <td style="background-color:black;"></td>
             
             <td>0</td>
             
@@ -4935,7 +5589,7 @@
             <td>0</td>
             
             <td>Apurva Mehta</td>
-            <td>5 years 3 weeks</td>
+            <td>7 years 10 weeks</td>
         </tr>
         
         <tr>
@@ -4952,7 +5606,7 @@
             <td>0</td>
             
             <td>Vahid Hashemian</td>
-            <td>5 years 5 weeks</td>
+            <td>7 years 12 weeks</td>
         </tr>
         
         <tr>
@@ -4969,7 +5623,7 @@
             <td>0</td>
             
             <td>huxihx</td>
-            <td>5 years 6 weeks</td>
+            <td>7 years 13 weeks</td>
         </tr>
         
         <tr>
@@ -4986,7 +5640,7 @@
             <td>0</td>
             
             <td>Grant Neale</td>
-            <td>5 years 10 weeks</td>
+            <td>7 years 17 weeks</td>
         </tr>
         
         <tr>
@@ -5003,7 +5657,7 @@
             <td>0</td>
             
             <td>Ma Tianchi</td>
-            <td>5 years 13 weeks</td>
+            <td>7 years 19 weeks</td>
         </tr>
         
         <tr>
@@ -5020,7 +5674,7 @@
             <td>0</td>
             
             <td>Jeyhun Karimov</td>
-            <td>5 years 14 weeks</td>
+            <td>7 years 21 weeks</td>
         </tr>
         
         <tr>
@@ -5037,7 +5691,7 @@
             <td>0</td>
             
             <td>pengwei</td>
-            <td>5 years 18 weeks</td>
+            <td>7 years 25 weeks</td>
         </tr>
         
         <tr>
@@ -5054,7 +5708,7 @@
             <td>0</td>
             
             <td>Colin McCabe</td>
-            <td>5 years 19 weeks</td>
+            <td>7 years 25 weeks</td>
         </tr>
         
         <tr>
@@ -5071,7 +5725,7 @@
             <td>0</td>
             
             <td>Ismael Juma</td>
-            <td>5 years 20 weeks</td>
+            <td>7 years 27 weeks</td>
         </tr>
         
         <tr>
@@ -5088,7 +5742,7 @@
             <td>0</td>
             
             <td>Mayuresh Gharat</td>
-            <td>5 years 23 weeks</td>
+            <td>7 years 30 weeks</td>
         </tr>
         
         <tr>
@@ -5105,7 +5759,7 @@
             <td>0</td>
             
             <td>Onur Karaman</td>
-            <td>5 years 27 weeks</td>
+            <td>7 years 34 weeks</td>
         </tr>
         
         <tr>
@@ -5122,7 +5776,7 @@
             <td>0</td>
             
             <td>Matthias J. Sax</td>
-            <td>5 years 40 weeks</td>
+            <td>7 years 46 weeks</td>
         </tr>
         
         <tr>
@@ -5139,7 +5793,7 @@
             <td>0</td>
             
             <td>Michael André Pearce</td>
-            <td>5 years 44 weeks</td>
+            <td>7 years 51 weeks</td>
         </tr>
         
         <tr>
@@ -5156,24 +5810,7 @@
             <td>0</td>
             
             <td>Ashish Singh</td>
-            <td>6 years 1 weeks</td>
-        </tr>
-        
-        <tr>
-            <td><a href=https://wiki.apache.org/confluence/display/KAFKA/KIP-72%3A+Allow+putting+a+bound+on+memory+consumed+by+Incoming+requests>72</a></td>
-            <td>Allow putting a bound on memory consumed by Incoming requests
-            <td style="background-color:black;"></td>
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            
-            <td>0</td>
-            
-            <td>Radai Rosenblatt</td>
-            <td>6 years 4 weeks</td>
+            <td>8 years 7 weeks</td>
         </tr>
         
         <tr>
@@ -5190,7 +5827,7 @@
             <td>0</td>
             
             <td>Harsha</td>
-            <td>6 years 9 weeks</td>
+            <td>8 years 15 weeks</td>
         </tr>
         
         <tr>
@@ -5207,7 +5844,7 @@
             <td>0</td>
             
             <td>pengwei</td>
-            <td>6 years 9 weeks</td>
+            <td>8 years 15 weeks</td>
         </tr>
         
         <tr>
@@ -5224,7 +5861,7 @@
             <td>0</td>
             
             <td>Arvind Kandhare</td>
-            <td>6 years 10 weeks</td>
+            <td>8 years 17 weeks</td>
         </tr>
         
         <tr>
@@ -5241,7 +5878,7 @@
             <td>0</td>
             
             <td>Ben Drees</td>
-            <td>6 years 16 weeks</td>
+            <td>8 years 22 weeks</td>
         </tr>
         
         <tr>
@@ -5258,7 +5895,7 @@
             <td>0</td>
             
             <td>Rajini Sivaram</td>
-            <td>6 years 16 weeks</td>
+            <td>8 years 23 weeks</td>
         </tr>
         
         <tr>
@@ -5275,7 +5912,7 @@
             <td>0</td>
             
             <td>Jayesh Thakrar</td>
-            <td>6 years 16 weeks</td>
+            <td>8 years 23 weeks</td>
         </tr>
         
         <tr>
@@ -5292,7 +5929,7 @@
             <td>0</td>
             
             <td>Florian Hussonnois</td>
-            <td>6 years 21 weeks</td>
+            <td>8 years 28 weeks</td>
         </tr>
         
         <tr>
@@ -5309,7 +5946,7 @@
             <td>0</td>
             
             <td>Jason Gustafson</td>
-            <td>6 years 22 weeks</td>
+            <td>8 years 28 weeks</td>
         </tr>
         
         <tr>
@@ -5326,7 +5963,7 @@
             <td>0</td>
             
             <td>Andrew Olson</td>
-            <td>6 years 27 weeks</td>
+            <td>8 years 33 weeks</td>
         </tr>
         
         <tr>
@@ -5343,7 +5980,7 @@
             <td>0</td>
             
             <td>Bill Warshaw</td>
-            <td>6 years 29 weeks</td>
+            <td>8 years 36 weeks</td>
         </tr>
         
         <tr>
@@ -5360,7 +5997,7 @@
             <td>0</td>
             
             <td>Aditya Auradkar</td>
-            <td>6 years 30 weeks</td>
+            <td>8 years 37 weeks</td>
         </tr>
         
         <tr>
@@ -5377,7 +6014,7 @@
             <td>0</td>
             
             <td>Pierre-Yves Ritschard</td>
-            <td>6 years 31 weeks</td>
+            <td>8 years 38 weeks</td>
         </tr>
         
         <tr>
@@ -5394,7 +6031,7 @@
             <td>0</td>
             
             <td>XIAO, TAO</td>
-            <td>6 years 31 weeks</td>
+            <td>8 years 38 weeks</td>
         </tr>
         
         <tr>
@@ -5411,7 +6048,7 @@
             <td>0</td>
             
             <td>Ashish Singh</td>
-            <td>6 years 48 weeks</td>
+            <td>9 years 2 weeks</td>
         </tr>
         
         <tr>
@@ -5428,7 +6065,7 @@
             <td>0</td>
             
             <td>Bhavesh Mistry</td>
-            <td>6 years 50 weeks</td>
+            <td>9 years 5 weeks</td>
         </tr>
         
         <tr>
@@ -5445,7 +6082,7 @@
             <td>0</td>
             
             <td>Joe Stein</td>
-            <td>7 years 27 weeks</td>
+            <td>9 years 34 weeks</td>
         </tr>
         
         <tr>
@@ -5462,7 +6099,7 @@
             <td>0</td>
             
             <td>Jiangjie Qin</td>
-            <td>7 years 4 weeks</td>
+            <td>9 years 10 weeks</td>
         </tr>
         
         <tr>
@@ -5479,7 +6116,7 @@
             <td>0</td>
             
             <td>Ben Kirwin</td>
-            <td>7 years 7 weeks</td>
+            <td>9 years 13 weeks</td>
         </tr>
         
         <tr>
@@ -5496,7 +6133,7 @@
             <td>0</td>
             
             <td>Ashish Singh</td>
-            <td>7 years 17 weeks</td>
+            <td>9 years 23 weeks</td>
         </tr>
         
         <tr>
@@ -5513,7 +6150,7 @@
             <td>0</td>
             
             <td>Grant Henke</td>
-            <td>7 years 23 weeks</td>
+            <td>9 years 30 weeks</td>
         </tr>
         
         <tr>
@@ -5530,7 +6167,7 @@
             <td>0</td>
             
             <td>Jiangjie Qin</td>
-            <td>7 years 27 weeks</td>
+            <td>9 years 33 weeks</td>
         </tr>
         
         <tr>
@@ -5547,7 +6184,7 @@
             <td>0</td>
             
             <td>Joe Stein</td>
-            <td>7 years 32 weeks</td>
+            <td>9 years 38 weeks</td>
         </tr>
         
     </table>

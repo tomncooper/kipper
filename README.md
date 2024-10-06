@@ -7,7 +7,8 @@ Apache Kafka Improvement Proposal (KIP) [summary page](https://cwiki.apache.org/
 
 ## Installation
 
-This project uses [`poetry`](https://python-poetry.org/) to manage dependencies. To install the necessary libraries run:
+This project uses [`poetry`](https://python-poetry.org/) to manage dependencies. 
+To install the necessary libraries run:
 
 ```bash
 $ poetry install 

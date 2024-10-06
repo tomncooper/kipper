@@ -1,23 +1,23 @@
 [tool.poetry]
 name = "kipper"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Thomas Cooper <code@tomcooper.dev>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-requests = "^2.27.1"
+python = "^3.12"
+requests = "^2.32.3"
 beautifulsoup4 = "^4.10.0"
-pandas = "^1.4.1"
-Jinja2 = "^3.0.3"
+pandas = "^2.2.3"
+Jinja2 = "^3.1.4"
 
 [tool.poetry.dev-dependencies]
-ipython = "^8.0.1"
-pylint = "^2.12.2"
-black = "^22.1.0"
-mypy = "^0.931"
-types-requests = "^2.27.8"
-ipdb = "^0.13.9"
+ipython = "^8.28.0"
+pylint = "^3.3.1"
+black = "^24.8.0"
+mypy = "^1.11.2"
+types-requests = "^2.32.0.20240914"
+ipdb = "^0.13.13"
 
 [tool.poetry.scripts]
 kipper = "kipper.main:run"

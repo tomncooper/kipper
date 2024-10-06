@@ -12,7 +12,7 @@ BASE_URL: str = "https://wiki.apache.org/confluence"
 CONTENT_URL: str = BASE_URL + "/rest/api/content"
 WIKI_DATE_FORMAT: str = "%Y-%m-%dT%H:%M:%S.000Z"
 
-KIP_PATTERN: re.Pattern = re.compile("KIP-(?P<kip>\d+)", re.IGNORECASE)
+KIP_PATTERN: re.Pattern = re.compile(r"KIP-(?P<kip>\d+)", re.IGNORECASE)
 
 
 def get_kip_main_page_info() -> Dict[str, Any]:
