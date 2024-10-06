@@ -4,6 +4,7 @@ import datetime as dt
 
 from typing import List, Dict, Union, Optional, cast
 from enum import Enum
+from pathlib import Path
 
 from pandas import DataFrame, Timestamp, Timedelta, to_datetime
 from jinja2 import Template, Environment, FileSystemLoader
@@ -163,6 +164,9 @@ def render_standalone_status_page(
     """Renders the KIPs under discussion table with a status entry based on
     how recently the KIP was mentioned in an email subject line."""
 
+    output_path: Path = Path(output_filename)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
     kip_main_info = get_kip_main_page_info()
     kip_wiki_info = get_kip_information(kip_main_info)
 
@@ -180,5 +184,5 @@ def render_standalone_status_page(
         date=dt.datetime.now(dt.timezone.utc).strftime("%Y/%m/%d %H:%M:%S %Z"),
     )
 
-    with open(output_filename, "w", encoding="utf8") as out_file:
+    with open(output_path, "w", encoding="utf8") as out_file:
         out_file.write(output)
