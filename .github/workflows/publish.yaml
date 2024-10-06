@@ -27,7 +27,10 @@ jobs:
           POETRY_VIRTUALENVS_CREATE: false
 
       - name: Build the site
-        run: python kipper/main.py output standalone dev/kip_mentions.csv site_files/index.html
+        run: |
+          pwd
+          ls
+          python kipper/main.py output standalone dev/kip_mentions.csv site_files/index.html
     
       - name: Push to site branch
         uses: seanmiddleditch/gha-publish-to-git@master
