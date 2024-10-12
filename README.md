@@ -36,3 +36,8 @@ To create the standalone site html run the command below where the first argumen
 $ poetry run kipper output standalone dev/kip_mentions.csv index.html
 ```
 
+## Deployment
+
+A Github action (see `.github/publish.yaml`) will build and publish the site on every push to `main`. 
+The site is automatically built and deployed every day at approximately 09:00 UTC.
+
