@@ -1,6 +1,6 @@
-*pyc
-*mbox
-dev/*html
-*csv
+*.pyc
+*.mbox
+*.html
+*.csv
 *.json
 site_files/*

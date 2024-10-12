@@ -52,8 +52,23 @@
 </head>
 
 <body>
-    <h1>KIPs Under Discussion</h1>
+    <h1>Kafka Improvement Proposals: Enriched</h1>
+    <p>GitHub Repository: <a href="https://github.com/tomncooper/kipper">tomncooper/kipper</a></p>
     <p>Last Updated: {{ date }}</p>
+    <h2>Status Key</h2>
+    <table>
+        <tr>
+            <th>Status</th>
+            <th>Mentioned within the last N days</th>
+        </tr>
+        {% for status in kip_status_enum %}
+        <tr>
+            <td style="background-color:{{ status.text }};"></td>
+            <td>{{ status.duration.days }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2>KIPs Under Discussion</h2>
     <table>
         <tr>
             <th>KIP</th>
@@ -111,19 +126,6 @@
             {% endif %}
             <td>{{ kip["created_by"] }}</td>
             <td>{{ kip["age"] }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <h2>Status Key</h2>
-    <table>
-        <tr>
-            <th>Status</th>
-            <th>Mentioned within the last N days</th>
-        </tr>
-        {% for status in kip_status_enum %}
-        <tr>
-            <td style="background-color:{{ status.text }};"></td>
-            <td>{{ status.duration.days }}</td>
         </tr>
         {% endfor %}
     </table>
