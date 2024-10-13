@@ -129,7 +129,7 @@ def create_status_dict(
             status_entry["text"] = clean_description(cast(str, kip_data["title"]))
             status_entry["url"] = kip_data["web_url"]
             status_entry["created_by"] = kip_data["created_by"]
-            status_entry["age"] = calculate_age(kip_data["created_on"])
+            status_entry["age"] = calculate_age(cast(str, kip_data["created_on"]))
 
             if kip_id in subject_mentions:
                 status_entry["status"] = calculate_status(subject_mentions[kip_id])

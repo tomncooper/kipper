@@ -15,7 +15,7 @@ WIKI_DATE_FORMAT: str = "%Y-%m-%dT%H:%M:%S.000Z"
 KIP_PATTERN: re.Pattern = re.compile(r"KIP-(?P<kip>\d+)", re.IGNORECASE)
 
 
-def get_kip_main_page_info() -> Dict[str, Any]:
+def get_kip_main_page_info(timeout: int = 30) -> Dict[str, Any]:
     """Gets the details of the main KIP page"""
 
     kip_request: requests.Response = requests.get(
@@ -25,6 +25,7 @@ def get_kip_main_page_info() -> Dict[str, Any]:
             "spaceKey": "KAFKA",
             "title": "Kafka Improvement Proposals",
         },
+        timeout=timeout,
     )
 
     kip_request.raise_for_status()
@@ -40,11 +41,13 @@ def get_kip_main_page_info() -> Dict[str, Any]:
     return results[0]
 
 
-def get_kip_main_page_body(kip_main_info: Dict[str, Any]) -> str:
+def get_kip_main_page_body(kip_main_info: Dict[str, Any], timeout: int = 30) -> str:
     """Gets the RAW HTML body of the KIP main page"""
 
     kip_body_request: requests.Response = requests.get(
-        CONTENT_URL + "/" + kip_main_info["id"], params={"expand": "body.view"}
+        CONTENT_URL + "/" + kip_main_info["id"],
+        params={"expand": "body.view"},
+        timeout=timeout,
     )
 
     kip_body_request.raise_for_status()
@@ -177,6 +180,7 @@ def get_kip_information(
     update: bool = False,
     overwrite_cache: bool = False,
     cache_filepath: str = "kip_wiki_cache.json",
+    timeout: int = 30,
 ) -> Dict[int, Dict[str, Union[int, str]]]:
     """Gets the details of all child pages of the KIP main page that relate
     to a KIP. This takes a long time so will cache its results in a json file."""
@@ -202,14 +206,19 @@ def get_kip_information(
         print("Downloading KIP Wiki information for all KIPS")
 
     kip_child_info_request: requests.Response = requests.get(
-        BASE_URL + kip_main_info["_expandable"]["children"]
+        BASE_URL + kip_main_info["_expandable"]["children"],
+        timeout=timeout,
     )
 
     kip_child_info_request.raise_for_status()
 
     first_kip_child_request: requests.Response = requests.get(
         BASE_URL + kip_child_info_request.json()["_expandable"]["page"],
-        params={"limit": chunk, "expand": "history.lastUpdated,body.view"},
+        params={
+            "limit": chunk,
+            "expand": "history.lastUpdated,body.view",
+        },
+        timeout=timeout,
     )
 
     first_kip_child_request.raise_for_status()
@@ -229,7 +238,8 @@ def get_kip_information(
 
         if "next" in response_json["_links"]:
             kip_child_response: requests.Response = requests.get(
-                BASE_URL + response_json["_links"]["next"]
+                BASE_URL + response_json["_links"]["next"],
+                timeout=timeout,
             )
             kip_child_response.raise_for_status()
             response_json = kip_child_response.json()

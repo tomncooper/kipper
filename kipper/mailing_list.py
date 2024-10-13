@@ -2,7 +2,7 @@ import os
 import re
 import datetime as dt
 
-from typing import Dict, List, Tuple, Optional, Union, Set, Any
+from typing import Dict, List, Tuple, Optional, Union, Set, cast
 from pathlib import Path
 from enum import Enum
 
@@ -58,6 +58,7 @@ def get_monthly_mbox_file(
     month: int,
     overwrite: bool = False,
     output_directory: Optional[str] = None,
+    timeout: int = 30,
 ) -> Path:
     """Downloads the specified mbox archive file from the specified mailing list"""
 
@@ -72,7 +73,8 @@ def get_monthly_mbox_file(
     if filepath.exists():
         if not overwrite:
             print(
-                f"Mbox file {filepath} already exists. Skipping download (set overwrite to True to re-download)."
+                f"Mbox file {filepath} already exists. " +
+                "Skipping download (set overwrite to True to re-download)."
             )
             return filepath
 
@@ -84,7 +86,12 @@ def get_monthly_mbox_file(
         "d": f"{year}-{month}",
     }
 
-    with requests.get(BASE_URL, params=options, stream=True) as response:
+    with requests.get(
+            BASE_URL,
+            params=options,
+            stream=True,
+            timeout=timeout
+        ) as response:
         response.raise_for_status()
         with open(filepath, "wb") as mbox_file:
             for chunk in response.iter_content(chunk_size=8192):
@@ -120,7 +127,8 @@ def get_multiple_mbox(
     output_directory: Optional[str] = None,
     overwrite: bool = False,
 ) -> List[Path]:
-    """Gets all monthly mbox archives from the specified mailing list over the specified number of days into the past"""
+    """Gets all monthly mbox archives from the specified mailing list over the specified
+    number of days into the past"""
 
     if not output_directory:
         output_directory = mailing_list
@@ -190,9 +198,9 @@ def extract_message_payload(msg: Message) -> List[str]:
 
         temp_payload: Union[List[Message], str] = message.get_payload()
         if isinstance(temp_payload, list):
-            payload: str = temp_payload[0].get_payload()
+            payload: str = cast(str, temp_payload[0].get_payload())
         elif isinstance(temp_payload, str):
-            payload = message.get_payload()
+            payload = cast(str, message.get_payload())
         else:
             err_msg: str = f"Expected payload to be list or str no {type(temp_payload)}"
             print(err_msg)
@@ -363,7 +371,7 @@ def vote_converter(vote: Optional[str]) -> Optional[str]:
     """Converter function for the vote column of the mbox cache dataframe"""
 
     if vote != "":
-        vote_num: float = float(vote)
+        vote_num: float = float(cast(str, vote))
         if vote_num >= 1.0:
             return "+1"
 

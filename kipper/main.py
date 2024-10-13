@@ -2,7 +2,7 @@ from argparse import ArgumentParser, Namespace
 from pathlib import Path
 from typing import List
 
-from pandas import DataFrame, read_csv
+from pandas import DataFrame
 
 from kipper.mailing_list import (
     get_multiple_mbox,
@@ -48,12 +48,12 @@ def setup_top_level_commands(main_subparser):
     )
 
     init_parser.add_argument(
-        "-od" "--output_dir",
+        "-od", "--output_dir",
         required=False,
         help="Directory to save mailing list archives too.",
     )
 
-    update_parser = main_subparser.add_parser(
+    main_subparser.add_parser(
         "update",
         help="Command for updating the cached data from the KIP Wiki and Mail Archives",
     )
@@ -89,7 +89,7 @@ def setup_mail_command(main_subparser) -> None:
     )
 
     download_subparser.add_argument(
-        "-od" "--output_dir",
+        "-od", "--output_dir",
         required=False,
         help="Directory to save mailing list archives too.",
     )
@@ -144,7 +144,10 @@ def setup_wiki_command(main_subparser):
         "--update",
         required=False,
         action="store_true",
-        help="Update KIP wiki information. This will add any newly added KIPs to the existing cache.",
+        help=(
+            "Update KIP wiki information. " +
+            "This will add any newly added KIPs to the existing cache."
+        ),
     )
 
 
@@ -209,7 +212,7 @@ def setup_wiki_download(args: Namespace) -> None:
     )
 
 
-def run():
+def run() -> None:
     """KIPper Main Method"""
 
     parser: ArgumentParser = create_parser()
