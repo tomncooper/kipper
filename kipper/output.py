@@ -39,7 +39,7 @@ def calculate_status(last_mention: Timestamp) -> KIPStatus:
     """Calculates the appropriate KIPStatus instance based on the time
     difference between now and the last mention."""
 
-    now: Timestamp = to_datetime(dt.datetime.utcnow(), utc=True)
+    now: Timestamp = to_datetime(dt.datetime.now(dt.timezone.utc), utc=True)
     diff: Timedelta = now - last_mention
 
     if diff <= KIPStatus.GREEN.duration:
