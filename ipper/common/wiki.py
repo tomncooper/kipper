@@ -3,6 +3,7 @@ from typing import Any, Generator
 import requests
 
 APACHE_CONFLUENCE_BASE_URL: str = "https://wiki.apache.org/confluence"
+APACHE_CONFLUENCE_DATE_FORMAT: str = "%Y-%m-%dT%H:%M:%S.000Z"
 CONTENT_URL: str = APACHE_CONFLUENCE_BASE_URL + "/rest/api/content"
 
 

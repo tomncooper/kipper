@@ -12,8 +12,8 @@ from ipper.common.wiki import (
     get_wiki_page_body,
     child_page_generator,
 )
+from ipper.common.constants import IPState, UNKNOWN_STR
 
-WIKI_DATE_FORMAT: str = "%Y-%m-%dT%H:%M:%S.000Z"
 KIP_PATTERN: re.Pattern = re.compile(r"KIP-(?P<kip>\d+)", re.IGNORECASE)
 ACCEPTED_TERMS: list[str] = [
     "accepted",
@@ -49,10 +49,6 @@ NOT_ACCEPTED_TERMS: list[str] = [
     "replaced",
     "moved to",
 ]
-ACCEPTED: str = "accepted"
-UNDER_DISCUSSION: str = "under discussion"
-NOT_ACCEPTED: str = "not accepted"
-UNKNOWN: str = "unknown"
 
 
 def get_kip_main_page_info(timeout: int = 30) -> dict[str, Any]:
@@ -75,13 +71,13 @@ def get_current_state(html: str) -> Optional[str]:
     """Discerns the state of the kip from the supplied current state html paragraph"""
 
     if any(option in html.lower() for option in ACCEPTED_TERMS):
-        return ACCEPTED
+        return IPState.ACCEPTED
 
     if any(option in html.lower() for option in UNDER_DISCUSSION_TERMS):
-        return UNDER_DISCUSSION
+        return IPState.UNDER_DISCUSSION
 
     if any(option in html.lower() for option in NOT_ACCEPTED_TERMS):
-        return NOT_ACCEPTED
+        return IPState.NOT_ACCEPTED
 
     return None
 
@@ -104,7 +100,7 @@ def enrich_kip_info(body_html: str, kip_dict: dict[str, Union[list[str], str, in
                 kip_dict["state"] = state
             else:
                 print(f"Could not discern KIP state from {para}")
-                kip_dict["state"] = UNKNOWN
+                kip_dict["state"] = IPState.UNKNOWN
 
             state_processed = True
 
@@ -119,15 +115,15 @@ def enrich_kip_info(body_html: str, kip_dict: dict[str, Union[list[str], str, in
                 kip_dict["jira"] = href
             else:
                 print(f"Could not discern JIRA link from {para}")
-                kip_dict["jira"] = UNKNOWN
+                kip_dict["jira"] = UNKNOWN_STR
 
             jira_processed = True
 
     if not state_processed:
-        kip_dict["state"] = UNKNOWN
+        kip_dict["state"] = UNKNOWN_STR
 
     if not jira_processed:
-        kip_dict["jira"] = UNKNOWN
+        kip_dict["jira"] = UNKNOWN_STR
 
 
 def process_child_kip(kip_id: int, child: dict):
