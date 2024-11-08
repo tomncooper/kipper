@@ -12,6 +12,8 @@ from pandas import DataFrame, concat, to_datetime, read_csv
 
 import requests
 
+from ipper.common.utils import generate_month_list
+
 
 KIP_PATTERN: re.Pattern = re.compile(r"KIP-(?P<kip>\d+)", re.IGNORECASE)
 BASE_URL: str = "https://lists.apache.org/api/mbox.lua"
@@ -62,7 +64,7 @@ def get_monthly_mbox_file(
 ) -> Path:
     """Downloads the specified mbox archive file from the specified mailing list"""
 
-    filename = f"{mailing_list}_{DOMAIN.replace('.','_')}-{year}-{month}.mbox"
+    filename = f"{mailing_list}_{DOMAIN.replace('.', '_')}-{year}-{month}.mbox"
 
     filepath: Path
     if not output_directory:
@@ -91,34 +93,13 @@ def get_monthly_mbox_file(
             params=options,
             stream=True,
             timeout=timeout
-        ) as response:
+    ) as response:
         response.raise_for_status()
         with open(filepath, "wb") as mbox_file:
             for chunk in response.iter_content(chunk_size=8192):
                 mbox_file.write(chunk)
 
     return filepath
-
-
-def generate_month_list(now: dt.datetime, then: dt.datetime) -> List[Tuple[int, int]]:
-    """Generates a list of year-month strings spanning from then to now"""
-
-    month_list: List[Tuple[int, int]] = []
-
-    year: int = then.year
-    month: int = then.month
-    finished: bool = False
-
-    while not finished:
-        month_list.append((year, month))
-        month = (month + 1) % 13
-        if month == 0:
-            year += 1
-            month = 1
-        if month > now.month and year >= now.year:
-            finished = True
-
-    return month_list
 
 
 def get_multiple_mbox(
