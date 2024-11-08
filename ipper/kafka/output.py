@@ -139,6 +139,8 @@ def create_status_dict(
 def render_standalone_status_page(
     kip_mentions: DataFrame,
     output_filename: str,
+    templates_dir: str = "templates",
+    template_filename: str = "kafka-index.html.jinja",
 ) -> None:
     """Renders the KIPs under discussion table with a status entry based on
     how recently the KIP was mentioned in an email subject line."""
@@ -153,8 +155,8 @@ def render_standalone_status_page(
         Dict[str, Union[int, str, KIPStatus, List[str]]]
     ] = create_status_dict(kip_mentions, kip_wiki_info)
 
-    template: Template = Environment(loader=FileSystemLoader("templates")).get_template(
-        "index.html.jinja"
+    template: Template = Environment(loader=FileSystemLoader(templates_dir)).get_template(
+        template_filename
     )
 
     output: str = template.render(

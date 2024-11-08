@@ -31,8 +31,13 @@ jobs:
       - name: Download and process KIP data
         run: python ipper/main.py kafka init --days 365
 
+      - name: Copy main page to site_files
+        run: |
+          mkdir site_files
+          cp templates/index.html site_files
+
       - name: Build the site
-        run: python ipper/main.py kafka output standalone dev/kip_mentions.csv site_files/index.html
+        run: python ipper/main.py kafka output standalone dev/kip_mentions.csv site_files/kafka.html
      
       - name: Upload static files as artifact
         id: deployment
