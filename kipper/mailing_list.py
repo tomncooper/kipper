@@ -115,7 +115,8 @@ def generate_month_list(now: dt.datetime, then: dt.datetime) -> List[Tuple[int, 
         if month == 0:
             year += 1
             month = 1
-        if month > now.month and year >= now.year:
+        if month >= now.month and year >= now.year:
+            month_list.append((year, month))
             finished = True
 
     return month_list
