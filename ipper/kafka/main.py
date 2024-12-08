@@ -151,6 +151,15 @@ def setup_wiki_command(main_subparser):
     )
 
     wiki_download_subparser.add_argument(
+        "-c",
+        "--chunk",
+        required=False,
+        type=int,
+        default=100,
+        help="The number of KIP pages to fetch at once.",
+    )
+
+    wiki_download_subparser.add_argument(
         "-ow",
         "--overwrite",
         required=False,
@@ -233,7 +242,7 @@ def setup_wiki_download(args: Namespace) -> None:
 
     kip_main_info = get_kip_main_page_info()
     get_kip_information(
-        kip_main_info, update=args.update, overwrite_cache=args.overwrite
+        kip_main_info, chunk=args.chunk, update=args.update, overwrite_cache=args.overwrite
     )
 
 

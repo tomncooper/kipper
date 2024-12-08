@@ -119,8 +119,10 @@ def get_multiple_mbox(
     if not output_dir.exists():
         os.mkdir(output_dir)
 
-    now: dt.datetime = dt.datetime.utcnow()
+    now: dt.datetime = dt.datetime.now(dt.timezone.utc)
     then: dt.datetime = now - dt.timedelta(days=days_back)
+
+    print(f"Downloading mail archives for mailing list {mailing_list} between {then.isoformat()} and {now.isoformat()}")
 
     month_list: List[Tuple[int, int]] = generate_month_list(now, then)
 
