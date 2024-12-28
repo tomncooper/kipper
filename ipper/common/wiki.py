@@ -49,7 +49,7 @@ def get_wiki_page_body(wiki_page_info: dict[str, Any], timeout: int = 30) -> str
     return wiki_body_request.json()["body"]["view"]["value"]
 
 
-def child_page_generator(wiki_page_info, chunk: int, timeout: int) -> Generator[dict]:
+def child_page_generator(wiki_page_info, chunk: int, timeout: int) -> Generator[dict, None, None]:
     """Generator function which will yield the child info dict of each child page of the
     supplied wiki page"""
 

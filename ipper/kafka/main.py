@@ -57,7 +57,7 @@ def setup_init_command(main_subparser):
         required=False,
         help="Directory to save mailing list archives too.",
     )
-    
+
     init_parser.add_argument(
         "-c",
         "--chunk",
