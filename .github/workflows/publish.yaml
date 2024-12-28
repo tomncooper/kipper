@@ -40,7 +40,7 @@ jobs:
         run: python ipper/main.py kafka output standalone dev/kip_mentions.csv site_files/kafka.html
 
       - name: Build the Flink site
-        run: cp templates/flink.html site_files/flink.html
+        run: cp templates/flink-index.html site_files/flink.html
      
       - name: Upload static files as artifact
         id: deployment
