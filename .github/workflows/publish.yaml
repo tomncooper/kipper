@@ -36,8 +36,11 @@ jobs:
           mkdir site_files
           cp templates/index.html site_files
 
-      - name: Build the site
+      - name: Build the Kafka site
         run: python ipper/main.py kafka output standalone dev/kip_mentions.csv site_files/kafka.html
+
+      - name: Build the Flink site
+        run: cp templates/flink.html site_files/flink.html
      
       - name: Upload static files as artifact
         id: deployment

@@ -13,9 +13,9 @@ Jinja2 = "^3.1.4"
 
 [tool.poetry.dev-dependencies]
 ipython = "^8.29.0"
-pylint = "^3.3.1"
+pylint = "^3.3.3"
 black = "^24.10.0"
-mypy = "^1.13.0"
+mypy = "^1.14.0"
 types-requests = "^2.32.0.20241016"
 ipdb = "^0.13.13"
 
