@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "kipper"
-version = "0.1.1"
+name = "ipper"
+version = "0.2.0"
 description = ""
 authors = ["Thomas Cooper <code@tomcooper.dev>"]
 
@@ -12,15 +12,12 @@ pandas = "^2.2.3"
 Jinja2 = "^3.1.4"
 
 [tool.poetry.dev-dependencies]
-ipython = "^8.28.0"
-pylint = "^3.3.1"
-black = "^24.8.0"
-mypy = "^1.11.2"
-types-requests = "^2.32.0.20240914"
+ipython = "^8.29.0"
+pylint = "^3.3.3"
+black = "^24.10.0"
+mypy = "^1.14.0"
+types-requests = "^2.32.0.20241016"
 ipdb = "^0.13.13"
-
-[tool.poetry.scripts]
-kipper = "kipper.main:run"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -1,6 +1,5 @@
 *.pyc
 *.mbox
-*.html
 *.csv
 *.json
 site_files/*

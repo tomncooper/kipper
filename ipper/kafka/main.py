@@ -4,33 +4,38 @@ from typing import List
 
 from pandas import DataFrame
 
-from kipper.mailing_list import (
+from ipper.kafka.mailing_list import (
     get_multiple_mbox,
     load_mbox_cache_file,
     process_all_mbox_in_directory,
     CACHE_DIR,
     process_mbox_files,
 )
-from kipper.output import render_standalone_status_page
-from kipper.wiki import get_kip_information, get_kip_main_page_info
+from ipper.kafka.output import render_standalone_status_page
+from ipper.kafka.wiki import get_kip_information, get_kip_main_page_info
 
 
-def create_parser() -> ArgumentParser:
-    """Creates the Argument Parser instance for the command line interface."""
+def setup_kafka_parser(top_level_parser: ArgumentParser) -> None:
+    """Add the kafka subcommands to the supplied top level subparser"""
 
-    parser: ArgumentParser = ArgumentParser("KIPper: The KIP Enrichment Program")
+    top_level_subparsers = top_level_parser.add_subparsers()
 
-    main_subparser = parser.add_subparsers(title="subcommands", dest="subcommand")
-    setup_top_level_commands(main_subparser)
+    kafka_parser: ArgumentParser = top_level_subparsers.add_parser("kafka")
+    kafka_parser.set_defaults(func=lambda _: print(kafka_parser.format_help()))
+
+    main_subparser = kafka_parser.add_subparsers(
+        title="kafka subcommands",
+        dest="kafka_subcommand",
+    )
+    setup_init_command(main_subparser)
+    setup_update_command(main_subparser)
     setup_mail_command(main_subparser)
     setup_wiki_command(main_subparser)
     setup_output_command(main_subparser)
 
-    return parser
 
-
-def setup_top_level_commands(main_subparser):
-    """Setup the top level commands for initalizing and updating"""
+def setup_init_command(main_subparser):
+    """Setup the initialization command"""
 
     init_parser = main_subparser.add_parser(
         "init", help="Command for initializing all data caches"
@@ -53,10 +58,18 @@ def setup_top_level_commands(main_subparser):
         help="Directory to save mailing list archives too.",
     )
 
-    main_subparser.add_parser(
+    init_parser.set_defaults(func=run_init_cmd)
+
+
+def setup_update_command(main_subparser) -> None:
+    """Setup the 'update' command parser"""
+
+    update_parser = main_subparser.add_parser(
         "update",
         help="Command for updating the cached data from the KIP Wiki and Mail Archives",
     )
+
+    update_parser.set_defaults(func=run_update_cmd)
 
 
 def setup_mail_command(main_subparser) -> None:
@@ -65,6 +78,8 @@ def setup_mail_command(main_subparser) -> None:
     mail_parser = main_subparser.add_parser(
         "mail", help="Command for performing mailing list related commands"
     )
+    mail_parser.set_defaults(func=mail_parser.print_help)
+
     mail_subparser = mail_parser.add_subparsers(dest="mail_subcommand")
 
     download_subparser = mail_subparser.add_parser(
@@ -102,6 +117,8 @@ def setup_mail_command(main_subparser) -> None:
         help="Replace existing mail archives.",
     )
 
+    download_subparser.set_defaults(func=setup_mail_download)
+
     process_subparser = mail_subparser.add_parser(
         "process", help="Command for processing mailing list archives."
     )
@@ -118,6 +135,8 @@ def setup_mail_command(main_subparser) -> None:
         help="Reprocess the mbox files and overwrite their cache files.",
     )
 
+    process_subparser.set_defaults(func=process_mail_archives)
+
 
 def setup_wiki_command(main_subparser):
     """Setup the top level wiki command line option."""
@@ -129,6 +148,15 @@ def setup_wiki_command(main_subparser):
 
     wiki_download_subparser = wiki_subparser.add_parser(
         "download", help="Command for downloading and caching KIP wiki information."
+    )
+
+    wiki_download_subparser.add_argument(
+        "-c",
+        "--chunk",
+        required=False,
+        type=int,
+        default=100,
+        help="The number of KIP pages to fetch at once.",
     )
 
     wiki_download_subparser.add_argument(
@@ -150,6 +178,8 @@ def setup_wiki_command(main_subparser):
         ),
     )
 
+    wiki_download_subparser.set_defaults(func=setup_wiki_download)
+
 
 def setup_output_command(main_subparser):
     """Setup the top level output command line option."""
@@ -157,6 +187,8 @@ def setup_output_command(main_subparser):
     output_parser = main_subparser.add_parser(
         "output", help="Command for performing output related commands"
     )
+    output_parser.set_defaults(func=output_parser.print_help)
+
     output_subparser = output_parser.add_subparsers(dest="output_subcommand")
 
     standalone_subparser = output_subparser.add_parser(
@@ -171,6 +203,8 @@ def setup_output_command(main_subparser):
     standalone_subparser.add_argument(
         "output_file", help="The path to the output html file"
     )
+
+    standalone_subparser.set_defaults(func=run_output_standalone_cmd)
 
 
 def setup_mail_download(args: Namespace) -> List[Path]:
@@ -208,69 +242,55 @@ def setup_wiki_download(args: Namespace) -> None:
 
     kip_main_info = get_kip_main_page_info()
     get_kip_information(
-        kip_main_info, update=args.update, overwrite_cache=args.overwrite
+        kip_main_info, chunk=args.chunk, update=args.update, overwrite_cache=args.overwrite
     )
 
 
-def run() -> None:
-    """KIPper Main Method"""
+def run_init_cmd(args: Namespace) -> None:
+    print("Initializing all data caches")
+    print("Downloading KIP Wiki Information")
+    args.update = False
+    args.overwrite = True
+    setup_wiki_download(args)
+    print("Downloading Developer Mailing List Archives")
+    args.mailing_list = "dev"
+    setup_mail_download(args)
+    args.overwrite_cache = True
+    args.directory = "dev"
+    process_mail_archives(args)
 
-    parser: ArgumentParser = create_parser()
-    args: Namespace = parser.parse_args()
 
-    if args.subcommand == "init":
-        print("Initializing all data caches")
-        print("Downloading KIP Wiki Information")
-        args.update = False
-        args.overwrite = True
-        setup_wiki_download(args)
-        print("Dowloading Developer Mailing List Archives")
-        args.mailing_list = "dev"
-        setup_mail_download(args)
-        args.overwrite_cache = True
-        args.directory = "dev"
-        process_mail_archives(args)
+def run_update_cmd(args: Namespace) -> None:
+    print("Updating all data caches")
+    print("Updating KIP Wiki Information")
+    args.update = True
+    args.overwrite = False
+    setup_wiki_download(args)
+    print("Updating Developer Mailing List Archives")
+    # Re-download the most recent months archive
+    args.days = 1
+    args.overwrite = True
+    args.mailing_list = "dev"
+    updated_files: List[Path] = setup_mail_download(args)
+    # Reprocess just the newly downloaded mail file
+    cache_dir: Path = Path("dev").joinpath(CACHE_DIR)
+    process_mbox_files(updated_files, cache_dir, overwrite_cache=True)
+    # Overwrite the kip mentions cache by process all the old mbox cache files
+    # and the newly overwritten one(s)
+    args.directory = "dev"
+    args.overwrite_cache = False
+    process_mail_archives(args)
 
-    if args.subcommand == "update":
-        print("Updating all data caches")
-        print("Updating KIP Wiki Information")
-        args.update = True
-        args.overwrite = False
-        setup_wiki_download(args)
-        print("Updating Developer Mailing List Archives")
-        # Re-download the most recent months archive
-        args.days = 1
-        args.overwrite = True
-        args.mailing_list = "dev"
-        updated_files: List[Path] = setup_mail_download(args)
-        # Reprocess just the newly downloaded mail file
-        cache_dir: Path = Path("dev").joinpath(CACHE_DIR)
-        process_mbox_files(updated_files, cache_dir, overwrite_cache=True)
-        # Overwrite the kip mentions cache by process all the old mbox cache files
-        # and the newly overwritten one(s)
-        args.directory = "dev"
-        args.overwrite_cache = False
-        process_mail_archives(args)
 
-    if args.subcommand == "mail":
-        if args.mail_subcommand == "download":
-            setup_mail_download(args)
-        elif args.mail_subcommand == "process":
-            process_mail_archives(args)
-
-    if args.subcommand == "output":
-        if args.output_subcommand == "standalone":
-            cache_file = Path(args.kip_mentions_file)
-            kip_mentions: DataFrame = load_mbox_cache_file(cache_file)
-            render_standalone_status_page(kip_mentions, args.output_file)
-
-    if args.subcommand == "wiki":
-        if args.wiki_subcommand == "download":
-            setup_wiki_download(
-                args,
-            )
+def run_output_standalone_cmd(args: Namespace) -> None:
+    cache_file = Path(args.kip_mentions_file)
+    kip_mentions: DataFrame = load_mbox_cache_file(cache_file)
+    render_standalone_status_page(kip_mentions, args.output_file)
 
 
 if __name__ == "__main__":
 
-    run()
+    PARSER: ArgumentParser = ArgumentParser("Kafka Improvement Proposal Enrichment Program")
+    setup_kafka_parser(PARSER)
+    ARGS: Namespace = PARSER.parse_args()
+    ARGS.func(ARGS)

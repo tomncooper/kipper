@@ -29,10 +29,18 @@ jobs:
           POETRY_VIRTUALENVS_CREATE: false
       
       - name: Download and process KIP data
-        run: python kipper/main.py init --days 365
+        run: python ipper/main.py kafka init --days 365
 
-      - name: Build the site
-        run: python kipper/main.py output standalone dev/kip_mentions.csv site_files/index.html
+      - name: Copy main page to site_files
+        run: |
+          mkdir site_files
+          cp templates/index.html site_files
+
+      - name: Build the Kafka site
+        run: python ipper/main.py kafka output standalone dev/kip_mentions.csv site_files/kafka.html
+
+      - name: Build the Flink site
+        run: cp templates/flink.html site_files/flink.html
      
       - name: Upload static files as artifact
         id: deployment

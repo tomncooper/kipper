@@ -1,5 +1,4 @@
 import re
-import math
 import datetime as dt
 
 from typing import List, Dict, Union, Optional, cast
@@ -9,8 +8,9 @@ from pathlib import Path
 from pandas import DataFrame, Timestamp, Timedelta, to_datetime
 from jinja2 import Template, Environment, FileSystemLoader
 
-from kipper.mailing_list import get_most_recent_mention_by_type
-from kipper.wiki import (
+from ipper.common.utils import calculate_age
+from ipper.kafka.mailing_list import get_most_recent_mention_by_type
+from ipper.kafka.wiki import (
     UNDER_DISCUSSION,
     WIKI_DATE_FORMAT,
     get_kip_information,
@@ -87,27 +87,6 @@ def create_vote_dict(kip_mentions: DataFrame) -> Dict[int, Dict[str, List[str]]]
     return vote_dict
 
 
-def calculate_age(date_str: str) -> str:
-    """Calculate the age string for the given date string"""
-
-    then: dt.datetime = dt.datetime.strptime(date_str, WIKI_DATE_FORMAT).replace(
-        tzinfo=dt.timezone.utc
-    )
-    now: dt.datetime = dt.datetime.now(dt.timezone.utc)
-    diff: dt.timedelta = now - then
-
-    if diff.days < 7:
-        return f"{diff.days} days"
-
-    if diff.days > 7 and diff.days < 365:
-        weeks: int = int(round(diff.days / 7, 0))
-        return f"{weeks} weeks"
-
-    years: int = math.floor(diff.days / 365)
-    weeks_remaining: int = int(round(diff.days / 7 % 52, 0))
-    return f"{years} years {weeks_remaining} weeks"
-
-
 def create_status_dict(
     kip_mentions: DataFrame, kip_wiki_info: Dict[int, Dict[str, Union[int, str]]]
 ) -> List[Dict[str, Union[int, str, KIPStatus, List[str]]]]:
@@ -129,7 +108,7 @@ def create_status_dict(
             status_entry["text"] = clean_description(cast(str, kip_data["title"]))
             status_entry["url"] = kip_data["web_url"]
             status_entry["created_by"] = kip_data["created_by"]
-            status_entry["age"] = calculate_age(cast(str, kip_data["created_on"]))
+            status_entry["age"] = calculate_age(cast(str, kip_data["created_on"]), WIKI_DATE_FORMAT)
 
             if kip_id in subject_mentions:
                 status_entry["status"] = calculate_status(subject_mentions[kip_id])
@@ -160,6 +139,8 @@ def create_status_dict(
 def render_standalone_status_page(
     kip_mentions: DataFrame,
     output_filename: str,
+    templates_dir: str = "templates",
+    template_filename: str = "kafka-index.html.jinja",
 ) -> None:
     """Renders the KIPs under discussion table with a status entry based on
     how recently the KIP was mentioned in an email subject line."""
@@ -174,8 +155,8 @@ def render_standalone_status_page(
         Dict[str, Union[int, str, KIPStatus, List[str]]]
     ] = create_status_dict(kip_mentions, kip_wiki_info)
 
-    template: Template = Environment(loader=FileSystemLoader("templates")).get_template(
-        "index.html.jinja"
+    template: Template = Environment(loader=FileSystemLoader(templates_dir)).get_template(
+        template_filename
     )
 
     output: str = template.render(
