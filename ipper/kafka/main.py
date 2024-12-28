@@ -57,6 +57,15 @@ def setup_init_command(main_subparser):
         required=False,
         help="Directory to save mailing list archives too.",
     )
+    
+    init_parser.add_argument(
+        "-c",
+        "--chunk",
+        required=False,
+        type=int,
+        default=100,
+        help="The number of KIP pages to fetch at once.",
+    )
 
     init_parser.set_defaults(func=run_init_cmd)
 
