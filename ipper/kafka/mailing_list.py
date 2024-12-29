@@ -179,9 +179,12 @@ def extract_message_payload(msg: Message) -> List[str]:
 
     for message in msg.walk():
 
-        temp_payload: Union[List[Message], str] = message.get_payload()
+        temp_payload: Union[List[Union[Message, str]], Message, str] = message.get_payload()
         if isinstance(temp_payload, list):
-            payload: str = cast(str, temp_payload[0].get_payload())
+            if isinstance(temp_payload[0], Message):
+                payload: str = cast(str, temp_payload[0].get_payload())
+            elif isinstance(temp_payload[0], str):
+                payload = cast(str, message.get_payload())
         elif isinstance(temp_payload, str):
             payload = cast(str, message.get_payload())
         else:

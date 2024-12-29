@@ -86,7 +86,7 @@ def get_current_state(html: str) -> Optional[str]:
     return None
 
 
-def enrich_kip_info(body_html: str, kip_dict: dict[str, Union[str, int]]) -> None:
+def enrich_kip_info(body_html: str, kip_dict: dict[str, Union[list[str], str, int]]) -> None:
     """Parses the body of the KIP wiki page pointed to by the 'content_url'
     key in the supplied dictionary. It will add the derived data to the
     supplied dict."""
@@ -111,7 +111,7 @@ def enrich_kip_info(body_html: str, kip_dict: dict[str, Union[str, int]]) -> Non
         elif not jira_processed and "jira" in para.text.lower():
             link: Tag = para.find("a")
             if link:
-                href: Optional[str] = link.get("href")
+                href: Optional[Union[list, str]] = link.get("href")
             else:
                 href = None
 
@@ -134,7 +134,7 @@ def process_child_kip(kip_id: int, child: dict):
     """Process and enrich the KIP child page dictionary"""
 
     print(f"Processing KIP {kip_id} wiki page")
-    child_dict: dict[str, Union[int, str]] = {}
+    child_dict: dict[str, Union[list[str], str, int]] = {}
     child_dict["kip_id"] = kip_id
     child_dict["title"] = child["title"]
     child_dict["web_url"] = APACHE_CONFLUENCE_BASE_URL + child["_links"]["webui"]
@@ -234,6 +234,9 @@ def process_discussion_table(
         kip_dict: dict[str, str] = {}
         columns: list[Tag] = row.find_all("td")
 
+        if not columns[0].a:
+            continue
+
         kip_text: str = columns[0].a.text
         kip_match: Optional[re.Match] = re.search(KIP_PATTERN, kip_text)
 
@@ -244,7 +247,14 @@ def process_discussion_table(
             try:
                 kip_dict["url"] = cast(str, kip_child_urls[kip_id]["web_url"])
             except KeyError:
-                kip_dict["url"] = columns[0].a.get("href")
+                href: Optional[Union[list[str], str]] = columns[0].a.get("href")
+                if href:
+                    if isinstance(href, list):
+                        kip_dict["url"] = href[0]
+                    else:
+                        kip_dict["url"] = href
+                else:
+                    kip_dict["url"] = "Unknown"
             output[kip_id] = kip_dict
         else:
             continue

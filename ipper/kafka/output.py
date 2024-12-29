@@ -5,7 +5,7 @@ from typing import List, Dict, Union, Optional, cast
 from enum import Enum
 from pathlib import Path
 
-from pandas import DataFrame, Timestamp, Timedelta, to_datetime
+from pandas import DataFrame, Series, Timestamp, Timedelta, to_datetime
 from jinja2 import Template, Environment, FileSystemLoader
 
 from ipper.common.utils import calculate_age
@@ -69,7 +69,6 @@ def create_vote_dict(kip_mentions: DataFrame) -> Dict[int, Dict[str, List[str]]]
     from vote type to list of those who voted that way"""
 
     vote_dict: Dict[int, Dict[str, List[str]]] = {}
-    kip_id: int
     kip_votes: DataFrame
     for kip_id, kip_votes in kip_mentions[~kip_mentions["vote"].isna()][
         ["kip", "from", "vote"]
@@ -82,7 +81,7 @@ def create_vote_dict(kip_mentions: DataFrame) -> Dict[int, Dict[str, List[str]]]
                     for name in kip_votes[kip_votes["vote"] == vote]["from"]
                 )
             )
-        vote_dict[kip_id] = kip_dict
+        vote_dict[cast(int, kip_id)] = kip_dict
 
     return vote_dict
 
@@ -95,7 +94,7 @@ def create_status_dict(
 
     recent_mentions: DataFrame = get_most_recent_mention_by_type(kip_mentions)
 
-    subject_mentions: DataFrame = recent_mentions["subject"].dropna()
+    subject_mentions: Series = recent_mentions["subject"].dropna()
 
     vote_dict: Dict[int, Dict[str, List[str]]] = create_vote_dict(kip_mentions)
 

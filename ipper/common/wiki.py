@@ -63,7 +63,7 @@ def child_page_generator(wiki_page_info, chunk: int, timeout: int) -> Generator[
     first_child_request: requests.Response = requests.get(
         APACHE_CONFLUENCE_BASE_URL + wiki_page_child_info_request.json()["_expandable"]["page"],
         params={
-            "limit": chunk,
+            "limit": str(chunk),
             "expand": "history.lastUpdated,body.view",
         },
         timeout=timeout,
