@@ -1,7 +1,7 @@
 # OSSIP 
 _A hub for Open Source Software Improvement Proposals_
 
-[https://tomncooper.github.io/kipper/](https://tomncooper.github.io/kipper/)
+[ossip.dev](https://ossip.dev/)
 
 This repo holds a collection of scripts for making a more enriched version of the Improvement Proposals from various open source projects.
 The only one currently supported is the [Apache Kafka](https://kafka.apache.org/) project's [Kafka Improvement Proposal (KIP)](https://cwiki.apache.org/confluence/display/kafka/kafka+improvement+proposals), but [Apache Flink](https://flink.apache.org/)'s [FLIP](https://cwiki.apache.org/confluence/display/FLINK/Flink+Improvement+Proposals)s are coming soon.
