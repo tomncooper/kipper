@@ -54,7 +54,7 @@ def enrich_flip_info(body_html: str, flip_dict: dict[str, Union[str, int]]) -> N
         elif not jira_processed and "jira" in para.text.lower():
             link: Tag = para.find("a")
             if link:
-                href: Optional[str] = link.get("href")
+                href: Optional[Union[list[str], str]] = link.get("href")
             else:
                 href = None
 
@@ -107,5 +107,7 @@ def get_flip_information(
             flip_id: int = int(flip_match.groupdict()["flip"])
             if flip_id not in output:
                 output[flip_id] = process_child_kip(flip_id, child)
+            else:
+                print(f"WARNING: FLIP-{flip_id} has been seen more than once in the child pages")
 
     return output
